@@ -1,0 +1,10 @@
+[
+["index.html", "R cookbook from Xiaotao Shen Chapter 1 前言", " R cookbook from Xiaotao Shen Xiaotao Shen 2020-03-12 Chapter 1 前言 陆陆续续看了很多书,希望系统的把自己对R语言学习到的内容记录下来. "],
+["rmarkdown.html", "Chapter 2 Rmarkdown学习总结 2.1 Markdown", " Chapter 2 Rmarkdown学习总结 首先从Markdown的基础语法开始. 2.1 Markdown 2.1.1 插入图片 插入图片的基本语法: ![](图片链接或者本地位置) 比如使用下面语句: ![](https://www.shenxt.info/files/wechat_QR.jpg) 2.1.2 插入链接 2.1.3 强调 "],
+["git.html", "Chapter 3 Git和github学习", " Chapter 3 Git和github学习 Here is a review of existing methods. "],
+["ggplot2.html", "Chapter 4 ggplot2学习总结", " Chapter 4 ggplot2学习总结 We describe our methods in this chapter. "],
+["network.html", "Chapter 5 Network分析总结 5.1 Example one 5.2 Example two", " Chapter 5 Network分析总结 Some significant applications are demonstrated in this chapter. 5.1 Example one 5.2 Example two "],
+["multiomics.html", "Chapter 6 多组学分析", " Chapter 6 多组学分析 We have finished a nice book. "],
+["tidyverse.html", "Chapter 7 Tidyverse用于数据分析", " Chapter 7 Tidyverse用于数据分析 You can label chapter and section titles using {#label} after them, e.g., we can reference Chapter 2. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter 2. "],
+["references.html", "References", " References "]
+]

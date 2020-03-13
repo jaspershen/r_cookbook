@@ -1,0 +1,25 @@
+# Rmarkdown学习总结 {#rmarkdown}
+
+首先从`Markdown`的基础语法开始.
+
+## Markdown
+
+### 插入图片
+
+插入图片的基本语法:
+
+```
+![](图片链接或者本地位置)
+```
+
+比如使用下面语句:
+
+```
+![](https://www.shenxt.info/files/wechat_QR.jpg)
+```
+
+![](https://www.shenxt.info/files/wechat_QR.jpg)
+
+### 插入链接
+
+### 强调

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584075839614.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2860694151",
+    "id" : "434DCF51",
+    "lastKnownWriteTime" : 1584076157,
+    "last_content_update" : 1584076157043,
+    "path" : "~/github/r_cookbook/01-rmarkdown.Rmd",
+    "project_path" : "01-rmarkdown.Rmd",
+    "properties" : {
+        "cursorPosition" : "20,48",
+        "scrollLine" : "2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
