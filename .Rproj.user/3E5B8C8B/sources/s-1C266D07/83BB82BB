@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "1115388391",
     "id" : "83BB82BB",
-    "lastKnownWriteTime" : 1584074492,
-    "last_content_update" : 1584074492,
+    "lastKnownWriteTime" : 1584077290,
+    "last_content_update" : 1584077290266,
     "path" : "~/github/r_cookbook/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "16,0",
-        "scrollLine" : "11"
+        "cursorPosition" : "6,30",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
