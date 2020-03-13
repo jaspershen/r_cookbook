@@ -1,5 +1,6 @@
 book_filename: "r_cookbook"
 delete_merged_file: true
+output_dir: "docs"
 language:
   ui:
     chapter_name: "Chapter "

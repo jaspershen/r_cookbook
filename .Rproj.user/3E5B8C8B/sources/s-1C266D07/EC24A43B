@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3843318046",
+    "hash" : "3837125265",
     "id" : "EC24A43B",
-    "lastKnownWriteTime" : 1584074153,
-    "last_content_update" : 1584074153,
+    "lastKnownWriteTime" : 1584076973,
+    "last_content_update" : 1584076973259,
     "path" : "~/github/r_cookbook/_bookdown.yml",
     "project_path" : "_bookdown.yml",
     "properties" : {
+        "cursorPosition" : "2,18",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
