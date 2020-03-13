@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Rmarkdown学习总结 | R cookbook from Xiaotao Shen</title>
+  <title>Chapter 2 Rmarkdown | R cookbook from Xiaotao Shen</title>
   <meta name="description" content="记录所有跟R语言有关的内容" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Rmarkdown学习总结 | R cookbook from Xiaotao Shen" />
+  <meta property="og:title" content="Chapter 2 Rmarkdown | R cookbook from Xiaotao Shen" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Rmarkdown学习总结 | R cookbook from Xiaotao Shen" />
+  <meta name="twitter:title" content="Chapter 2 Rmarkdown | R cookbook from Xiaotao Shen" />
   
   <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Xiaotao Shen" />
 
 
-<meta name="date" content="2020-03-12" />
+<meta name="date" content="2020-03-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,8 +50,78 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.12/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -70,11 +140,17 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
-<li class="chapter" data-level="2" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Rmarkdown学习总结</a><ul>
-<li class="chapter" data-level="2.1" data-path="rmarkdown.html"><a href="rmarkdown.html#markdown"><i class="fa fa-check"></i><b>2.1</b> Markdown</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="rmarkdown.html"><a href="rmarkdown.html#插入图片"><i class="fa fa-check"></i><b>2.1.1</b> 插入图片</a></li>
-<li class="chapter" data-level="2.1.2" data-path="rmarkdown.html"><a href="rmarkdown.html#插入链接"><i class="fa fa-check"></i><b>2.1.2</b> 插入链接</a></li>
-<li class="chapter" data-level="2.1.3" data-path="rmarkdown.html"><a href="rmarkdown.html#强调"><i class="fa fa-check"></i><b>2.1.3</b> 强调</a></li>
+<li class="chapter" data-level="2" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Rmarkdown</a><ul>
+<li class="chapter" data-level="2.1" data-path="rmarkdown.html"><a href="rmarkdown.html#markdownrmarkdown以及html语法"><i class="fa fa-check"></i><b>2.1</b> Markdown,Rmarkdown以及HTML语法</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="rmarkdown.html"><a href="rmarkdown.html#标题"><i class="fa fa-check"></i><b>2.1.1</b> 标题</a></li>
+<li class="chapter" data-level="2.1.2" data-path="rmarkdown.html"><a href="rmarkdown.html#插入图片"><i class="fa fa-check"></i><b>2.1.2</b> 插入图片</a></li>
+<li class="chapter" data-level="2.1.3" data-path="rmarkdown.html"><a href="rmarkdown.html#插入链接"><i class="fa fa-check"></i><b>2.1.3</b> 插入链接</a></li>
+<li class="chapter" data-level="2.1.4" data-path="rmarkdown.html"><a href="rmarkdown.html#强调"><i class="fa fa-check"></i><b>2.1.4</b> 强调</a></li>
+<li class="chapter" data-level="2.1.5" data-path="rmarkdown.html"><a href="rmarkdown.html#引用blockquotes"><i class="fa fa-check"></i><b>2.1.5</b> 引用(Blockquotes)</a></li>
+<li class="chapter" data-level="2.1.6" data-path="rmarkdown.html"><a href="rmarkdown.html#插入代码块"><i class="fa fa-check"></i><b>2.1.6</b> 插入代码块</a></li>
+<li class="chapter" data-level="2.1.7" data-path="rmarkdown.html"><a href="rmarkdown.html#插入水平线"><i class="fa fa-check"></i><b>2.1.7</b> 插入水平线</a></li>
+<li class="chapter" data-level="2.1.8" data-path="rmarkdown.html"><a href="rmarkdown.html#列表"><i class="fa fa-check"></i><b>2.1.8</b> 列表</a></li>
+<li class="chapter" data-level="2.1.9" data-path="rmarkdown.html"><a href="rmarkdown.html#表格"><i class="fa fa-check"></i><b>2.1.9</b> 表格</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>3</b> Git和github学习</a></li>
@@ -107,23 +183,379 @@
 
             <section class="normal" id="section-">
 <div id="rmarkdown" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> Rmarkdown学习总结</h1>
+<h1><span class="header-section-number">Chapter 2</span> Rmarkdown</h1>
 <p>首先从<code>Markdown</code>的基础语法开始.</p>
-<div id="markdown" class="section level2">
-<h2><span class="header-section-number">2.1</span> Markdown</h2>
+<div id="markdownrmarkdown以及html语法" class="section level2">
+<h2><span class="header-section-number">2.1</span> Markdown,Rmarkdown以及HTML语法</h2>
+<div id="标题" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> 标题</h3>
+<p>Markdown一共支持六级标题.</p>
+<p>语法:</p>
+<pre><code># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题</code></pre>
+</div>
 <div id="插入图片" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> 插入图片</h3>
+<h3><span class="header-section-number">2.1.2</span> 插入图片</h3>
+<blockquote>
+<p>注意<code>#</code>和文字之间一定要空格.</p>
+</blockquote>
 <p>插入图片的基本语法:</p>
 <pre><code>![](图片链接或者本地位置)</code></pre>
 <p>比如使用下面语句:</p>
 <pre><code>![](https://www.shenxt.info/files/wechat_QR.jpg)</code></pre>
 <p><img src="https://www.shenxt.info/files/wechat_QR.jpg" /></p>
+<p>这种插入图片的办法,不能设置图片的大小,如果想要设置图片大小,可以使用HTML语法(img标签)插入,markdown是支持HTML语法的.</p>
+<pre><code>&lt;img src = &#39;https://www.shenxt.info/files/wechat_QR.jpg&#39; alt = &#39;shenxiaotao&#39; /&gt;</code></pre>
+<p><img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% /></p>
+<p>HTML <code>img</code>标签还有很多的其他功能,比如对齐等.</p>
 </div>
 <div id="插入链接" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> 插入链接</h3>
+<h3><span class="header-section-number">2.1.3</span> 插入链接</h3>
+<ul>
+<li>直接写url</li>
+</ul>
+<p>语法:</p>
+<pre><code>https://www.shenxt.info/</code></pre>
+<p><a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a></p>
+<ul>
+<li>将网址超链接给某段文字</li>
+</ul>
+<p>语法:</p>
+<pre><code>想要访问我的网站,请点击[这里](https://www.shenxt.info/)</code></pre>
+<p>想要访问我的网站,请点击<a href="https://www.shenxt.info/">这里</a></p>
 </div>
 <div id="强调" class="section level3">
-<h3><span class="header-section-number">2.1.3</span> 强调</h3>
+<h3><span class="header-section-number">2.1.4</span> 强调</h3>
+<p>强调包括斜体,高亮,加粗等等.</p>
+<ul>
+<li>斜体</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>*这是斜体*
+_这也是斜体_</code></pre>
+<p><em>这是斜体</em></p>
+<p><em>这也是斜体</em></p>
+<ul>
+<li>加粗</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>**这是粗体**
+__这也是粗体__</code></pre>
+<p><strong>这是粗体</strong></p>
+<p><strong>这也是粗体</strong></p>
+<ul>
+<li>加粗和斜体</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>***这是粗体也是斜体***
+___这是粗体也是斜体___</code></pre>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+</div>
+<div id="引用blockquotes" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> 引用(Blockquotes)</h3>
+<p>语法:</p>
+<pre><code>&gt; 这是一句引用</code></pre>
+<blockquote>
+<p>这是一句引用</p>
+</blockquote>
+<p>语法:</p>
+<pre><code>&gt; 这是一段引用        
+&gt; 这是一段引用</code></pre>
+<blockquote>
+<p>这是一段引用<br />
+这是一段引用</p>
+</blockquote>
+</div>
+<div id="插入代码块" class="section level3">
+<h3><span class="header-section-number">2.1.6</span> 插入代码块</h3>
+<p>语法:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="bn">```</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="bn">library(tidyverse)</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="bn">mtcars %&gt;% </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="bn">ggplot(aes(x = gear, cyl)) + </span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
+<pre><code>library(ggplot2)
+library(tidyverse)
+
+mtcars %&gt;% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()</code></pre>
+<p>如果是使用Rmarkdown,还可以直接让代码运行出现结果.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb14-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="bn">```r</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="bn">library(ggplot2)</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="bn">library(tidyverse)</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="bn">mtcars %&gt;% </span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="bn">ggplot(aes(x = gear, cyl)) + </span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="bn">geom_point() + </span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="bn">theme_bw()</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="bn">```</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">&lt;img src=&quot;r_cookbook_files/figure-html/unnamed-chunk-2-1.png&quot; width=&quot;672&quot; /&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gear, cyl)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Rmarkdown中代码块中有很多内容可以设置.</p>
+</div>
+<div id="插入水平线" class="section level3">
+<h3><span class="header-section-number">2.1.7</span> 插入水平线</h3>
+<p>语法:</p>
+<pre><code>这是一条水平线.
+***
+
+这也是一条水平线.
+---</code></pre>
+<p>这是一条水平线.</p>
+<hr />
+<p>这也是一条水平线.</p>
+<hr />
+</div>
+<div id="列表" class="section level3">
+<h3><span class="header-section-number">2.1.8</span> 列表</h3>
+<ul>
+<li>有序列表</li>
+</ul>
+<p>直接使用数字即可</p>
+<p>语法:</p>
+<pre><code>1. Item 1
+2. Item 2
+3. Item 3</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>Item 1</p></li>
+<li><p>Item 2</p></li>
+<li><p>Item 3</p></li>
+</ol>
+<ul>
+<li>无序列表</li>
+</ul>
+<p>无需列表可以使用<code>*</code>或者<code>-</code>来创建.</p>
+<p>语法:</p>
+<pre><code>* Item 1
+* Item 2
+  * Item 2.1
+  * Item 2.2
+* Item 3</code></pre>
+<ul>
+<li>Item 1</li>
+<li>Item 2
+<ul>
+<li>Item 2.1</li>
+<li>Item 2.2</li>
+</ul></li>
+<li>Item 3</li>
+</ul>
+<p>语法:</p>
+<pre><code>- Item 1
+- Item 2
+  - Item 2.1
+  - Item 2.2
+- Item 3</code></pre>
+<ul>
+<li>Item 1</li>
+<li>Item 2
+<ul>
+<li>Item 2.1</li>
+<li>Item 2.2</li>
+</ul></li>
+<li>Item 3</li>
+</ul>
+</div>
+<div id="表格" class="section level3">
+<h3><span class="header-section-number">2.1.9</span> 表格</h3>
+<p>原生态的markdown表格语法非常简单.</p>
+<p>语法:</p>
+<pre><code>| First name    | Last name   | Sex  |
+| ------------- |-------------| -----|
+| Xiaotao       |Shen          | Male |
+| Chuchu        | Wang      |   Female |</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>First name</th>
+<th>Last name</th>
+<th>Sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Xiaotao</td>
+<td>Shen</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<td>Chuchu</td>
+<td>Wang</td>
+<td>Female</td>
+</tr>
+</tbody>
+</table>
+<p>Rmarkdown可以使用函数来插入表格.</p>
+<ul>
+<li><code>DT</code>包</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb21-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="bn">```r</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="bn">library(DT)</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="bn">DT::datatable(</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="bn">  head(iris, 10),</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="bn">  fillContainer = TRUE, </span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="bn">  options = list(pageLength = 4)</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="bn">)</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="bn">```</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><div id="htmlwidget-38920f7522776a4118d1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-38920f7522776a4118d1">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script></a></code></pre></div>
+<ul>
+<li><code>knitr</code>包</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="bn">```</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="bn">knitr::kable(head(iris), format = &#39;html&#39;)</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(iris), <span class="dt">format =</span> <span class="st">&#39;html&#39;</span>)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>

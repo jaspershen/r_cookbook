@@ -1,19 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1584076310451.000,
+    "created" : 1584116182455.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1115388391",
-    "id" : "83BB82BB",
-    "lastKnownWriteTime" : 1584077290,
-    "last_content_update" : 1584077290266,
-    "path" : "~/github/r_cookbook/index.Rmd",
-    "project_path" : "index.Rmd",
+    "hash" : "0",
+    "id" : "50182E45",
+    "lastKnownWriteTime" : 1584116814,
+    "last_content_update" : 1584116814349,
+    "path" : "~/github/r_cookbook/02-git.Rmd",
+    "project_path" : "02-git.Rmd",
     "properties" : {
-        "cursorPosition" : "6,30",
-        "scrollLine" : "0"
+        "cursorPosition" : "73,33",
+        "scrollLine" : "59"
     },
     "read_only" : false,
     "read_only_alternatives" : [

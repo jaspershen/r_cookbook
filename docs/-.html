@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 一级标题 | R cookbook from Xiaotao Shen</title>
+  <meta name="description" content="记录所有跟R语言有关的内容" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 一级标题 | R cookbook from Xiaotao Shen" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="记录所有跟R语言有关的内容" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 一级标题 | R cookbook from Xiaotao Shen" />
+  
+  <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
+  
+
+<meta name="author" content="Xiaotao Shen" />
+
+
+<meta name="date" content="2020-03-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rmarkdown.html"/>
+<link rel="next" href="git.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R cookbook of Xiaotao Shen</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Rmarkdown学习总结</a><ul>
+<li class="chapter" data-level="2.1" data-path="rmarkdown.html"><a href="rmarkdown.html#markdown"><i class="fa fa-check"></i><b>2.1</b> Markdown</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="rmarkdown.html"><a href="rmarkdown.html#标题"><i class="fa fa-check"></i><b>2.1.1</b> 标题</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="-.html"><a href="-.html"><i class="fa fa-check"></i><b>3</b> 一级标题</a><ul>
+<li class="chapter" data-level="3.1" data-path="-.html"><a href="-.html#二级标题"><i class="fa fa-check"></i><b>3.1</b> 二级标题</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="-.html"><a href="-.html#三级标题"><i class="fa fa-check"></i><b>3.1.1</b> 三级标题</a></li>
+<li class="chapter" data-level="3.1.2" data-path="-.html"><a href="-.html#插入图片"><i class="fa fa-check"></i><b>3.1.2</b> 插入图片</a></li>
+<li class="chapter" data-level="3.1.3" data-path="-.html"><a href="-.html#插入链接"><i class="fa fa-check"></i><b>3.1.3</b> 插入链接</a></li>
+<li class="chapter" data-level="3.1.4" data-path="-.html"><a href="-.html#强调"><i class="fa fa-check"></i><b>3.1.4</b> 强调</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>4</b> Git和github学习</a></li>
+<li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2学习总结</a></li>
+<li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
+<li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
+<li class="chapter" data-level="6.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a></li>
+<li class="chapter" data-level="8" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>8</b> Tidyverse用于数据分析</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R cookbook from Xiaotao Shen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="一级标题" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> 一级标题</h1>
+<div id="二级标题" class="section level2">
+<h2><span class="header-section-number">3.1</span> 二级标题</h2>
+<div id="三级标题" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> 三级标题</h3>
+<div id="四级标题" class="section level4">
+<h4><span class="header-section-number">3.1.1.1</span> 四级标题</h4>
+<div id="五级标题" class="section level5">
+<h5><span class="header-section-number">3.1.1.1.1</span> 五级标题</h5>
+<div id="六级标题" class="section level6">
+<h6><span class="header-section-number">3.1.1.1.1.1</span> 六级标题</h6>
+</div>
+</div>
+</div>
+</div>
+<div id="插入图片" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> 插入图片</h3>
+<blockquote>
+<p>注意<code>#</code>和文字之间一定要空格.</p>
+</blockquote>
+<p>插入图片的基本语法:</p>
+<pre><code>![](图片链接或者本地位置)</code></pre>
+<p>比如使用下面语句:</p>
+<pre><code>![](https://www.shenxt.info/files/wechat_QR.jpg)</code></pre>
+<p><img src="https://www.shenxt.info/files/wechat_QR.jpg" /></p>
+<p>这种插入图片的办法,不能设置图片的大小,如果想要设置图片大小,可以使用HTML语法(img标签)插入,markdown是支持HTML语法的.</p>
+<pre><code>&lt;img src = &#39;https://www.shenxt.info/files/wechat_QR.jpg&#39; alt = &#39;shenxiaotao&#39; /&gt;</code></pre>
+<p><img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% /></p>
+<p>HTML <code>img</code>标签还有很多的其他功能,比如对齐等.</p>
+</div>
+<div id="插入链接" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> 插入链接</h3>
+<ul>
+<li>直接写url</li>
+</ul>
+<p>语法:</p>
+<pre><code>https://www.shenxt.info/</code></pre>
+<p><a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a></p>
+<ul>
+<li>将网址超链接给某段文字</li>
+</ul>
+<p>语法:</p>
+<pre><code>想要访问我的网站,请点击[这里](https://www.shenxt.info/)</code></pre>
+<p>想要访问我的网站,请点击<a href="https://www.shenxt.info/">这里</a></p>
+</div>
+<div id="强调" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> 强调</h3>
+<p>强调包括斜体,高亮,加粗等等.</p>
+<ul>
+<li>斜体</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>*这是斜体*
+_这也是斜体_</code></pre>
+<p><em>这是斜体</em></p>
+<p><em>这也是斜体</em></p>
+<ul>
+<li>加粗</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>**这是粗体**
+__这也是粗体__</code></pre>
+<p><strong>这是粗体</strong></p>
+<p><strong>这也是粗体</strong></p>
+<ul>
+<li>加粗和斜体</li>
+</ul>
+<p>语法如下:</p>
+<pre><code>***这是粗体也是斜体***
+___这是粗体也是斜体___</code></pre>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rmarkdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="git.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r_cookbook.pdf", "r_cookbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
