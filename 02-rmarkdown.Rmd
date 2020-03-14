@@ -1,4 +1,4 @@
-# RMarkdown {#Rmarkdown}
+# RMarkdown {#rmarkdown}
 
 Rmarkdown是Rstudio公司出品的.所有markdown的语法都支持.但是加入了很多强大的功能,因此可以做更多原生markdown无法完成的任务.成为数据分析以及报告自动化和重复化领域一个非常常用的工具.
 
