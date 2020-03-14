@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Markdown | R cookbook from Xiaotao Shen</title>
+  <meta name="description" content="记录所有跟R语言有关的内容" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Markdown | R cookbook from Xiaotao Shen" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="记录所有跟R语言有关的内容" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Markdown | R cookbook from Xiaotao Shen" />
+  
+  <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
+  
+
+<meta name="author" content="Xiaotao Shen" />
+
+
+<meta name="date" content="2020-03-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="Rmarkdown.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.12/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R cookbook of Xiaotao Shen</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> 前言</a></li>
+<li class="chapter" data-level="2" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>2</b> Markdown</a><ul>
+<li class="chapter" data-level="2.1" data-path="markdown.html"><a href="markdown.html#markdown语法"><i class="fa fa-check"></i><b>2.1</b> Markdown语法</a></li>
+<li class="chapter" data-level="2.2" data-path="markdown.html"><a href="markdown.html#标题-header"><i class="fa fa-check"></i><b>2.2</b> 标题 (Header)</a></li>
+<li class="chapter" data-level="2.3" data-path="markdown.html"><a href="markdown.html#图片-image"><i class="fa fa-check"></i><b>2.3</b> 图片 (Image)</a></li>
+<li class="chapter" data-level="2.4" data-path="markdown.html"><a href="markdown.html#链接-links"><i class="fa fa-check"></i><b>2.4</b> 链接 (Links)</a></li>
+<li class="chapter" data-level="2.5" data-path="markdown.html"><a href="markdown.html#强调-emphasize"><i class="fa fa-check"></i><b>2.5</b> 强调 (Emphasize)</a></li>
+<li class="chapter" data-level="2.6" data-path="markdown.html"><a href="markdown.html#引用blockquotes"><i class="fa fa-check"></i><b>2.6</b> 引用(Blockquotes)</a></li>
+<li class="chapter" data-level="2.7" data-path="markdown.html"><a href="markdown.html#代码块-code-chunks"><i class="fa fa-check"></i><b>2.7</b> 代码块 (Code chunks)</a></li>
+<li class="chapter" data-level="2.8" data-path="markdown.html"><a href="markdown.html#水平线-horizontal-rule"><i class="fa fa-check"></i><b>2.8</b> 水平线 (Horizontal rule)</a></li>
+<li class="chapter" data-level="2.9" data-path="markdown.html"><a href="markdown.html#列表-list"><i class="fa fa-check"></i><b>2.9</b> 列表 (List)</a></li>
+<li class="chapter" data-level="2.10" data-path="markdown.html"><a href="markdown.html#表格-tables"><i class="fa fa-check"></i><b>2.10</b> 表格 (Tables)</a></li>
+<li class="chapter" data-level="2.11" data-path="markdown.html"><a href="markdown.html#段落"><i class="fa fa-check"></i><b>2.11</b> 段落</a></li>
+<li class="chapter" data-level="2.12" data-path="markdown.html"><a href="markdown.html#插入icon"><i class="fa fa-check"></i><b>2.12</b> 插入icon</a></li>
+<li class="chapter" data-level="2.13" data-path="markdown.html"><a href="markdown.html#数学公式-equations"><i class="fa fa-check"></i><b>2.13</b> 数学公式 (Equations)</a><ul>
+<li class="chapter" data-level="2.13.1" data-path="markdown.html"><a href="markdown.html#行内和行外"><i class="fa fa-check"></i><b>2.13.1</b> 行内和行外</a></li>
+<li class="chapter" data-level="2.13.2" data-path="markdown.html"><a href="markdown.html#上标和下标"><i class="fa fa-check"></i><b>2.13.2</b> 上标和下标</a></li>
+<li class="chapter" data-level="2.13.3" data-path="markdown.html"><a href="markdown.html#占位符"><i class="fa fa-check"></i><b>2.13.3</b> 占位符</a></li>
+<li class="chapter" data-level="2.13.4" data-path="markdown.html"><a href="markdown.html#四则运算"><i class="fa fa-check"></i><b>2.13.4</b> 四则运算</a></li>
+<li class="chapter" data-level="2.13.5" data-path="markdown.html"><a href="markdown.html#集合运算"><i class="fa fa-check"></i><b>2.13.5</b> 集合运算</a></li>
+<li class="chapter" data-level="2.13.6" data-path="markdown.html"><a href="markdown.html#数学符号"><i class="fa fa-check"></i><b>2.13.6</b> 数学符号</a></li>
+<li class="chapter" data-level="2.13.7" data-path="markdown.html"><a href="markdown.html#希腊字母"><i class="fa fa-check"></i><b>2.13.7</b> 希腊字母</a></li>
+</ul></li>
+<li class="chapter" data-level="2.14" data-path="markdown.html"><a href="markdown.html#视频-video和音乐-music"><i class="fa fa-check"></i><b>2.14</b> 视频 (Video)和音乐 (music)</a></li>
+<li class="chapter" data-level="2.15" data-path="markdown.html"><a href="markdown.html#markdown编辑器"><i class="fa fa-check"></i><b>2.15</b> Markdown编辑器</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> RMarkdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#markdown语法-1"><i class="fa fa-check"></i><b>3.1</b> Markdown语法</a></li>
+<li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#标题-header-1"><i class="fa fa-check"></i><b>3.2</b> 标题 (Header)</a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>3.3</b> 图片 (Image)</a></li>
+<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#链接-links-1"><i class="fa fa-check"></i><b>3.4</b> 链接 (Links)</a></li>
+<li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#强调-emphasize-1"><i class="fa fa-check"></i><b>3.5</b> 强调 (Emphasize)</a></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#引用blockquotes-1"><i class="fa fa-check"></i><b>3.6</b> 引用(Blockquotes)</a></li>
+<li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#代码块-code-chunks-1"><i class="fa fa-check"></i><b>3.7</b> 代码块 (Code chunks)</a></li>
+<li class="chapter" data-level="3.8" data-path="Rmarkdown.html"><a href="Rmarkdown.html#水平线-horizontal-rule-1"><i class="fa fa-check"></i><b>3.8</b> 水平线 (Horizontal rule)</a></li>
+<li class="chapter" data-level="3.9" data-path="Rmarkdown.html"><a href="Rmarkdown.html#列表-list-1"><i class="fa fa-check"></i><b>3.9</b> 列表 (List)</a></li>
+<li class="chapter" data-level="3.10" data-path="Rmarkdown.html"><a href="Rmarkdown.html#表格-tables-1"><i class="fa fa-check"></i><b>3.10</b> 表格 (Tables)</a></li>
+<li class="chapter" data-level="3.11" data-path="Rmarkdown.html"><a href="Rmarkdown.html#段落-1"><i class="fa fa-check"></i><b>3.11</b> 段落</a></li>
+<li class="chapter" data-level="3.12" data-path="Rmarkdown.html"><a href="Rmarkdown.html#插入icon-1"><i class="fa fa-check"></i><b>3.12</b> 插入icon</a></li>
+<li class="chapter" data-level="3.13" data-path="Rmarkdown.html"><a href="Rmarkdown.html#数学公式-equations-1"><i class="fa fa-check"></i><b>3.13</b> 数学公式 (Equations)</a><ul>
+<li class="chapter" data-level="3.13.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#行内和行外-1"><i class="fa fa-check"></i><b>3.13.1</b> 行内和行外</a></li>
+<li class="chapter" data-level="3.13.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#上标和下标-1"><i class="fa fa-check"></i><b>3.13.2</b> 上标和下标</a></li>
+<li class="chapter" data-level="3.13.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#占位符-1"><i class="fa fa-check"></i><b>3.13.3</b> 占位符</a></li>
+<li class="chapter" data-level="3.13.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#四则运算-1"><i class="fa fa-check"></i><b>3.13.4</b> 四则运算</a></li>
+<li class="chapter" data-level="3.13.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#集合运算-1"><i class="fa fa-check"></i><b>3.13.5</b> 集合运算</a></li>
+<li class="chapter" data-level="3.13.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#数学符号-1"><i class="fa fa-check"></i><b>3.13.6</b> 数学符号</a></li>
+<li class="chapter" data-level="3.13.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#希腊字母-1"><i class="fa fa-check"></i><b>3.13.7</b> 希腊字母</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>4</b> Git和github</a><ul>
+<li class="chapter" data-level="4.1" data-path="git.html"><a href="git.html#git配制"><i class="fa fa-check"></i><b>4.1</b> Git配制</a></li>
+<li class="chapter" data-level="4.2" data-path="git.html"><a href="git.html#git基本操作"><i class="fa fa-check"></i><b>4.2</b> Git基本操作</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="git.html"><a href="git.html#创建本地git仓库reop"><i class="fa fa-check"></i><b>4.2.1</b> 创建本地git仓库(reop)</a></li>
+<li class="chapter" data-level="4.2.2" data-path="git.html"><a href="git.html#将文件添加到版本库"><i class="fa fa-check"></i><b>4.2.2</b> 将文件添加到版本库</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2学习总结</a></li>
+<li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
+<li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
+<li class="chapter" data-level="6.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a></li>
+<li class="chapter" data-level="8" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>8</b> Tidyverse用于数据分析</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R cookbook from Xiaotao Shen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="markdown" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Markdown</h1>
+<p>首先从<code>Markdown</code>的基础语法开始.</p>
+<div id="markdown语法" class="section level2">
+<h2><span class="header-section-number">2.1</span> Markdown语法</h2>
+<p>markdown语法一般是使用符号转变为特殊格式.这样,看起来markdown文件都是plain text(纯文本),但是渲染之后,就可以得到特殊格式的文件了.</p>
+<p>很多语法没有必要记住,只需要记住大概常用的几个就好,遇到不会的,直接google就可以.</p>
+</div>
+<div id="标题-header" class="section level2">
+<h2><span class="header-section-number">2.2</span> 标题 (Header)</h2>
+<p>Markdown一共支持六级标题.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu"># 一级标题</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">## 二级标题</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">### 三级标题</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">#### 四级标题</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="fu">##### 五级标题</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">###### 六级标题</span></a></code></pre></div>
+</div>
+<div id="图片-image" class="section level2">
+<h2><span class="header-section-number">2.3</span> 图片 (Image)</h2>
+<blockquote>
+<p>注意<code>#</code>和文字之间一定要空格.</p>
+</blockquote>
+<p>插入图片的基本语法:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb2-1" data-line-number="1">![](图片链接或者本地位置)</a></code></pre></div>
+<p>比如使用下面语句:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb3-1" data-line-number="1">![](https://www.shenxt.info/files/wechat_QR.jpg)</a></code></pre></div>
+<p><img src="https://www.shenxt.info/files/wechat_QR.jpg" /></p>
+<p>这种插入图片的办法,不能设置图片的大小,如果想要设置图片大小,可以使用HTML语法(img标签)插入,markdown是支持HTML语法的.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb4-1" data-line-number="1">&lt;img src = &#39;https://www.shenxt.info/files/wechat_QR.jpg&#39; alt = &#39;shenxiaotao&#39; /&gt;</a></code></pre></div>
+<p><img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% /></p>
+<p>HTML <code>img</code>标签还有很多的其他功能,比如对齐等.</p>
+<p>常用的一些参数:</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>alt</td>
+<td>图像替代文本</td>
+</tr>
+<tr class="even">
+<td>src</td>
+<td>图片链接或者本地地址</td>
+</tr>
+<tr class="odd">
+<td>height</td>
+<td>图片高度,单位可以是%或者pixel</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>图片宽度,单位可以是%或者pixel</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>图片宽度,单位可以是%或者pixel</td>
+</tr>
+<tr class="even">
+<td>align</td>
+<td>图片位置,只支持left或者right</td>
+</tr>
+</tbody>
+</table>
+<p>图片默认是靠左对齐.如果想要居中,很奇怪不能使用<code>&lt;img&gt;</code>标签,需要使用<code>&lt;p&gt;</code>标签.也就是段落.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb5-1" data-line-number="1">&lt;p align = &quot;center&quot;&gt;</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">&lt;img src = &#39;https://www.shenxt.info/files/wechat_QR.jpg&#39; alt = &#39;shenxiaotao&#39; height = 50% width = 50% /&gt;</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="center">
+<img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% />
+</p>
+</div>
+<div id="链接-links" class="section level2">
+<h2><span class="header-section-number">2.4</span> 链接 (Links)</h2>
+<ul>
+<li>直接写url</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" data-line-number="1">https://www.shenxt.info/</a></code></pre></div>
+<p><a href="https://www.shenxt.info/" class="uri">https://www.shenxt.info/</a></p>
+<ul>
+<li>将网址超链接给某段文字</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" data-line-number="1">想要访问我的网站,请点击<span class="ot">[这里](https://www.shenxt.info/)</span></a></code></pre></div>
+<p>想要访问我的网站,请点击<a href="https://www.shenxt.info/">这里</a></p>
+<ul>
+<li>HTML插入链接</li>
+</ul>
+<p>如果我们想要更多的链接功能,比如点击链接打开新的窗口.这时候可以使用<code>&lt;a&gt;</code>标签.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" data-line-number="1">&lt;a href=&quot;url&quot;&gt;Link text&lt;/a&gt;</a></code></pre></div>
+<p>常用属性含义如下:</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>href</td>
+<td>链接网址url</td>
+</tr>
+<tr class="even">
+<td>target</td>
+<td>在何处打开链接, <code>_blank</code>, <code>_parent</code>, <code>_self</code>, <code>_top</code></td>
+</tr>
+</tbody>
+</table>
+<p>比如我们插入一个网址,点击之后在新的网页打开.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb9-1" data-line-number="1">想要访问我的网站,请点击&lt;a href=&quot;https://www.shenxt.info/&quot; target = &#39;_blank&#39;&gt;这里&lt;/a&gt;.</a></code></pre></div>
+<p>想要访问我的网站,请点击<a href="https://www.shenxt.info/" target = '_blank'>这里</a>.</p>
+<ul>
+<li>将超链接绑定在图片上</li>
+</ul>
+<p>使用HTML语法,可以将超链接绑定在一个图片上.</p>
+<p>比如:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb10-1" data-line-number="1">&lt;a href=&quot;https://www.shenxt.info/&quot; target = &#39;_blank&#39;&gt;&lt;img src = &#39;https://www.shenxt.info/files/wechat_QR.jpg&#39; alt = &#39;shenxiaotao&#39; height = 50% width = 50% /&gt;&lt;/a&gt;</a></code></pre></div>
+<p>点击下图查看我的网站:</p>
+<p><a href="https://www.shenxt.info/" target = '_blank'><img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% /></a></p>
+</div>
+<div id="强调-emphasize" class="section level2">
+<h2><span class="header-section-number">2.5</span> 强调 (Emphasize)</h2>
+<p>强调包括斜体,高亮,加粗等等.</p>
+<ul>
+<li>斜体</li>
+</ul>
+<p>语法如下:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb11-1" data-line-number="1">*这是斜体*</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">_这也是斜体_</a></code></pre></div>
+<p><em>这是斜体</em></p>
+<p><em>这也是斜体</em></p>
+<ul>
+<li>加粗</li>
+</ul>
+<p>语法如下:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb12-1" data-line-number="1">**这是粗体**</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">__这也是粗体__</a></code></pre></div>
+<p><strong>这是粗体</strong></p>
+<p><strong>这也是粗体</strong></p>
+<ul>
+<li>加粗和斜体</li>
+</ul>
+<p>语法如下:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb13-1" data-line-number="1">***这是粗体也是斜体***</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">___这是粗体也是斜体___</a></code></pre></div>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+<p><strong><em>这是粗体也是斜体</em></strong></p>
+<ul>
+<li>删除线</li>
+</ul>
+<p>语法如下:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb14-1" data-line-number="1">~~删除这句话~~</a></code></pre></div>
+<p><del>删除这句话</del></p>
+<ul>
+<li>其他可以使用HTML语法实现的强调</li>
+</ul>
+<p>Markdown只有以上几种强调的用法,使用HTML可以实现一些其他的内容.比如字体颜色等.</p>
+<p>字体颜色可以使用<code>&lt;font&gt;</code>标签实现.</p>
+<p>比如我们想用红色字体.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb15-1" data-line-number="1">&lt;font color=&quot;red&quot;&gt;这段话使用红色字体.&lt;/font&gt;</a></code></pre></div>
+<p><font color="red">这段话使用红色字体.</font></p>
+<p><code>&lt;font&gt;</code>标签常用属性:</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>color</td>
+<td>颜色</td>
+</tr>
+<tr class="even">
+<td>face</td>
+<td>字体</td>
+</tr>
+<tr class="odd">
+<td>size</td>
+<td>字体大小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="引用blockquotes" class="section level2">
+<h2><span class="header-section-number">2.6</span> 引用(Blockquotes)</h2>
+<p>语法:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb16-1" data-line-number="1">&gt;<span class="dt"> 这是一句引用</span></a></code></pre></div>
+<blockquote>
+<p>这是一句引用</p>
+</blockquote>
+<p>语法:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb17-1" data-line-number="1">&gt;<span class="dt"> 这是一段引用        </span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="dt">&gt; 这是一段引用</span></a></code></pre></div>
+<blockquote>
+<p>这是一段引用<br />
+这是一段引用</p>
+</blockquote>
+</div>
+<div id="代码块-code-chunks" class="section level2">
+<h2><span class="header-section-number">2.7</span> 代码块 (Code chunks)</h2>
+<ul>
+<li>单独代码</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="bn">```</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="bn">library(tidyverse)</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="bn">mtcars %&gt;% </span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="bn">ggplot(aes(x = gear, cyl)) + </span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
+<p>最后渲染结果为:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb19-1" data-line-number="1">library(ggplot2)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">library(tidyverse)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">mtcars %&gt;% </a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">ggplot(aes(x = gear, cyl)) + </a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">geom_point() + </a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">theme_bw()</a></code></pre></div>
+<p>如果是使用Rmarkdown,还可以直接让代码运行出现结果.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="bn">```{r, eval = TRUE}</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="bn">library(tidyverse)</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="bn">mtcars %&gt;% </span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="bn">ggplot(aes(x = gear, cyl)) + </span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gear, cyl)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="kw">theme_bw</span>()</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Rmarkdown中代码块中有很多内容可以设置.</p>
+<ul>
+<li>行内代码</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" data-line-number="1">行内代码可以使用``(中间为内容或者代码).</a></code></pre></div>
+<p>比如:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="bn">`行内代码`</span>可以用来强调某个部分.</a></code></pre></div>
+<p><code>行内代码</code>可以用来强调某个部分.</p>
+<p>当然,在rmakdown中,代码块是可以运行的,所以行内代码也可以运行得到结果.</p>
+<p>比如:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb24-1" data-line-number="1">There were 50 cars studied</a></code></pre></div>
+<p>There were 50 cars studied</p>
+</div>
+<div id="水平线-horizontal-rule" class="section level2">
+<h2><span class="header-section-number">2.8</span> 水平线 (Horizontal rule)</h2>
+<p>语法:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb25-1" data-line-number="1">这是一条水平线.</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">***</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">这也是一条水平线.</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">---</a></code></pre></div>
+<p>这是一条水平线.</p>
+<hr />
+<p>这也是一条水平线.</p>
+<hr />
+</div>
+<div id="列表-list" class="section level2">
+<h2><span class="header-section-number">2.9</span> 列表 (List)</h2>
+<ul>
+<li>有序列表 (Ordered list)</li>
+</ul>
+<p>直接使用数字即可</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb26-1" data-line-number="1">1. <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="fl">2. Item 2</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="fl">3. Item 3</span></a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><p>Item 1</p></li>
+<li><p>Item 2</p></li>
+<li><p>Item 3</p></li>
+</ol>
+<ul>
+<li>无序列表 (Unordered list)</li>
+</ul>
+<p>无需列表可以使用<code>*</code>或者<code>-</code>来创建.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb27-1" data-line-number="1">* <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="fl">* Item 2</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="fl">  * Item 2.1</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="fl">  * Item 2.2</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="fl">* Item 3</span></a></code></pre></div>
+<ul>
+<li>Item 1</li>
+<li>Item 2
+<ul>
+<li>Item 2.1</li>
+<li>Item 2.2</li>
+</ul></li>
+<li>Item 3</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb28-1" data-line-number="1">- <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="fl">- Item 2</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="fl">  - Item 2.1</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="fl">  - Item 2.2</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="fl">- Item 3</span></a></code></pre></div>
+<ul>
+<li>Item 1</li>
+<li>Item 2
+<ul>
+<li>Item 2.1</li>
+<li>Item 2.2</li>
+</ul></li>
+<li><p>Item 3</p></li>
+<li><p>任务列表 (Task list)</p></li>
+</ul>
+<p>有的markdown编辑器是支持任务列表的,比如github,但是有些也不支持.比如rmakdown就是不支持的(本书就是用rmakrdown写的).</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb29-1" data-line-number="1">- <span class="fl">[x] Write the press release</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="fl">- [ ] Update the website</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="fl">- [ ] Contact the media</span></a></code></pre></div>
+<ul>
+<li>[x] Write the press release</li>
+<li>[ ] Update the website</li>
+<li>[ ] Contact the media</li>
+</ul>
+</div>
+<div id="表格-tables" class="section level2">
+<h2><span class="header-section-number">2.10</span> 表格 (Tables)</h2>
+<p>原生态的markdown表格语法非常简单.</p>
+<p>语法:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb30-1" data-line-number="1">| First name    | Last name   | Sex  |</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">| ------------- |-------------| -----|</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">| Xiaotao       |Shen          | Male |</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">| Chuchu        | Wang      |   Female |</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>First name</th>
+<th>Last name</th>
+<th>Sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Xiaotao</td>
+<td>Shen</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<td>Chuchu</td>
+<td>Wang</td>
+<td>Female</td>
+</tr>
+</tbody>
+</table>
+<p>Rmarkdown可以使用函数来插入表格.</p>
+<ul>
+<li><code>DT</code>包</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="bn">library(DT)</span></a>
+<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="bn">DT::datatable(</span></a>
+<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="bn">  head(iris, 10),</span></a>
+<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="bn">  fillContainer = TRUE, </span></a>
+<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="bn">  options = list(pageLength = 4)</span></a>
+<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="bn">)</span></a>
+<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">library</span>(DT)</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">DT<span class="op">::</span><span class="kw">datatable</span>(</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">  <span class="kw">head</span>(iris, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">)</a></code></pre></div>
+<div id="htmlwidget-144b212581be1b6ba2e5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-144b212581be1b6ba2e5">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><code>knitr</code>包</li>
+</ul>
+<p>语法:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="bn">knitr::kable(head(iris), format = &#39;html&#39;)</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(iris), <span class="dt">format =</span> <span class="st">&#39;html&#39;</span>)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+Sepal.Length
+</th>
+<th style="text-align:right;">
+Sepal.Width
+</th>
+<th style="text-align:right;">
+Petal.Length
+</th>
+<th style="text-align:right;">
+Petal.Width
+</th>
+<th style="text-align:left;">
+Species
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:left;">
+setosa
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="段落" class="section level2">
+<h2><span class="header-section-number">2.11</span> 段落</h2>
+<p>markdown中对于段落的控制比较上,如果需要对段落进行修饰,比如对齐,段间距等等,需要使用HTML<code>&lt;p&gt;</code>标签进行设置.</p>
+<ul>
+<li>对齐</li>
+</ul>
+<p>对齐是<code>&lt;p&gt;</code>标签中的<code>align</code>属性.</p>
+<ol style="list-style-type: decimal">
+<li>左对齐</li>
+</ol>
+<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb35-1" data-line-number="1">&lt;p align = &quot;left&quot;&gt; </a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="left">
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+</p>
+<ol start="2" style="list-style-type: decimal">
+<li>右对齐</li>
+</ol>
+<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb36-1" data-line-number="1">&lt;p align = &quot;right&quot;&gt; </a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="right">
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+</p>
+<ol start="3" style="list-style-type: decimal">
+<li>居中对齐</li>
+</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb37-1" data-line-number="1">&lt;p align = &quot;center&quot;&gt; </a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="center">
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+</p>
+<ol start="3" style="list-style-type: decimal">
+<li>两端对齐</li>
+</ol>
+<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb38-1" data-line-number="1">&lt;p align = &quot;justify&quot;&gt; </a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="justify">
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+</p>
+<ul>
+<li>行间距</li>
+</ul>
+<p>使用<code>&lt;p&gt;</code>标签的<code>style</code>属性进行设置.</p>
+<p>将<code>line-height</code>设置为<code>300%</code>相当于是三倍行距.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb39-1" data-line-number="1">&lt;p align = &quot;justify&quot; style=&quot;line-height:300%&quot;&gt; </a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<p align="justify" style="line-height:300%">
+Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+</p>
+</div>
+<div id="插入icon" class="section level2">
+<h2><span class="header-section-number">2.12</span> 插入icon</h2>
+<p>可以插入符号工具包<code>Font Awesome</code>.一般的markdown编辑器都已经支持直接使用HTML插入icon.</p>
+<p>比如插入微信图标:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb40-1" data-line-number="1">&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;</a></code></pre></div>
+<p><i class="fa fa-weixin"></i></p>
+<p>如果不支持,可以在markdown的最底端插入下面的代码:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb41-1" data-line-number="1">&lt;head&gt; </a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; </span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; </span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">&lt;/head&gt; </a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.0.13/css/all.css&quot;&gt;</a></code></pre></div>
+<p>当然也可以使用HTML的<code>&lt;a&gt;</code>标签让icon绑定一个超链接.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb42-1" data-line-number="1">&lt;a href=&quot;https://www.shenxt.info/files/wechat_QR.jpg&quot;&gt;&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;&lt;/a&gt;</a></code></pre></div>
+<p><a href="https://www.shenxt.info/files/wechat_QR.jpg"><i class="fa fa-weixin"></i></a></p>
+</div>
+<div id="数学公式-equations" class="section level2">
+<h2><span class="header-section-number">2.13</span> 数学公式 (Equations)</h2>
+<p>Markdown可以方便插入数学公式.</p>
+<div id="行内和行外" class="section level3">
+<h3><span class="header-section-number">2.13.1</span> 行内和行外</h3>
+<p>如果是将公式插入到行内,使用<code>$公式$</code>.</p>
+<p>如果是将公式单独出来,使用<code>$$公式$$</code>.</p>
+</div>
+<div id="上标和下标" class="section level3">
+<h3><span class="header-section-number">2.13.2</span> 上标和下标</h3>
+<ol style="list-style-type: decimal">
+<li>上标<code>^</code></li>
+</ol>
+<p>比如:<code>$x^4$</code>:<span class="math inline">\(x^4\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>下标<code>_</code></li>
+</ol>
+<p>比如:<code>$x_2$</code>:<span class="math inline">\(x_2\)</span></p>
+</div>
+<div id="占位符" class="section level3">
+<h3><span class="header-section-number">2.13.3</span> 占位符</h3>
+<ol style="list-style-type: decimal">
+<li>空格</li>
+</ol>
+<p>单个空格:<code>\quad</code>.</p>
+<p>比如:<code>$x\quady$</code>: <span class="math inline">\(x \quad y\)</span></p>
+<p>两个个空格:<code>\qquad</code>.</p>
+<p>比如:<code>$x\qquady$</code>: <span class="math inline">\(x \qquad y\)</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>大空格</li>
+</ol>
+<p>符号:<code>\</code></p>
+<p>比如:<code>$x\y$</code>:<span class="math inline">\(x\ y\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>中空格</li>
+</ol>
+<p>符号:<code>\:</code></p>
+<p>比如:<code>$x\:y$</code>:<span class="math inline">\(x\: y\)</span>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>小空格</li>
+</ol>
+<p>符号:<code>\,</code></p>
+<p>比如:<code>$x\,y$</code>:<span class="math inline">\(x\, y\)</span>.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>紧贴</li>
+</ol>
+<p>符号:<code>\!</code></p>
+<p>比如:<code>$x\!y$</code>:<span class="math inline">\(x\! y\)</span>.</p>
+</div>
+<div id="四则运算" class="section level3">
+<h3><span class="header-section-number">2.13.4</span> 四则运算</h3>
+<ol style="list-style-type: decimal">
+<li>平均数运算</li>
+</ol>
+<p>符号：<code>\overline{算式}</code>，如：<code>$\overline{xyz}$</code>:<span class="math inline">\(\overline{xyz}\)</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>开二次方运算，符号：<code>\sqrt</code>，如：<code>$\sqrt x$</code>:<span class="math inline">\(\sqrt x\)</span></p></li>
+<li><p>开方运算，符号：<code>\sqrt[开方数]{被开方数}</code>，如：<code>$\sqrt[3]{x+y}$</code>:<span class="math inline">\(\sqrt[3]{x+y}\)</span></p></li>
+<li><p>对数运算，符号：<code>\log</code>，如：<code>$\log(x)$</code>:<span class="math inline">\(\log(x)\)</span>.</p></li>
+<li><p>极限运算，符号：<code>\lim</code>，如：<code>$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</code>:<span class="math inline">\(\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}\)</span></p></li>
+<li><p>极限运算，符号：<code>\displaystyle \lim</code>，如：<code>$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</code>:<span class="math inline">\(\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}\)</span></p></li>
+<li><p>求和运算，符号：<code>\sum</code>，如：<code>$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</code>:<span class="math inline">\(\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}\)</span></p></li>
+<li><p>求和运算，符号：<code>\displaystyle \sum</code>，如：<code>$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</code>:<span class="math inline">\(\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}\)</span></p></li>
+<li><p>积分运算，符号：<code>\int</code>，如：<code>$\int^{\infty}_{0}{xdx}$</code>:<span class="math inline">\(\int^{\infty}_{0}{xdx}\)</span></p></li>
+<li><p>积分运算，符号：<code>\displaystyle \int</code>，如：<code>$\displaystyle \int^{\infty}_{0}{xdx}$</code>:<span class="math inline">\(\displaystyle \int^{\infty}_{0}{xdx}\)</span></p></li>
+<li><p>微分运算，符号：<code>\partial</code>，如：<code>$\frac{\partial x}{\partial y}$</code>:<span class="math inline">\(\frac{\partial x}{\partial y}\)</span></p></li>
+<li><p>矩阵表示，符号：<code>\begin{matrix} \end{matrix}</code>，如：<code>$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]$</code><span class="math inline">\(\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;4\5 &amp;6 &amp;\cdots &amp;8\\vdots &amp;\vdots &amp;\ddots &amp;\vdots\13 &amp;14 &amp;\cdots &amp;16\end{matrix} \right]\)</span></p></li>
+</ol>
+</div>
+<div id="集合运算" class="section level3">
+<h3><span class="header-section-number">2.13.5</span> 集合运算</h3>
+<ol style="list-style-type: decimal">
+<li><p>属于运算，符号：<code>\in</code>，如：<code>$x \in y$</code><span class="math inline">\(x \in y\)</span></p></li>
+<li><p>不属于运算，符号：<code>\notin</code>，如：<code>$x \notin y$</code>:<span class="math inline">\(x \notin y\)</span></p></li>
+<li><p>不属于运算，符号：<code>\not\in</code>，如：<code>$x \not\in y$</code><span class="math inline">\(x \not\in y\)</span></p></li>
+<li><p>子集运算，符号：<code>\subset</code>，如：<code>$x \subset y$</code><span class="math inline">\(x \subset y\)</span></p></li>
+<li><p>子集运算，符号：<code>\supset</code>，如：<code>$x \supset y$</code><span class="math inline">\(x \supset y\)</span></p></li>
+<li><p>真子集运算，符号：<code>\subseteq</code>，如：<code>$x \subseteq y$</code><span class="math inline">\(x \subseteq y\)</span></p></li>
+<li><p>非真子集运算，符号：<code>\subsetneq</code>，如：<code>$x \subsetneq y$</code><span class="math inline">\(x \subsetneq y\)</span></p></li>
+<li><p>真子集运算，符号：<code>\supseteq</code>，如：<code>$x \supseteq y$</code><span class="math inline">\(x \supseteq y\)</span></p></li>
+<li><p>非真子集运算，符号：<code>\supsetneq</code>，如：<code>$x \supsetneq y$</code><span class="math inline">\(x \supsetneq y\)</span></p></li>
+<li><p>非子集运算，符号：<code>\not\subset</code>，如：<code>$x \not\subset y$</code><span class="math inline">\(x \not\subset y\)</span></p></li>
+<li><p>非子集运算，符号：<code>\not\supset</code>，如：<code>$x \not\supset y$</code><span class="math inline">\(x \not\supset y\)</span></p></li>
+<li><p>并集运算，符号：<code>\cup</code>，如：<code>$x \cup y$</code><span class="math inline">\(x \cup y\)</span></p></li>
+<li><p>交集运算，符号：<code>\cap</code>，如：<code>$x \cap y$</code><span class="math inline">\(x \cap y\)</span></p></li>
+<li><p>差集运算，符号：<code>\setminus</code>，如：<code>$x \setminus y$</code><span class="math inline">\(x \setminus y\)</span></p></li>
+<li><p>同或运算，符号：<code>\bigodot</code>，如：<code>$x \bigodot y$</code><span class="math inline">\(x \bigodot y\)</span></p></li>
+<li><p>同与运算，符号：<code>\bigotimes</code>，如：<code>$x \bigotimes y$</code><span class="math inline">\(x \bigotimes y\)</span></p></li>
+<li><p>实数集合，符号：<code>\mathbb{R}</code>，如：<code>$\mathbb{R}$</code> <span class="math inline">\(\mathbb{R}\)</span></p></li>
+<li><p>自然数集合，符号：<code>\mathbb{Z}</code>，如：<code>$\mathbb{Z}$</code> <span class="math inline">\(\mathbb{Z}\)</span></p></li>
+<li><p>空集，符号：<code>\emptyset</code>，如：<code>$\emptyset$</code><span class="math inline">\(\emptyset\)</span></p></li>
+</ol>
+</div>
+<div id="数学符号" class="section level3">
+<h3><span class="header-section-number">2.13.6</span> 数学符号</h3>
+<ol style="list-style-type: decimal">
+<li><p>无穷，符号：<code>\infty</code>，如：<code>$\infty$</code><span class="math inline">\(\infty\)</span></p></li>
+<li><p>虚数，符号：<code>\imath</code>，如：<code>$\imath$</code><span class="math inline">\(\imath\)</span></p></li>
+<li><p>虚数，符号：<code>\jmath</code>，如：<code>$\jmath$</code><span class="math inline">\(\jmath\)</span></p></li>
+<li><p>数学符号，符号<code>\hat{a}</code>，如：<code>$\hat{a}$</code><span class="math inline">\(\hat{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\check{a}</code>，如：<code>$\check{a}$</code><span class="math inline">\(\check{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\breve{a}</code>，如：<code>$\breve{a}$</code><span class="math inline">\(\breve{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\tilde{a}</code>，如：<code>$\tilde{a}$</code><span class="math inline">\(\tilde{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\bar{a}</code>，如：<code>$\bar{a}$</code><span class="math inline">\(\bar{a}\)</span></p></li>
+<li><p>矢量符号，符号<code>\vec{a}</code>，如：<code>$\vec{a}$</code><span class="math inline">\(\vec{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\acute{a}</code>，如：<code>$\acute{a}$</code><span class="math inline">\(\acute{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\grave{a}</code>，如：<code>$\grave{a}$</code><span class="math inline">\(\grave{a}\)</span></p></li>
+<li><p>数学符号，符号<code>\mathring{a}</code>，如：<code>$\mathring{a}$</code><span class="math inline">\(\mathring{a}\)</span></p></li>
+<li><p>一阶导数符号，符号<code>\dot{a}</code>，如：<code>$\dot{a}$</code><span class="math inline">\(\dot{a}\)</span></p></li>
+<li><p>二阶导数符号，符号<code>\ddot{a}</code>，如：<code>$\ddot{a}$</code><span class="math inline">\(\ddot{a}\)</span></p></li>
+<li><p>上箭头，符号：<code>\uparrow</code>，如：<code>$\uparrow$</code><span class="math inline">\(\uparrow\)</span></p></li>
+<li><p>上箭头，符号：<code>\Uparrow</code>，如：<code>$\Uparrow$</code><span class="math inline">\(\Uparrow\)</span></p></li>
+<li><p>下箭头，符号：<code>\downarrow</code>，如：<code>$\downarrow$</code><span class="math inline">\(\downarrow\)</span></p></li>
+<li><p>下箭头，符号：<code>\Downarrow</code>，如：<code>$\Downarrow$</code><span class="math inline">\(\Downarrow\)</span></p></li>
+<li><p>左箭头，符号：<code>\leftarrow</code>，如：<code>$\leftarrow$</code><span class="math inline">\(\leftarrow\)</span></p></li>
+<li><p>左箭头，符号：<code>\Leftarrow</code>，如：<code>$\Leftarrow$</code><span class="math inline">\(\Leftarrow\)</span></p></li>
+<li><p>右箭头，符号：<code>\rightarrow</code>，如：<code>$\rightarrow$</code><span class="math inline">\(\rightarrow\)</span></p></li>
+<li><p>右箭头，符号：<code>\Rightarrow</code>，如：<code>$\Rightarrow$</code><span class="math inline">\(\Rightarrow\)</span></p></li>
+<li><p>底端对齐的省略号，符号：<code>\ldots</code>，如：<code>$1,2,\ldots,n$</code><span class="math inline">\(1,2,\ldots,n\)</span></p></li>
+<li><p>中线对齐的省略号，符号：<code>\cdots</code>，如：<code>$x_1^2 + x_2^2 + \cdots + x_n^2$</code><span class="math inline">\(x_1^2 + x_2^2 + \cdots + x_n^2\)</span></p></li>
+<li><p>竖直对齐的省略号，符号：<code>\vdots</code>，如：<code>$\vdots$</code><span class="math inline">\(\vdots\)</span></p></li>
+<li><p>斜对齐的省略号，符号：<code>\ddots</code>，如：<code>$\ddots$</code><span class="math inline">\(\ddots\)</span></p></li>
+</ol>
+</div>
+<div id="希腊字母" class="section level3">
+<h3><span class="header-section-number">2.13.7</span> 希腊字母</h3>
+<table>
+<thead>
+<tr class="header">
+<th>字母</th>
+<th>符合</th>
+<th>字母</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A\)</span></td>
+<td><code>$A$</code></td>
+<td><span class="math inline">\(\alpha\)</span></td>
+<td><code>$\alpha$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(B\)</span></td>
+<td><code>$B$</code></td>
+<td><span class="math inline">\(\beta\)</span></td>
+<td><code>$\beta$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Gamma\)</span></td>
+<td><code>$\Gamma$</code></td>
+<td><span class="math inline">\(\gamma\)</span></td>
+<td><code>$\gamma$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta\)</span></td>
+<td><code>$\Delta$</code></td>
+<td><span class="math inline">\(\delta\)</span></td>
+<td><code>$\delta$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(E\)</span></td>
+<td><code>$E$</code></td>
+<td><span class="math inline">\(\epsilon\)</span></td>
+<td><code>$\epsilon$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(Z\)</span></td>
+<td><code>$Z$</code></td>
+<td><span class="math inline">\(\zeta\)</span></td>
+<td><code>$\zeta$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H\)</span></td>
+<td><code>$H$</code></td>
+<td><span class="math inline">\(\eta\)</span></td>
+<td><code>$\eta$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Theta\)</span></td>
+<td><code>$Theta$</code></td>
+<td><span class="math inline">\(\theta\)</span></td>
+<td><code>$\theta$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(I\)</span></td>
+<td><code>$I$</code></td>
+<td><span class="math inline">\(\iota\)</span></td>
+<td><code>$\iota$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(K\)</span></td>
+<td><code>$K$</code></td>
+<td><span class="math inline">\(\kappa\)</span></td>
+<td><code>$\kappa$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Lambda\)</span></td>
+<td><code>$\Lambda$</code></td>
+<td><span class="math inline">\(\lambda\)</span></td>
+<td><code>$\lambda$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(M\)</span></td>
+<td><code>$M$</code></td>
+<td><span class="math inline">\(\mu\)</span></td>
+<td><code>$\mu$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(N\)</span></td>
+<td><code>$N$</code></td>
+<td><span class="math inline">\(\nu\)</span></td>
+<td><code>$\nu$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Xi\)</span></td>
+<td><code>$\Xi$</code></td>
+<td><span class="math inline">\(\xi\)</span></td>
+<td><code>$\xi$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(O\)</span></td>
+<td><code>$O$</code></td>
+<td><span class="math inline">\(\omicron\)</span></td>
+<td><code>$\omicron$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Pi\)</span></td>
+<td><code>$\Pi$</code></td>
+<td><span class="math inline">\(\pi\)</span></td>
+<td><code>$\pi$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(P\)</span></td>
+<td><code>$P$</code></td>
+<td><span class="math inline">\(\rho\)</span></td>
+<td><code>$\rho$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Sigma\)</span></td>
+<td><code>$\Sigma$</code></td>
+<td><span class="math inline">\(\sigma\)</span></td>
+<td><code>$\sigma$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T\)</span></td>
+<td><code>$T$</code></td>
+<td><span class="math inline">\(\tau\)</span></td>
+<td><code>$\tua$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Upsilon\)</span></td>
+<td><code>$\Upsilon$</code></td>
+<td><span class="math inline">\(\upsilon\)</span></td>
+<td><code>$\upsilon$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Phi\)</span></td>
+<td><code>$\Phi$</code></td>
+<td><span class="math inline">\(\phi\)</span></td>
+<td><code>$\phi$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(X\)</span></td>
+<td><code>$X$</code></td>
+<td><span class="math inline">\(\chi\)</span></td>
+<td><code>$\chi$</code></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\Psi\)</span></td>
+<td><code>$\Psi$</code></td>
+<td><span class="math inline">\(\psi\)</span></td>
+<td><code>$\psi$</code></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Omega\)</span></td>
+<td><code>$\Omega$</code></td>
+<td><span class="math inline">\(\omega\)</span></td>
+<td><code>$\omega$</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="视频-video和音乐-music" class="section level2">
+<h2><span class="header-section-number">2.14</span> 视频 (Video)和音乐 (music)</h2>
+<p>原生markdown并不支持视频插入,需要使用HTML语法.一般需要视频网站支持.比如插入youtube视频,需要到youtube视频下方,点击分享按钮,然后点击<code>Embed</code>,会给出内嵌的HTML代码.复制到markdown即可.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb43-1" data-line-number="1">&lt;iframe width=&quot;100%&quot; height=&quot;400&quot; src=&quot;https://www.youtube.com/embed/GCmnvXXrpRk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</a></code></pre></div>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/GCmnvXXrpRk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<p>同理,对于音乐,也需要音乐来源网站支持.比如我们插入网易音乐:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb44-1" data-line-number="1">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=330 height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=85569&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</a></code></pre></div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&amp;id=85569&amp;auto=1&amp;height=66">
+</iframe>
+</div>
+<div id="markdown编辑器" class="section level2">
+<h2><span class="header-section-number">2.15</span> Markdown编辑器</h2>
+<p>很多编辑器都支持markdown语法, 还有一些专门用于markdown的编辑器.</p>
+<ol style="list-style-type: decimal">
+<li>Typora</li>
+</ol>
+<p>官网如下:</p>
+<p><a href="https://typora.io/" class="uri">https://typora.io/</a></p>
+<p>感觉是现在最佳的markdown编辑器.实时渲染.</p>
+<p><img src="images/Mar-13-2020%2021-54-05.gif" /></p>
+<p>另外还可以导出为PDF等其他格式,非常全能.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>网易云笔记</li>
+</ol>
+<p>网易云笔记也支持markdown文件.并且能够在右侧实时显示渲染结果.也非常不错.</p>
+<p><img src="Mar-13-2020%2022-00-22.gif" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Atom</li>
+</ol>
+<p>是github官方出的文本编辑器,并不推荐使用.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Rstudio</li>
+</ol>
+<p>配合Rmarkdown使用非常好.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Jupyter notebook</li>
+</ol>
+<p>Python数据分析的非常好的编辑器.跟typora一样,实时渲染,格式并不是markdown的,但是可以导出为markdown格式.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Rmarkdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r_cookbook.pdf", "r_cookbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
