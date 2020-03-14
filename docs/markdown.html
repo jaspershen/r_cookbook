@@ -24,7 +24,7 @@
 <meta name="author" content="Xiaotao Shen" />
 
 
-<meta name="date" content="2020-03-13" />
+<meta name="date" content="2020-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,11 +168,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="Rmarkdown.html"><a href="Rmarkdown.html"><i class="fa fa-check"></i><b>3</b> RMarkdown</a><ul>
 <li class="chapter" data-level="3.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#安装"><i class="fa fa-check"></i><b>3.1</b> 安装</a></li>
 <li class="chapter" data-level="3.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#rmarkdown结构"><i class="fa fa-check"></i><b>3.2</b> Rmarkdown结构</a></li>
-<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#blogdown"><i class="fa fa-check"></i><b>3.3</b> Blogdown</a></li>
-<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#bookdown"><i class="fa fa-check"></i><b>3.4</b> Bookdown</a></li>
-<li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#presentation"><i class="fa fa-check"></i><b>3.5</b> Presentation</a></li>
-<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#pagedown"><i class="fa fa-check"></i><b>3.6</b> Pagedown</a></li>
-<li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#pkgdown"><i class="fa fa-check"></i><b>3.7</b> Pkgdown</a></li>
+<li class="chapter" data-level="3.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#yaml"><i class="fa fa-check"></i><b>3.3</b> YAML</a></li>
+<li class="chapter" data-level="3.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>3.4</b> R代码块</a></li>
+<li class="chapter" data-level="3.5" data-path="Rmarkdown.html"><a href="Rmarkdown.html#代码块参数-chunk-options"><i class="fa fa-check"></i><b>3.5</b> 代码块参数 (Chunk options)</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="Rmarkdown.html"><a href="Rmarkdown.html#代码是否执行"><i class="fa fa-check"></i><b>3.5.1</b> 代码是否执行</a></li>
+<li class="chapter" data-level="3.5.2" data-path="Rmarkdown.html"><a href="Rmarkdown.html#代码控制-code-decoration"><i class="fa fa-check"></i><b>3.5.2</b> 代码控制 (code decoration)</a></li>
+<li class="chapter" data-level="3.5.3" data-path="Rmarkdown.html"><a href="Rmarkdown.html#缓冲-cache"><i class="fa fa-check"></i><b>3.5.3</b> 缓冲 (cache)</a></li>
+<li class="chapter" data-level="3.5.4" data-path="Rmarkdown.html"><a href="Rmarkdown.html#图像控制plot"><i class="fa fa-check"></i><b>3.5.4</b> 图像控制(plot)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="Rmarkdown.html"><a href="Rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>3.6</b> 输出格式</a></li>
+<li class="chapter" data-level="3.7" data-path="Rmarkdown.html"><a href="Rmarkdown.html#blogdown"><i class="fa fa-check"></i><b>3.7</b> Blogdown</a></li>
+<li class="chapter" data-level="3.8" data-path="Rmarkdown.html"><a href="Rmarkdown.html#bookdown"><i class="fa fa-check"></i><b>3.8</b> Bookdown</a></li>
+<li class="chapter" data-level="3.9" data-path="Rmarkdown.html"><a href="Rmarkdown.html#presentation"><i class="fa fa-check"></i><b>3.9</b> Presentation</a></li>
+<li class="chapter" data-level="3.10" data-path="Rmarkdown.html"><a href="Rmarkdown.html#pagedown"><i class="fa fa-check"></i><b>3.10</b> Pagedown</a></li>
+<li class="chapter" data-level="3.11" data-path="Rmarkdown.html"><a href="Rmarkdown.html#pkgdown"><i class="fa fa-check"></i><b>3.11</b> Pkgdown</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>4</b> Git和github</a><ul>
 <li class="chapter" data-level="4.1" data-path="git.html"><a href="git.html#git配制"><i class="fa fa-check"></i><b>4.1</b> Git配制</a></li>
@@ -593,8 +602,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb32-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb32-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb32-6" data-line-number="6">)</a></code></pre></div>
-<div id="htmlwidget-05d00715ce0b51fb4d5e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-05d00715ce0b51fb4d5e">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3be6a8dcdb0a6e10a35a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3be6a8dcdb0a6e10a35a">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <ul>
 <li><code>knitr</code>包</li>
 </ul>

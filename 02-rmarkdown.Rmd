@@ -58,6 +58,553 @@ YAML下面就是文本部分,其实也就是Markdown.
 
 上图显示的就是一个完整的Rmarkdown文件.
 
+## YAML
+
+## R代码块
+
+R代码块的格式为:
+
+````markdown
+`r ''````{r}
+library(tidyverse)
+library(ggplot2)
+```
+````
+
+可以看到,跟markdown代码块唯一的不同就是需要使用`{r}`来定义该代码块为R语言.除此之外,可以通过在大括号中设置一系列的参数,来控制代码块的输出.包括文本输出,图片输出以及表格输出等.
+
+比如,可以通过设置`result = 'hide'`从而使文本结果不输出.也可以通过设置`fig.width`和`fig.height`来控制输出图片的宽度和高度.
+
+另外还可以通过`eval`参数(evaulate)来控制代码块是否执行,如果设置为`FALSE`,则代码块不会执行.
+
+比如:
+
+下面这段代码就会执行,并输出结果.
+
+````markdown
+`r ''````{r, eval = TRUE}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = wt, 
+color = gear)) + 
+geom_point() + theme_bw()
+```
+````
+
+```{r, eval = TRUE}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = wt, 
+color = gear)) + 
+geom_point() + theme_bw()
+```
+
+而这段代码则不会执行
+
+````markdown
+`r ''````{r, eval = FALSE}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = wt, 
+color = gear)) + 
+geom_point() + theme_bw()
+```
+````
+
+```{r, eval = FALSE}
+library(ggplot2)
+ggplot(mtcars, aes(x = mpg, y = wt, 
+color = gear)) + 
+geom_point() + theme_bw()
+```
+
+
+## 代码块参数 (Chunk options)
+
+代码块有非常多的参数(chunk options),常用的总结如下,完整的可以在yihui xie的博客中.
+
+https://yihui.org/knitr/options/
+
+### 代码是否执行
+
+* `eval`:设置为TRUE或者FALSE来控制代码块是否执行.
+
+###文本输出结果
+
+* `echo`:设置为TRUE或者FALSE,控制代码块是否显示在最终的渲染结果中.
+
+* `results`:
+ 
+   - `markup`:mark up the results using the output hook, e.g. put results in a special LaTeX environment.
+ 
+   - `asis`:将R原始结果输出到最终文本中.
+ 
+   - `hide`:隐藏R执行结果,但是对error,message和warning没有作用.
+* `collapse`:设置为TRUE或者FALSE.用来控制文本输出结果是否和代码块混在一起.
+
+* `warning`:设置为TRUE或者FALSE.如果代码执行,是否显示其中的warning信息.
+
+* `error`:设置为TRUE或者FALSE.如果设置为TRUE,即使代码执行出现错误,仍然会输出渲染结果,如果设置为FALSE,代码执行错误,则渲染也会出错,不会在继续输出结果.
+
+* 'message': 设置为TRUE或者FALSE.代码执行时是否输出message信息.
+
+* `include`:是否将代码输出结果显示在最终的渲染输出文本中.
+
+显示代码和输出结果:
+
+````markdown
+`r ''````{r, eval = TRUE, include = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+````
+
+```{r, eval = TRUE, include = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+
+显示代码不显示输出结果:
+
+````markdown
+`r ''````{r, eval = TRUE, include = FALSE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+````
+
+```{r, eval = TRUE, include = FALSE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+
+
+* `strip.white`:设置为TRUE或者FALSE.是否输出在最终输出渲染结果中代码块上下的白线.
+
+````markdown
+`r ''````{r, eval = FALSE, strip.white = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+````
+
+```{r, eval = FALSE, strip.white = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+
+
+````markdown
+`r ''````{r, eval = FALSE, strip.white = FALSE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+````
+
+```{r, eval = FALSE, strip.white = FALSE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+
+
+###  代码控制 (code decoration)
+
+* `tidy`:
+  - `TRUE`:使用`formatR`对代码格式进行整理.
+  - `FALSE`:保持原格式.
+  - `styler`:使用`styler`包对代码格式进行整理.
+
+* `comment`:默认为`##`,表示对于R代码输出的文本结果前面会有`##`进行注释.
+
+* `highlight`:逻辑值.是否对代码进行高亮.
+
+````markdown
+`r ''````{r, eval = FALSE, highlight = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+````
+
+```{r, eval = FALSE, highlight = TRUE}
+library(ggplot2)
+library(tidyverse)
+
+mtcars %>% 
+ggplot(aes(x = gear, cyl)) + 
+geom_point() + 
+theme_bw()
+```
+
+### 缓冲 (cache)
+
+`cache`:逻辑值.是否需要缓冲代码块运行结果,对于代码运行时间比较长的rmakdown文件,可以设置为TRUE,这样重新渲染的时候,会减少运行时间.
+
+`cache.path`:默认为'cache/',设置如果缓冲为TRUE时,缓冲结果存储的文件夹位置.
+
+### 图像控制(plot)
+
+* `fig.path`:默认为'figure/',用来设置生成figure的存储位置.
+
+* `fig.show`:如何显示plot.
+
+   - `asis`: plot在产生他们的代码后面.
+   
+   - `hold`:所有代码产生的图片都放在一个完整的代码块之后.
+   
+   - `animate`: 将所有产生的图片合成一个动画图片.
+   
+   - `hide`:产生所有图片,但是并不展示.
+   
+   
+````markdown
+`r ''````{r, eval = TRUE, fig.show = 'asis'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+````
+
+```{r, eval = TRUE, fig.show = 'asis'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+
+
+````markdown
+`r ''````{r, eval = TRUE, fig.show = 'hold'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+````
+
+```{r, eval = TRUE, fig.show = 'hold'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+
+````markdown
+`r ''````{r, eval = TRUE, fig.show = 'animate'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+````
+
+````{r, eval = TRUE, fig.show = 'animate'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+
+#plot3
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_igv() +
+theme_bw()
+```
+
+* `dpi`:输出图片dpi,默认72.(dpi * inches = pixels)
+
+* `fig.width`和`fig.height`:输出图片宽度和高度,默认为7(单位英寸).
+
+* `fig.asp`:图片的高宽比.默认为NULL.如果设置为数值,比如设置为0.7.则`fig.height`会被覆盖,然后设置为fig.width*fig.asp.
+
+* `out.width`和`out.height`:默认为NULL.可以设置为`100%`,这样在最终的渲染结果中就是和页面宽度一致.
+
+* `fig.align`:图片的align位置.默认为`left`,可以为`right`或者`center`.
+
+* `fig.cap`:图片标题.设置为NA或者NULL,则没有.
+
+* `fig.subcap`:图片副标题.
+
+## 全局代码块参数
+
+如果某些代码块参数在全局中都是一样的,可以在全局进行设置.
+
+在YAML下以及所有的markdown文本之上,插入下列代码块.
+
+````markdown
+`r ''````{r, include = FALSE}
+knitr::opts_chunk$set(fig.width = 8, collapse = TRUE)
+```
+````
+
+使用的是`knitr`包中的`opts_chunk$set()`函数.可以将比较常见常用的代码块设置在这里进行设置.这里就是全局的设置.
+
+## 具体问题的cookbook
+
+1. 输出两幅图,并且并列排布
+
+结合代码块参数`fig.show`(设置为`hold`)和`out.width`(设置为`50%`).
+
+````markdown
+`r ''````{r, eval = TRUE, fig.show = 'hold', out.width = '50%'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+```
+````
+
+```{r, eval = TRUE, echo = FALSE, fig.show = 'hold', out.width = '50%'}
+library(ggplot2)
+library(tidyverse)
+library(ggsci)
+#plot1 
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_aaas() +
+theme_bw()
+
+#plot2
+mtcars %>% 
+ggplot(aes(x = mpg, y = disp, color = as.character(gear))) + 
+geom_point() + 
+ggsci::scale_color_ucscgb() +
+theme_bw()
+```
+
+
+## Rmarkdown特有语法
+
+Rmarkdown相比markdown来说,因为可以直接运行代码,因此有一些特有的语法,比如插入图片等.
+
+### 图片 (image)
+
+使用`knitr::include_graphics()`函数可以直接插入图片,然后使用代码块参数可以对图片进行设置,宽度高度,对齐等等.
+
+````markdown
+`r ''````{r, eval = TRUE, fig.show = 'hold', out.width = '50%', fig.align = 'center', fig.cap = "小涛"}
+knitr::include_graphics('images/Screen Shot 2020-03-13 at 10.48.36 PM.png')
+```
+````
+
+```{r, eval = TRUE, echo = FALSE, fig.show = 'hold', out.width = '50%', fig.align = 'center', fig.cap = "小涛"}
+knitr::include_graphics('images/wechat_QR.jpg')
+```
+
+### 表格 (Table)
+
+* `knitr::ktable()`函数
+
+````markdown
+`r ''````{r, eval = TRUE}
+knitr::kable(iris[1:5, ], caption = 'A caption')
+```
+````
+
+````{r, echo = FALSE, eval = TRUE}
+knitr::kable(iris[1:5, ], caption = 'A caption')
+```
+
+该函数又很多参数可以用来控制输出表格的格式,具体的可以参考帮助文档.也可以参考下面的帖子:
+
+https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html
+
+
+### 地图 (map)
+
+使用`leaflet`包可以插入地图.
+
+````markdown
+`r ''````{r out.width='100%', echo=FALSE}
+library(leaflet)
+leaflet() %>% addTiles() %>%
+  setView(-93.65, 42.0285, zoom = 17) %>%
+  addPopups(
+    -93.65, 42.0285,
+    'Here is the <b>Department of Statistics</b>, ISU'
+  )
+```
+````
+
+```{r out.width='100%', echo=FALSE}
+library(leaflet)
+leaflet() %>% addTiles() %>%
+  setView(-93.65, 42.0285, zoom = 17) %>%
+  addPopups(
+    -93.65, 42.0285,
+    'Here is the <b>Department of Statistics</b>, ISU'
+  )
+```
+
+
+
+
+
+## 输出格式
+
 
 
 
