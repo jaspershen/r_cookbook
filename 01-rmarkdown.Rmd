@@ -2,15 +2,19 @@
 
 首先从`Markdown`的基础语法开始.
 
-## Markdown,Rmarkdown以及HTML语法
+## Markdown语法
 
-### 标题
+markdown语法一般是使用符号转变为特殊格式.这样,看起来markdown文件都是plain text(纯文本),但是渲染之后,就可以得到特殊格式的文件了.
+
+很多语法没有必要记住,只需要记住大概常用的几个就好,遇到不会的,直接google就可以.
+
+## 标题 (Header)
 
 Markdown一共支持六级标题.
 
 语法:
 
-```
+```markdown
 # 一级标题
 ## 二级标题
 ### 三级标题
@@ -19,19 +23,19 @@ Markdown一共支持六级标题.
 ###### 六级标题
 ```
 
-### 插入图片
+## 图片 (Image)
 
 > 注意`#`和文字之间一定要空格.
 
 插入图片的基本语法:
 
-```
+```markdown
 ![](图片链接或者本地位置)
 ```
 
 比如使用下面语句:
 
-```
+```markdown
 ![](https://www.shenxt.info/files/wechat_QR.jpg)
 ```
 
@@ -39,38 +43,72 @@ Markdown一共支持六级标题.
 
 这种插入图片的办法,不能设置图片的大小,如果想要设置图片大小,可以使用HTML语法(img标签)插入,markdown是支持HTML语法的.
 
-```
+```markdown
 <img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' />
 ```
-
 <img src = 'https://www.shenxt.info/files/wechat_QR.jpg' alt = 'shenxiaotao' height = 50% width = 50% />
 
 HTML `img`标签还有很多的其他功能,比如对齐等.
 
-### 插入链接
+
+常用的一些参数:
+
+| 属性 | 描述 |
+|------|------|
+|alt   | 图像替代文本|
+|src   | 图片链接或者本地地址|
+|height | 图片高度,单位可以是%或者pixel|
+|weight | 图片宽度,单位可以是%或者pixel|
+|weight | 图片宽度,单位可以是%或者pixel|
+
+## 链接 (Links)
 
 * 直接写url
 
 语法:
 
-```
+```markdown
 https://www.shenxt.info/
 ```
 
 https://www.shenxt.info/
+
 
 * 将网址超链接给某段文字
 
 语法:
 
-```
+```markdown
 想要访问我的网站,请点击[这里](https://www.shenxt.info/)
 ```
 
 想要访问我的网站,请点击[这里](https://www.shenxt.info/)
 
 
-### 强调
+* HTML插入链接
+
+如果我们想要更多的链接功能,比如点击链接打开新的窗口.这时候可以使用`<a>`标签.
+
+语法:
+
+```markdown
+<a href="url">Link text</a>
+```
+常用属性含义如下:
+
+| 属性 | 描述 |
+|------|------|
+|href   | 链接网址url|
+|target   | 在何处打开链接, `_blank`, `_parent`, `_self`, `_top`|
+比如我们插入一个网址,点击之后在新的网页打开.
+
+```markdown
+想要访问我的网站,请点击<a href="https://www.shenxt.info/" target = '_blank'>这里</a>.
+```
+
+想要访问我的网站,请点击<a href="https://www.shenxt.info/" target = '_blank'>这里</a>.
+
+## 强调 (Emphasize)
 
 强调包括斜体,高亮,加粗等等.
 
@@ -78,7 +116,7 @@ https://www.shenxt.info/
 
 语法如下:
 
-```
+```markdown
 *这是斜体*
 _这也是斜体_
 ```
@@ -92,7 +130,7 @@ _这也是斜体_
 
 语法如下:
 
-```
+```markdown
 **这是粗体**
 __这也是粗体__
 ```
@@ -105,7 +143,7 @@ __这也是粗体__
 
 语法如下:
 
-```
+```markdown
 ***这是粗体也是斜体***
 ___这是粗体也是斜体___
 ```
@@ -115,11 +153,22 @@ ___这是粗体也是斜体___
 ___这是粗体也是斜体___
 
 
-### 引用(Blockquotes)
+* 删除线
+
+语法如下:
+
+```markdown
+~~删除这句话~~
+```
+
+~~删除这句话~~
+
+
+## 引用(Blockquotes)
 
 语法:
 
-```
+```markdown
 > 这是一句引用
 ```
 
@@ -127,7 +176,7 @@ ___这是粗体也是斜体___
 
 语法:
 
-```
+```markdown
 > 这是一段引用        
 > 这是一段引用
 ```
@@ -136,7 +185,9 @@ ___这是粗体也是斜体___
 > 这是一段引用
 
 
-### 插入代码块
+## 代码块 (Code chunks)
+
+* 单独代码
 
 语法:
 
@@ -152,7 +203,9 @@ theme_bw()
 ```
 ````
 
-```
+最后渲染结果为:
+
+```markdown
 library(ggplot2)
 library(tidyverse)
 
@@ -190,11 +243,34 @@ theme_bw()
 
 Rmarkdown中代码块中有很多内容可以设置.
 
-### 插入水平线
+* 行内代码
+
+````markdown
+行内代码可以使用``(中间为内容或者代码).
+````
+比如:
+
+```markdown
+`行内代码`可以用来强调某个部分.
+```
+
+`行内代码`可以用来强调某个部分.
+
+当然,在rmakdown中,代码块是可以运行的,所以行内代码也可以运行得到结果.
+
+比如:
+
+```markdown
+There were `r nrow(cars)` cars studied
+```
+
+There were `r nrow(cars)` cars studied
+
+## 水平线 (Horizontal rule)
 
 语法:
 
-```
+```markdown
 这是一条水平线.
 ***
 
@@ -210,15 +286,15 @@ Rmarkdown中代码块中有很多内容可以设置.
 
 ---
 
-### 列表
+## 列表 (List)
 
-* 有序列表
+* 有序列表 (Ordered list)
 
 直接使用数字即可
 
 语法:
 
-```
+```markdown
 1. Item 1
 2. Item 2
 3. Item 3
@@ -230,13 +306,13 @@ Rmarkdown中代码块中有很多内容可以设置.
    
 3. Item 3
 
-* 无序列表
+* 无序列表 (Unordered list)
 
 无需列表可以使用`*`或者`-`来创建.
 
 语法:
 
-```
+```markdown
 * Item 1
 * Item 2
   * Item 2.1
@@ -252,7 +328,7 @@ Rmarkdown中代码块中有很多内容可以设置.
 
 语法:
 
-```
+```markdown
 - Item 1
 - Item 2
   - Item 2.1
@@ -266,13 +342,29 @@ Rmarkdown中代码块中有很多内容可以设置.
   - Item 2.2
 - Item 3
 
-### 表格
+* 任务列表 (Task list)
+
+有的markdown编辑器是支持任务列表的,比如github,但是有些也不支持.比如rmakdown就是不支持的(本书就是用rmakrdown写的).
+
+语法:
+
+```markdown
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+```
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+## 表格 (Tables)
 
 原生态的markdown表格语法非常简单.
 
 语法:
 
-```
+```markdown
 | First name    | Last name   | Sex  |
 | ------------- |-------------| -----|
 | Xiaotao       |Shen          | Male |
@@ -292,7 +384,7 @@ Rmarkdown可以使用函数来插入表格.
 语法:
 
 ````markdown
-```{r, eval=TRUE}
+`r ''````{r, eval=TRUE}
 library(DT)
 DT::datatable(
   head(iris, 10),
@@ -302,18 +394,232 @@ DT::datatable(
 ```
 ````
 
+```{r, eval=TRUE}
+library(DT)
+DT::datatable(
+  head(iris, 10),
+  fillContainer = TRUE, 
+  options = list(pageLength = 4)
+)
+```
 
 * `knitr`包
 
 语法:
 
 ````markdown
-```
+`r ''````{r, eval=TRUE}
 knitr::kable(head(iris), format = 'html')
 ```
 ````
 
-
 ```{r, eval=TRUE}
 knitr::kable(head(iris), format = 'html')
 ```
+
+## 数学公式 (Equations)
+
+Markdown可以方便插入数学公式.
+
+### 行内和行外
+
+如果是将公式插入到行内,使用`$公式$`.
+
+如果是将公式单独出来,使用`$$公式$$`.
+
+### 上标和下标
+
+1. 上标`^`
+
+比如:`$x^4$`:$x^4$.
+
+2. 下标`_`
+
+比如:`$x_2$`:$x_2$
+
+### 占位符
+
+1. 空格
+
+单个空格:`\quad`.
+
+比如:`$x\quady$`: $x \quad y$
+
+两个个空格:`\qquad`.
+
+比如:`$x\qquady$`: $x \qquad y$
+
+2. 大空格
+
+符号:`\`
+
+比如:`$x\y$`:$x\ y$.
+
+3. 中空格
+
+符号:`\:`
+
+比如:`$x\:y$`:$x\: y$.
+
+4. 小空格
+
+符号:`\,`
+
+比如:`$x\,y$`:$x\, y$.
+
+5. 紧贴
+
+符号:`\!`
+
+比如:`$x\!y$`:$x\! y$.
+
+### 四则运算
+
+1. 平均数运算
+
+符号：`\overline{算式}`，如：`$\overline{xyz}$`:$\overline{xyz}$
+
+2. 开二次方运算，符号：`\sqrt`，如：`$\sqrt x$`:$\sqrt x$
+
+3. 开方运算，符号：`\sqrt[开方数]{被开方数}`，如：`$\sqrt[3]{x+y}$`:$\sqrt[3]{x+y}$
+
+4. 对数运算，符号：`\log`，如：`$\log(x)$`:$\log(x)$.
+
+5. 极限运算，符号：`\lim`，如：`$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$`:$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$
+
+6. 极限运算，符号：`\displaystyle \lim`，如：`$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$`:$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$
+
+7. 求和运算，符号：`\sum`，如：`$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$`:$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$
+
+8. 求和运算，符号：`\displaystyle \sum`，如：`$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$`:$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$
+
+9. 积分运算，符号：`\int`，如：`$\int^{\infty}_{0}{xdx}$`:$\int^{\infty}_{0}{xdx}$
+
+10. 积分运算，符号：`\displaystyle \int`，如：`$\displaystyle \int^{\infty}_{0}{xdx}$`:$\displaystyle \int^{\infty}_{0}{xdx}$
+
+11. 微分运算，符号：`\partial`，如：`$\frac{\partial x}{\partial y}$`:$\frac{\partial x}{\partial y}$
+
+12. 矩阵表示，符号：`\begin{matrix} \end{matrix}`，如：`$\left[ \begin{matrix} 1 &2 &\cdots &4\5 &6 &\cdots &8\\vdots &\vdots &\ddots &\vdots\13 &14 &\cdots &16\end{matrix} \right]$`$\left[ \begin{matrix} 1 &2 &\cdots &4\5 &6 &\cdots &8\\vdots &\vdots &\ddots &\vdots\13 &14 &\cdots &16\end{matrix} \right]$
+
+### 集合运算
+
+1. 属于运算，符号：`\in`，如：`$x \in y$`$x \in y$
+
+2. 不属于运算，符号：`\notin`，如：`$x \notin y$`:$x \notin y$
+
+3. 不属于运算，符号：`\not\in`，如：`$x \not\in y$`$x \not\in y$
+
+4. 子集运算，符号：`\subset`，如：`$x \subset y$`$x \subset y$
+
+5. 子集运算，符号：`\supset`，如：`$x \supset y$`$x \supset y$
+
+6. 真子集运算，符号：`\subseteq`，如：`$x \subseteq y$`$x \subseteq y$
+
+7. 非真子集运算，符号：`\subsetneq`，如：`$x \subsetneq y$`$x \subsetneq y$
+
+8. 真子集运算，符号：`\supseteq`，如：`$x \supseteq y$`$x \supseteq y$
+
+9. 非真子集运算，符号：`\supsetneq`，如：`$x \supsetneq y$`$x \supsetneq y$
+
+10. 非子集运算，符号：`\not\subset`，如：`$x \not\subset y$`$x \not\subset y$
+
+11. 非子集运算，符号：`\not\supset`，如：`$x \not\supset y$`$x \not\supset y$
+
+12. 并集运算，符号：`\cup`，如：`$x \cup y$`$x \cup y$
+
+13. 交集运算，符号：`\cap`，如：`$x \cap y$`$x \cap y$
+
+14. 差集运算，符号：`\setminus`，如：`$x \setminus y$`$x \setminus y$
+
+15. 同或运算，符号：`\bigodot`，如：`$x \bigodot y$`$x \bigodot y$
+
+16. 同与运算，符号：`\bigotimes`，如：`$x \bigotimes y$`$x \bigotimes y$
+
+17. 实数集合，符号：`\mathbb{R}`，如：`$\mathbb{R}$` $\mathbb{R}$
+
+18. 自然数集合，符号：`\mathbb{Z}`，如：`$\mathbb{Z}$` $\mathbb{Z}$
+
+19. 空集，符号：`\emptyset`，如：`$\emptyset$`$\emptyset$
+
+### 数学符号
+
+1. 无穷，符号：`\infty`，如：`$\infty$`$\infty$
+
+2. 虚数，符号：`\imath`，如：`$\imath$`$\imath$
+
+3. 虚数，符号：`\jmath`，如：`$\jmath$`$\jmath$
+
+4. 数学符号，符号`\hat{a}`，如：`$\hat{a}$`$\hat{a}$
+
+5. 数学符号，符号`\check{a}`，如：`$\check{a}$`$\check{a}$
+
+6. 数学符号，符号`\breve{a}`，如：`$\breve{a}$`$\breve{a}$
+
+7. 数学符号，符号`\tilde{a}`，如：`$\tilde{a}$`$\tilde{a}$
+
+8. 数学符号，符号`\bar{a}`，如：`$\bar{a}$`$\bar{a}$
+
+9. 矢量符号，符号`\vec{a}`，如：`$\vec{a}$`$\vec{a}$
+
+10. 数学符号，符号`\acute{a}`，如：`$\acute{a}$`$\acute{a}$
+
+11. 数学符号，符号`\grave{a}`，如：`$\grave{a}$`$\grave{a}$
+
+12. 数学符号，符号`\mathring{a}`，如：`$\mathring{a}$`$\mathring{a}$
+
+13. 一阶导数符号，符号`\dot{a}`，如：`$\dot{a}$`$\dot{a}$
+
+14. 二阶导数符号，符号`\ddot{a}`，如：`$\ddot{a}$`$\ddot{a}$
+
+15. 上箭头，符号：`\uparrow`，如：`$\uparrow$`$\uparrow$
+
+16. 上箭头，符号：`\Uparrow`，如：`$\Uparrow$`$\Uparrow$
+
+17. 下箭头，符号：`\downarrow`，如：`$\downarrow$`$\downarrow$
+
+18. 下箭头，符号：`\Downarrow`，如：`$\Downarrow$`$\Downarrow$
+
+19. 左箭头，符号：`\leftarrow`，如：`$\leftarrow$`$\leftarrow$
+
+20. 左箭头，符号：`\Leftarrow`，如：`$\Leftarrow$`$\Leftarrow$
+
+21. 右箭头，符号：`\rightarrow`，如：`$\rightarrow$`$\rightarrow$
+
+22. 右箭头，符号：`\Rightarrow`，如：`$\Rightarrow$`$\Rightarrow$
+
+23. 底端对齐的省略号，符号：`\ldots`，如：`$1,2,\ldots,n$`$1,2,\ldots,n$
+
+24. 中线对齐的省略号，符号：`\cdots`，如：`$x_1^2 + x_2^2 + \cdots + x_n^2$`$x_1^2 + x_2^2 + \cdots + x_n^2$
+
+25. 竖直对齐的省略号，符号：`\vdots`，如：`$\vdots$`$\vdots$
+
+26. 斜对齐的省略号，符号：`\ddots`，如：`$\ddots$`$\ddots$
+
+### 希腊字母
+
+| 字母          | 符合      |  字母    | 符号      |
+| ------------- |-----------| ---------|-----------|
+| $A$           |`$A$`      | $\alpha$ | `$\alpha$`|
+| $B$           |`$B$`      | $\beta$ | `$\beta$`|
+| $\Gamma$       |`$\Gamma$` | $\gamma$ | `$\gamma$`|
+| $\Delta$       |`$\Delta$`  | $\delta$ | `$\delta$`|
+| $E$           |`$E$`      | $\epsilon$| `$\epsilon$`|
+| $Z$           |`$Z$`      | $\zeta$  | `$\zeta$`|
+| $H$           |`$H$`      | $\eta$ | `$\eta$`|
+| $\Theta$       |`$Theta$`  | $\theta$ | `$\theta$`|
+| $I$           |`$I$`      | $\iota$ | `$\iota$`|
+| $K$           |`$K$`      | $\kappa$ | `$\kappa$`|
+| $\Lambda$     |`$\Lambda$`| $\lambda$ | `$\lambda$`|
+| $M$           |`$M$`      | $\mu$ | `$\mu$`|
+| $N$           |`$N$`      | $\nu$     | `$\nu$`|
+| $\Xi$     |`$\Xi$`| $\xi$ | `$\xi$`|
+| $O$     |`$O$`| $\omicron$ | `$\omicron$`|
+| $\Pi$     |`$\Pi$`| $\pi$ | `$\pi$`|
+| $P$     |`$P$`| $\rho$ | `$\rho$`|
+| $\Sigma$     |`$\Sigma$`| $\sigma$ | `$\sigma$`|
+| $T$     |`$T$`| $\tau$ | `$\tua$`|
+| $\Upsilon$     |`$\Upsilon$`| $\upsilon$ | `$\upsilon$`|
+| $\Phi$     |`$\Phi$`| $\phi$ | `$\phi$`|
+| $X$     |`$X$`| $\chi$ | `$\chi$`|
+| $\Psi$     |`$\Psi$`| $\psi$ | `$\psi$`|
+| $\Omega$     |`$\Omega$`| $\omega$ | `$\omega$`|
