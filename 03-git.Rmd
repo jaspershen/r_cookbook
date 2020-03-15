@@ -1,6 +1,38 @@
 # Git和github {#git}
 
-Here is a review of existing methods.
+## 安装git
+
+Mac和Linux是默认安装git的,windows安装git可以直接到官网下载,然后安装即可.官网如下:
+
+https://git-scm.com/downloads
+
+## 注册github账户
+
+1. 打开github官网注册界面
+
+https://github.com/join?source=header-home
+
+2. 填入自己的账户名,邮箱和密码.
+
+选择`free` plan即可.
+
+![](images/Screen Shot 2020-03-14 at 11.30.19 PM.png)
+
+3. 选择或者填写一些内容.
+
+4. 验证邮箱
+
+## Git基础知识
+
+`git`是Linux的作者写的.是一个分布式的版本控制软件.
+
+主要功能:
+
+* 备份代码.
+
+* 版本管理.
+
+* 协作办公.
 
 ## Git配制
 

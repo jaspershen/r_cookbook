@@ -60,6 +60,8 @@ YAML下面就是文本部分,其实也就是Markdown.
 
 ## YAML
 
+`YAML`是在Rmakdown中控制很多内容的部分.通过参数设置,可以控制比如输入格式,输出主题等等.
+
 ## R代码块
 
 R代码块的格式为:
@@ -592,28 +594,248 @@ leaflet() %>% addTiles() %>%
 ```{r out.width='100%', echo=FALSE}
 library(leaflet)
 leaflet() %>% addTiles() %>%
-  setView(-93.65, 42.0285, zoom = 17) %>%
+  setView(-122.176758, 37.432748, zoom = 17) %>%
   addPopups(
-    -93.65, 42.0285,
-    'Here is the <b>Department of Statistics</b>, ISU'
+    -122.176758, 37.432748,
+    'Here is the <b>Snyder lab</b>, Stanford University'
   )
 ```
 
 
-
-
-
 ## 输出格式
 
+### HTML格式
+
+Markdown最最开始就是就是为输出为HTML格式涉及的.在Rmarkdown中,如果想要输出位HTML格式,需要在`YAML`中将output设置为`html_document`即可.
+
+````markdown
+---
+title: Test
+author: Xiaotao Shen
+date: March 22, 2005
+output: html_document
+---
+````
+
+1. 目录(Table of contents)
+
+想要给文章设置目录,可以在`html_document`下设置`toc`参数,同时也可以设置`toc_depth`来设置几级目录.
+
+比如下面的例子:
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+````
+
+如果想要让目录浮在页面上,可以设置`toc_float`参数.比如下面的例子:
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+````
+
+同时`toc_float`参数还有自己的参数可以进行设置.
+
+* `collapsed`:逻辑值.控制目录是否可以进行折叠.
+
+* `smooth_scroll`:逻辑值.controls whether page scrolls are animated when TOC items are navigated to via mouse clicks.
+
+例如:
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+````
+
+2. 标题编号(Section numbering)
+
+可以使用`number_sections`参数来控制标题的编号.
+
+例如:
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+````
+
+3. 外观和风格
+
+有几个参数可以来控制HTML document的外观.
+
+* `theme`参数可以用来控制HTML document的外观和主题.来自于[Bootswatch](https://bootswatch.com/3/cosmo/).可以选择的主题包括以下几项:
+`default`, `cerulean`, `journal`, `flatly`, `darkly`, `readable`, `spacelab`, `united`, `cosmo`, `lumen`, `paper`, `sandstone`, `simplex`, and `yeti`.可以点击到网站中去查看几种主题的外观.
+
+* `highlight`用来控制语法高亮的风格.包括以下几种: 
+`default`, `tango`, `pygments`, `kate`, `monochrome`, `espresso`, `zenburn`, `haddock`, `breezedark`, and `textmate`.
+
+4. 表格打印
+
+可以使用`df_print`参数来控制表格打印的风格.在R代码块中的数据框直接显示的风格.
+
+* `default`: 使用R中`print.data.frame`方法.
+
+* `kable`: 使用`knitr::kable`函数.
+
+* `tibble`: 使用`tibble::print.tbl_df`函数,
+
+* `paged`:使用`rmarkdown::paged_table`函数.
 
 
+````markdown
+---
+title: "Motor Trend Car Road Tests"
+output:
+  html_document:
+    df_print: default
+---
+
+`r ''````{r}
+mtcars
+```
+````
+
+显示结果如下:
+
+![](images/Screen Shot 2020-03-14 at 10.13.12 PM.png)
+
+如果设置为`kable`:
+
+![](images/Screen Shot 2020-03-14 at 10.16.32 PM.png)
+
+如果设置为`paged`:
+
+![](images/Screen Shot 2020-03-14 at 10.19.57 PM.png)
+
+5. 代码折叠
+
+可以通过设置`code_folding`为`hide`,这样所有的代码默认都是折叠的,然后用户可以通过点击按钮显示某个代码块.
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    code_folding: hide
+---
+````
+
+6. 其他一些高级设置
+
+* 通过使用`includes`参数,可以在rmarkdown的某些位置加入一些自己设计好的HTML元素.
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    includes:
+      in_header: header.html
+      before_body: doc_prefix.html
+      after_body: doc_suffix.html
+---
+````
+* 自定义主题
+
+如果对HTML比较熟悉,可以使用自己的主题.
+
+````markdown
+---
+title: "Habits"
+output:
+  html_document:
+    template: quarterly_report.html
+---
+````
+
+
+### PDF格式
+
+Rmarkdown也可以输出为PDF格式的文档.设置output为`pdf_document`.
+
+````markdown
+---
+title: "Habits"
+output:
+  pdf_document:
+    highlight: tango
+---
+````
+
+PDF格式的目录,图片设置,数据框打印,语法高亮都跟HTML相同.
+
+### Word格式
+
+也可以输出为word格式,设置output为`word_document`.
+
+````markdown
+---
+title: "Habits"
+author: John Doe
+date: March 22, 2005
+output: word_document
+---
+````
+word的格式可以使用默认的格式,当然也可以自己进行设置.设置好格式之后,使用`reference_docx`参数进行设置.
+
+````markdown
+---
+title: "Habits"
+output:
+  word_document:
+    reference_docx: my-styles.docx
+---
+````
+
+如何设置格式文件,可以参考下面文章:
+
+https://rmarkdown.rstudio.com/articles_docx.html
+
+或者看下面的视频:
+
+<iframe src="https://player.vimeo.com/video/110804387" width="640" height="400" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://vimeo.com/110804387">Create A MS Word Template for R Markdown</a> from <a href="https://vimeo.com/yihui">Yihui Xie</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 ## Blogdown
 
+![](images/Screen Shot 2020-03-14 at 10.52.48 PM.png)
+
 ## Bookdown
+
+![](images/Screen Shot 2020-03-14 at 10.54.49 PM.png)
 
 ## Presentation
 
+![](images/Screen Shot 2020-03-14 at 11.00.46 PM.png)
+
+![](images/Screen Shot 2020-03-14 at 11.01.20 PM.png)
+
 ## Pagedown
 
+![](images/Screen Shot 2020-03-14 at 11.03.05 PM.png)
+
 ## Pkgdown
+
+![](images/Screen Shot 2020-03-14 at 11.03.59 PM.png)
