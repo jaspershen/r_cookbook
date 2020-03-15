@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 多人协作的工作模式 | R cookbook from Xiaotao Shen</title>
+  <title>Chapter 5 git的分支管理 | R cookbook from Xiaotao Shen</title>
   <meta name="description" content="记录所有跟R语言有关的内容" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 多人协作的工作模式 | R cookbook from Xiaotao Shen" />
+  <meta property="og:title" content="Chapter 5 git的分支管理 | R cookbook from Xiaotao Shen" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 多人协作的工作模式 | R cookbook from Xiaotao Shen" />
+  <meta name="twitter:title" content="Chapter 5 git的分支管理 | R cookbook from Xiaotao Shen" />
   
   <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="-.html"/>
-<link rel="next" href="ggplot2.html"/>
+<link rel="prev" href="git.html"/>
+<link rel="next" href="-github.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -195,55 +195,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="git.html"><a href="git.html#创建本地git仓库reop"><i class="fa fa-check"></i><b>4.5.1</b> 创建本地git仓库(reop)</a></li>
 <li class="chapter" data-level="4.5.2" data-path="git.html"><a href="git.html#将文件添加到版本库"><i class="fa fa-check"></i><b>4.5.2</b> 将文件添加到版本库</a></li>
 <li class="chapter" data-level="4.5.3" data-path="git.html"><a href="git.html#查看仓库状态"><i class="fa fa-check"></i><b>4.5.3</b> 查看仓库状态</a></li>
-<li class="chapter" data-level="4.5.4" data-path="git.html"><a href="git.html#查看仓库中的具体修改"><i class="fa fa-check"></i><b>4.5.4</b> 查看仓库中的具体修改</a></li>
-<li class="chapter" data-level="4.5.5" data-path="git.html"><a href="git.html#查看提交的历史记录"><i class="fa fa-check"></i><b>4.5.5</b> 查看提交的历史记录</a></li>
-<li class="chapter" data-level="4.5.6" data-path="git.html"><a href="git.html#版本回退"><i class="fa fa-check"></i><b>4.5.6</b> 版本回退</a></li>
-<li class="chapter" data-level="4.5.7" data-path="git.html"><a href="git.html#回到未来某个版本"><i class="fa fa-check"></i><b>4.5.7</b> 回到未来某个版本</a></li>
-<li class="chapter" data-level="4.5.8" data-path="git.html"><a href="git.html#撤销修改"><i class="fa fa-check"></i><b>4.5.8</b> 撤销修改</a></li>
-<li class="chapter" data-level="4.5.9" data-path="git.html"><a href="git.html#删除文件"><i class="fa fa-check"></i><b>4.5.9</b> 删除文件</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="git.html"><a href="git.html#git的分支管理"><i class="fa fa-check"></i><b>4.6</b> git的分支管理</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="git.html"><a href="git.html#查看分支"><i class="fa fa-check"></i><b>4.6.1</b> 查看分支</a></li>
-<li class="chapter" data-level="4.6.2" data-path="git.html"><a href="git.html#创建分支"><i class="fa fa-check"></i><b>4.6.2</b> 创建分支</a></li>
-<li class="chapter" data-level="4.6.3" data-path="git.html"><a href="git.html#切换分支"><i class="fa fa-check"></i><b>4.6.3</b> 切换分支</a></li>
-<li class="chapter" data-level="4.6.4" data-path="git.html"><a href="git.html#switch命令"><i class="fa fa-check"></i><b>4.6.4</b> <code>switch</code>命令</a></li>
-<li class="chapter" data-level="4.6.5" data-path="git.html"><a href="git.html#合并分支merge"><i class="fa fa-check"></i><b>4.6.5</b> 合并分支(merge)</a></li>
-<li class="chapter" data-level="4.6.6" data-path="git.html"><a href="git.html#删除分支"><i class="fa fa-check"></i><b>4.6.6</b> 删除分支</a></li>
-<li class="chapter" data-level="4.6.7" data-path="git.html"><a href="git.html#分支提交冲突"><i class="fa fa-check"></i><b>4.6.7</b> 分支提交冲突</a></li>
-<li class="chapter" data-level="4.6.8" data-path="git.html"><a href="git.html#分支策略"><i class="fa fa-check"></i><b>4.6.8</b> 分支策略</a></li>
+<li class="chapter" data-level="4.6" data-path="git.html"><a href="git.html#查看仓库中的具体修改"><i class="fa fa-check"></i><b>4.6</b> 查看仓库中的具体修改</a></li>
+<li class="chapter" data-level="4.7" data-path="git.html"><a href="git.html#查看提交的历史记录"><i class="fa fa-check"></i><b>4.7</b> 查看提交的历史记录</a></li>
+<li class="chapter" data-level="4.8" data-path="git.html"><a href="git.html#版本回退"><i class="fa fa-check"></i><b>4.8</b> 版本回退</a></li>
+<li class="chapter" data-level="4.9" data-path="git.html"><a href="git.html#回到未来某个版本"><i class="fa fa-check"></i><b>4.9</b> 回到未来某个版本</a></li>
+<li class="chapter" data-level="4.10" data-path="git.html"><a href="git.html#撤销修改"><i class="fa fa-check"></i><b>4.10</b> 撤销修改</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="git.html"><a href="git.html#丢弃工作区中的文件修改"><i class="fa fa-check"></i><b>4.10.1</b> 丢弃工作区中的文件修改</a></li>
+<li class="chapter" data-level="4.10.2" data-path="git.html"><a href="git.html#丢弃暂存区的修改"><i class="fa fa-check"></i><b>4.10.2</b> 丢弃暂存区的修改</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="git.html"><a href="git.html#远程仓库github"><i class="fa fa-check"></i><b>4.7</b> 远程仓库(GitHub)</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="git.html"><a href="git.html#添加到远程仓库"><i class="fa fa-check"></i><b>4.7.1</b> 添加到远程仓库</a></li>
-<li class="chapter" data-level="4.7.2" data-path="git.html"><a href="git.html#推送到远程仓库"><i class="fa fa-check"></i><b>4.7.2</b> 推送到远程仓库</a></li>
-<li class="chapter" data-level="4.7.3" data-path="git.html"><a href="git.html#从远程仓库获取最新内容"><i class="fa fa-check"></i><b>4.7.3</b> 从远程仓库获取最新内容</a></li>
-<li class="chapter" data-level="4.7.4" data-path="git.html"><a href="git.html#查看远程仓库信息"><i class="fa fa-check"></i><b>4.7.4</b> 查看远程仓库信息</a></li>
-<li class="chapter" data-level="4.7.5" data-path="git.html"><a href="git.html#从远程仓库克隆"><i class="fa fa-check"></i><b>4.7.5</b> 从远程仓库克隆</a></li>
+<li class="chapter" data-level="4.11" data-path="git.html"><a href="git.html#删除文件"><i class="fa fa-check"></i><b>4.11</b> 删除文件</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="git.html"><a href="git.html#设置忽略文件"><i class="fa fa-check"></i><b>4.8</b> 设置忽略文件</a></li>
-<li class="chapter" data-level="4.9" data-path="git.html"><a href="git.html#多人协作"><i class="fa fa-check"></i><b>4.9</b> 多人协作</a><ul>
-<li class="chapter" data-level="4.9.1" data-path="git.html"><a href="git.html#创建远程仓库"><i class="fa fa-check"></i><b>4.9.1</b> 创建远程仓库</a></li>
-<li class="chapter" data-level="4.9.2" data-path="git.html"><a href="git.html#本地创建分支并推送到远程仓库"><i class="fa fa-check"></i><b>4.9.2</b> 本地创建分支并推送到远程仓库</a></li>
-<li class="chapter" data-level="4.9.3" data-path="git.html"><a href="git.html#邀请合作者"><i class="fa fa-check"></i><b>4.9.3</b> 邀请合作者</a></li>
-<li class="chapter" data-level="4.9.4" data-path="git.html"><a href="git.html#合作者参与项目"><i class="fa fa-check"></i><b>4.9.4</b> 合作者参与项目</a></li>
-<li class="chapter" data-level="4.9.5" data-path="git.html"><a href="git.html#克隆项目"><i class="fa fa-check"></i><b>4.9.5</b> 克隆项目</a></li>
+<li class="chapter" data-level="5" data-path="git-.html"><a href="git-.html"><i class="fa fa-check"></i><b>5</b> git的分支管理</a><ul>
+<li class="chapter" data-level="5.1" data-path="git-.html"><a href="git-.html#查看分支"><i class="fa fa-check"></i><b>5.1</b> 查看分支</a></li>
+<li class="chapter" data-level="5.2" data-path="git-.html"><a href="git-.html#创建分支"><i class="fa fa-check"></i><b>5.2</b> 创建分支</a></li>
+<li class="chapter" data-level="5.3" data-path="git-.html"><a href="git-.html#切换分支"><i class="fa fa-check"></i><b>5.3</b> 切换分支</a></li>
+<li class="chapter" data-level="5.4" data-path="git-.html"><a href="git-.html#switch命令"><i class="fa fa-check"></i><b>5.4</b> <code>switch</code>命令</a></li>
+<li class="chapter" data-level="5.5" data-path="git-.html"><a href="git-.html#合并分支merge"><i class="fa fa-check"></i><b>5.5</b> 合并分支(merge)</a></li>
+<li class="chapter" data-level="5.6" data-path="git-.html"><a href="git-.html#删除分支"><i class="fa fa-check"></i><b>5.6</b> 删除分支</a></li>
+<li class="chapter" data-level="5.7" data-path="git-.html"><a href="git-.html#分支提交冲突"><i class="fa fa-check"></i><b>5.7</b> 分支提交冲突</a></li>
+<li class="chapter" data-level="5.8" data-path="git-.html"><a href="git-.html#分支策略"><i class="fa fa-check"></i><b>5.8</b> 分支策略</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="-github.html"><a href="-github.html"><i class="fa fa-check"></i><b>6</b> 远程仓库(GitHub)</a><ul>
+<li class="chapter" data-level="6.1" data-path="-github.html"><a href="-github.html#添加到远程仓库"><i class="fa fa-check"></i><b>6.1</b> 添加到远程仓库</a></li>
+<li class="chapter" data-level="6.2" data-path="-github.html"><a href="-github.html#推送到远程仓库"><i class="fa fa-check"></i><b>6.2</b> 推送到远程仓库</a></li>
+<li class="chapter" data-level="6.3" data-path="-github.html"><a href="-github.html#从远程仓库获取最新内容"><i class="fa fa-check"></i><b>6.3</b> 从远程仓库获取最新内容</a></li>
+<li class="chapter" data-level="6.4" data-path="-github.html"><a href="-github.html#查看远程仓库信息"><i class="fa fa-check"></i><b>6.4</b> 查看远程仓库信息</a></li>
+<li class="chapter" data-level="6.5" data-path="-github.html"><a href="-github.html#从远程仓库克隆"><i class="fa fa-check"></i><b>6.5</b> 从远程仓库克隆</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="-.html"><a href="-.html"><i class="fa fa-check"></i><b>5</b> 开始工作</a><ul>
-<li class="chapter" data-level="5.1" data-path="-.html"><a href="-.html#创建文件"><i class="fa fa-check"></i><b>5.1</b> 创建文件</a></li>
-<li class="chapter" data-level="5.2" data-path="-.html"><a href="-.html#提交"><i class="fa fa-check"></i><b>5.2</b> 提交</a></li>
-<li class="chapter" data-level="5.3" data-path="-.html"><a href="-.html#合并分支"><i class="fa fa-check"></i><b>5.3</b> 合并分支</a></li>
-<li class="chapter" data-level="5.4" data-path="-.html"><a href="-.html#推送到远程仓库-1"><i class="fa fa-check"></i><b>5.4</b> 推送到远程仓库</a></li>
+<li class="chapter" data-level="7" data-path="-.html"><a href="-.html"><i class="fa fa-check"></i><b>7</b> 设置忽略文件</a></li>
+<li class="chapter" data-level="8" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>8</b> ggplot2学习总结</a></li>
+<li class="chapter" data-level="9" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>9</b> Network分析总结</a><ul>
+<li class="chapter" data-level="9.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>9.1</b> Example one</a></li>
+<li class="chapter" data-level="9.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>9.2</b> Example two</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="-.html"><a href="-.html#有冲突怎么办"><i class="fa fa-check"></i><b>6</b> 有冲突怎么办</a></li>
-<li class="chapter" data-level="7" data-path="-.html"><a href="-.html#抓取分支"><i class="fa fa-check"></i><b>7</b> 抓取分支</a></li>
-<li class="chapter" data-level="8" data-path="-.html"><a href="-.html#多人协作的工作模式"><i class="fa fa-check"></i><b>8</b> 多人协作的工作模式</a></li>
-<li class="chapter" data-level="9" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>9</b> ggplot2学习总结</a></li>
-<li class="chapter" data-level="10" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>10</b> Network分析总结</a><ul>
-<li class="chapter" data-level="10.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>10.1</b> Example one</a></li>
-<li class="chapter" data-level="10.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>10.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>11</b> 多组学分析</a></li>
-<li class="chapter" data-level="12" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>12</b> Tidyverse用于数据分析</a></li>
+<li class="chapter" data-level="10" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>10</b> 多组学分析</a></li>
+<li class="chapter" data-level="11" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>11</b> Tidyverse用于数据分析</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -265,25 +252,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="多人协作的工作模式" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> 多人协作的工作模式</h1>
-<ol style="list-style-type: decimal">
-<li><p>首先，可以试图用<code>git push origin &lt;branch-name&gt;</code>推送自己的修改；</p></li>
-<li><p>如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并；</p></li>
-<li><p>如果合并有冲突，则解决冲突，并在本地提交；</p></li>
-<li><p>没有冲突或者解决掉冲突后，再用<code>git push origin &lt;branch-name&gt;</code>推送就能成功！</p></li>
-<li><p>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>。</p></li>
-</ol>
-<p>这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
-
+<div id="git的分支管理" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> git的分支管理</h1>
+<p>分支管理是版本管理中的重要概念.在进行多个并行作业时,我们经常会用到分支.在这类并行开发的过程中,往往同时存在着多个最新的代码状态.</p>
+<p>master分支时git默认创建的分支.因此基本上所有的开发都是以这个分支为中心进行的.</p>
+<p>在不同分支中,可以同时进行不同的作业,等该分支的作业完成之后,再与master分支进行合并.</p>
+<p>比如下图中,我们首先以master作为模板复制得到<code>feature A</code>的分支.<code>feature A</code>分支主要用来开发另外一个新的特性,等开发完毕之后,再将其合并到master分支中即可.</p>
+<p><img src="Annotation%202020-03-04%20205634.png" /></p>
+<div id="查看分支" class="section level2">
+<h2><span class="header-section-number">5.1</span> 查看分支</h2>
+<p>使用<code>git branch</code>命令查看分支信息.</p>
+<pre><code>git branch        #查看本地分支信息
+git branch -v     #查看相对详细的本地分支信息
+git branch -av     #查看包括远程仓库在内的分支信息</code></pre>
+<p><img src="Annotation%202020-03-04%20210006.png" /></p>
+<p>可以看到我们现在只有一个分支,也就是master,然后星号标识的就是当前所在的分支.</p>
+</div>
+<div id="创建分支" class="section level2">
+<h2><span class="header-section-number">5.2</span> 创建分支</h2>
+<p>使用 <code>git branch new.name</code>用来创建新的分支.</p>
+<pre><code>git branch development ##创建一个新的名字叫做development的分支</code></pre>
+<blockquote>
+<p>需要注意的是,在哪个分支下面新建分支,则该分支就是copy自当前所在的分支.</p>
+</blockquote>
+</div>
+<div id="切换分支" class="section level2">
+<h2><span class="header-section-number">5.3</span> 切换分支</h2>
+<p>使用<code>git checkout</code>命令来切换分支.比如我们先新建一个development的分支,然后切换到该分支下.</p>
+<pre><code>git branch development
+git checkout development</code></pre>
+<p>当然也可以使用下面命令直接创建并切换到新建的分支下.</p>
+<pre><code>git checkout -b development</code></pre>
+</div>
+<div id="switch命令" class="section level2">
+<h2><span class="header-section-number">5.4</span> <code>switch</code>命令</h2>
+<p>我们注意到切换分支使用<code>git checkout &lt;branch&gt;</code>,而前面讲过的撤销修改则是<code>git checkout -- &lt;file&gt;</code>,同一个命令,有两种作用,确实有点令人迷惑.</p>
+<p>实际上,切换分支这个动作,用<code>switch</code>更科学。因此，最新版本的Git提供了新的<code>git switch</code>命令来切换分支：</p>
+<p>创建并切换到新的development分支,可以使用:</p>
+<pre><code>git switch -c development </code></pre>
+<p>直接切换到已有分支:</p>
+<pre><code>git switch master</code></pre>
+<p><img src="Annotation%202020-03-04%20210500.png" /></p>
+<p>我们下面在development分支下面再新建一个<code>development.txt</code>文件,然后写入一些内容.</p>
+<p><img src="Annotation%202020-03-04%20211512.png" /></p>
+<p>可以看到此时有一个新建的development.txt文件.如果我们切换到master分支,还是有该文件,但是对该文件内容进行修改,则因为没有加入到暂存区,因此并不会进行版本控制.</p>
+</div>
+<div id="合并分支merge" class="section level2">
+<h2><span class="header-section-number">5.5</span> 合并分支(merge)</h2>
+<p>当我们修复完成一个Bug,或者开发完成一个新特性,我们就会把相关的Bug或者特性的上修改合并回原来的主分支上.,这时候就需要<code>git merge</code>命令来做分支的合并.</p>
+<p>首先需要切换回最终需要合并的分支,也就是<code>master</code>分支,然后再合并.</p>
+<pre><code>git checkout master        #切换回 master 分支
+git merge development     #将development分支中的修改合并回master分支</code></pre>
+<p><img src="Annotation%202020-03-04%20212532.png" /></p>
+</div>
+<div id="删除分支" class="section level2">
+<h2><span class="header-section-number">5.6</span> 删除分支</h2>
+<p>当之前创建的分支,完成了它的使命,如Bug修复完,分支合并以后,这个分支就不在需要了,就可以删除它.</p>
+<pre><code>git branch -d development #删除development分支</code></pre>
+<p>如果分支没有合并到master分支中,直接使用上面命令会报错,可以使用下面的命令强制删除.</p>
+<pre><code>git branch -D development</code></pre>
+</div>
+<div id="分支提交冲突" class="section level2">
+<h2><span class="header-section-number">5.7</span> 分支提交冲突</h2>
+<p>如果新创建了一个分支<code>develpment</code>,然后在该分支下对<code>readme.txt</code>进行修改,然后提交.</p>
+<p>随后然后切换到<code>master</code>分支,然后也对<code>readme.txt</code>进行修改,然后也提交.</p>
+<p>这样,两个分支分别有了不同的提交.这种情况下,再进行合并就会有冲突.</p>
+<p>我们合并一下试试:</p>
+<pre><code>![](Screen Shot 2020-03-11 at 9.20.30 PM.png)</code></pre>
+<p>可以看到报错,Git告诉我们,<code>readme.txt</code>文件存在冲突,必须手动解决冲突后再提交.<code>git status</code>也可以告诉我们冲突的文件:</p>
+<pre><code>git status</code></pre>
+<p><img src="Screen%20Shot%202020-03-11%20at%209.25.20%20PM.png" /></p>
+<p>这时候我们可以使用<code>vi</code>或者其他工具打开冲突的文件,在这就是<code>readme.txt</code>:</p>
+<p><img src="Screen%20Shot%202020-03-11%20at%209.32.06%20PM.png" /></p>
+<p>Git用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改如下后保存：</p>
+<p>我们将这些记号删除,然后保留自己想要保留的修改就可.然后重新提交.</p>
+<pre><code>git add .
+git commit-m &#39;remove conflict&#39;</code></pre>
+<p>这时候就完成了合并.可以删除development分支了.</p>
+<p>这时候使用<code>git log</code>也可以看到分支的提交情况.使用<code>git log --graph</code>可以观察分支合并图.</p>
+</div>
+<div id="分支策略" class="section level2">
+<h2><span class="header-section-number">5.8</span> 分支策略</h2>
+<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
+<p>首先，<code>master</code>分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；</p>
+<p>那在哪干活呢？干活都在<code>dev</code>分支上，也就是说，<code>dev</code>分支是不稳定的，到某个时候，比如<code>1.0</code>版本发布时，再把<code>dev</code>分支合并到<code>master</code>上，在<code>master</code>分支发布1.0版本；</p>
+<p>你和你的小伙伴们每个人都在<code>dev</code>分支上干活，每个人都有自己的分支，时不时地往<code>dev</code>分支上合并就可以了。</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="-.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="git.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="-github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
