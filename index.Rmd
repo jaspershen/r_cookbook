@@ -1,20 +1,49 @@
 --- 
 title: "R cookbook from Xiaotao Shen"
 author: "Xiaotao Shen"
+institute: Standfor University
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
-  bookdown::html_book: darkdly
+  bookdown::html_book:
+    theme: united
+    highlight: cosmo
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "记录所有跟R语言有关的内容"
+github-repo: jaspershen/r_cookbook
 ---
 
-# 前言
+# Welcome {-}
 
-陆陆续续看了很多书,希望系统的把自己对R语言学习到的内容记录下来.
+这本书用来系统记录在学习过程中的遇到的问题,学到的知识.
+
+You can contact me via the social website below:
+
+<a href="https://www.shenxt.info/"><i class="fa fa-home"> Personal website</i></a> 
+
+<a href="https://github.com/jaspershen"><i class="fa fa-github"> Github</i></a> 
+
+<a href="https://www.shenxt.info/files/wechat_QR.jpg"><i class="fa fa-weixin"> Wechat</i></a> 
+
+<a href="https://www.shenxt.info/files/qq_QR.jpg"><i class="fa fa-qq"> QQ</i></a> 
+
+<a href="shenxt@stanford.edu"><i class="fa fa-envelope">  shenxt at stanford.edu</i></a> 
+
+<a href="https://www.linkedin.com/in/shenxt/"><i class="fa fa-linkedin"> Linkedin</i></a>
+
+```{r, eval = TRUE, echo = FALSE}
+library(leaflet)
+leaflet() %>% addTiles() %>%
+  setView(-122.176758, 37.432748, zoom = 17) %>%
+  addPopups(
+    -122.176758, 37.432748,
+    'My office is <b>M339, Alway Building, Cooper Lane, Palo Alto, CA 94304'
+  )
+```
+
 
 
 ```{r include=FALSE}
