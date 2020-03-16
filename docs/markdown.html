@@ -24,7 +24,7 @@
 <meta name="author" content="Xiaotao Shen" />
 
 
-<meta name="date" content="2020-03-15" />
+<meta name="date" content="2020-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -527,35 +527,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb20-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
 <a class="sourceLine" id="cb20-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb20-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gear, cyl)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="kw">theme_bw</span>()</a></code></pre></div>
 <p><img src="r_cookbook_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>Rmarkdown中代码块中有很多内容可以设置.</p>
 <ul>
 <li>行内代码</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" data-line-number="1">行内代码可以使用``(中间为内容或者代码).</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb21-1" data-line-number="1">行内代码可以使用``(中间为内容或者代码).</a></code></pre></div>
 <p>比如:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="bn">`行内代码`</span>可以用来强调某个部分.</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="bn">`行内代码`</span>可以用来强调某个部分.</a></code></pre></div>
 <p><code>行内代码</code>可以用来强调某个部分.</p>
 <p>当然,在rmakdown中,代码块是可以运行的,所以行内代码也可以运行得到结果.</p>
 <p>比如:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb24-1" data-line-number="1">There were 50 cars studied</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" data-line-number="1">There were 50 cars studied</a></code></pre></div>
 <p>There were 50 cars studied</p>
 </div>
 <div id="水平线-horizontal-rule" class="section level2">
 <h2><span class="header-section-number">2.8</span> 水平线 (Horizontal rule)</h2>
 <p>语法:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb25-1" data-line-number="1">这是一条水平线.</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">***</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">这也是一条水平线.</a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">---</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb24-1" data-line-number="1">这是一条水平线.</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">***</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">这也是一条水平线.</a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">---</a></code></pre></div>
 <p>这是一条水平线.</p>
 <hr />
 <p>这也是一条水平线.</p>
@@ -568,9 +561,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>直接使用数字即可</p>
 <p>语法:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb26-1" data-line-number="1">1. <span class="fl">Item 1</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="fl">2. Item 2</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="fl">3. Item 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb25-1" data-line-number="1">1. <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="fl">2. Item 2</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="fl">3. Item 3</span></a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><p>Item 1</p></li>
 <li><p>Item 2</p></li>
@@ -581,11 +574,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>无需列表可以使用<code>*</code>或者<code>-</code>来创建.</p>
 <p>语法:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb27-1" data-line-number="1">* <span class="fl">Item 1</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="fl">* Item 2</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="fl">  * Item 2.1</span></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="fl">  * Item 2.2</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="fl">* Item 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb26-1" data-line-number="1">* <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="fl">* Item 2</span></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="fl">  * Item 2.1</span></a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"><span class="fl">  * Item 2.2</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5"><span class="fl">* Item 3</span></a></code></pre></div>
 <ul>
 <li>Item 1</li>
 <li>Item 2
@@ -596,11 +589,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Item 3</li>
 </ul>
 <p>语法:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb28-1" data-line-number="1">- <span class="fl">Item 1</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="fl">- Item 2</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="fl">  - Item 2.1</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="fl">  - Item 2.2</span></a>
-<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="fl">- Item 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb27-1" data-line-number="1">- <span class="fl">Item 1</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="fl">- Item 2</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="fl">  - Item 2.1</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="fl">  - Item 2.2</span></a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"><span class="fl">- Item 3</span></a></code></pre></div>
 <ul>
 <li>Item 1</li>
 <li>Item 2
@@ -613,9 +606,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>有的markdown编辑器是支持任务列表的,比如github,但是有些也不支持.比如rmakdown就是不支持的(本书就是用rmakrdown写的).</p>
 <p>语法:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb29-1" data-line-number="1">- <span class="fl">[x] Write the press release</span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="fl">- [ ] Update the website</span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="fl">- [ ] Contact the media</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb28-1" data-line-number="1">- <span class="fl">[x] Write the press release</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"><span class="fl">- [ ] Update the website</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="fl">- [ ] Contact the media</span></a></code></pre></div>
 <ul>
 <li>[x] Write the press release</li>
 <li>[ ] Update the website</li>
@@ -626,10 +619,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">2.10</span> 表格 (Tables)</h2>
 <p>原生态的markdown表格语法非常简单.</p>
 <p>语法:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb30-1" data-line-number="1">| First name    | Last name   | Sex  |</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">| ------------- |-------------| -----|</a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">| Xiaotao       |Shen          | Male |</a>
-<a class="sourceLine" id="cb30-4" data-line-number="4">| Chuchu        | Wang      |   Female |</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb29-1" data-line-number="1">| First name    | Last name   | Sex  |</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">| ------------- |-------------| -----|</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">| Xiaotao       |Shen          | Male |</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">| Chuchu        | Wang      |   Female |</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -656,30 +649,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>DT</code>包</li>
 </ul>
 <p>语法:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="bn">library(DT)</span></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="bn">DT::datatable(</span></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"><span class="bn">  head(iris, 10),</span></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5"><span class="bn">  fillContainer = TRUE, </span></a>
-<a class="sourceLine" id="cb31-6" data-line-number="6"><span class="bn">  options = list(pageLength = 4)</span></a>
-<a class="sourceLine" id="cb31-7" data-line-number="7"><span class="bn">)</span></a>
-<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="bn">```</span></a></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">library</span>(DT)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">DT<span class="op">::</span><span class="kw">datatable</span>(</a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">  <span class="kw">head</span>(iris, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">)</a></code></pre></div>
-<div id="htmlwidget-252081eeb8ef80974302" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-252081eeb8ef80974302">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb30"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="bn">library(DT)</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="bn">DT::datatable(</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="bn">  head(iris, 10),</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="bn">  fillContainer = TRUE, </span></a>
+<a class="sourceLine" id="cb30-6" data-line-number="6"><span class="bn">  options = list(pageLength = 4)</span></a>
+<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="bn">)</span></a>
+<a class="sourceLine" id="cb30-8" data-line-number="8"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">library</span>(DT)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">DT<span class="op">::</span><span class="kw">datatable</span>(</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="kw">head</span>(iris, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">)</a></code></pre></div>
+<div id="htmlwidget-0a3190e0f9f9969d34b6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0a3190e0f9f9969d34b6">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <ul>
 <li><code>knitr</code>包</li>
 </ul>
 <p>语法:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2"><span class="bn">knitr::kable(head(iris), format = &#39;html&#39;)</span></a>
-<a class="sourceLine" id="cb33-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(iris), <span class="dt">format =</span> <span class="st">&#39;html&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="bn">```{r, eval=TRUE}</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="bn">knitr::kable(head(iris), format = &#39;html&#39;)</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(iris), <span class="dt">format =</span> <span class="st">&#39;html&#39;</span>)</a></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -808,7 +801,7 @@ setosa
 </div>
 <div id="段落" class="section level2">
 <h2><span class="header-section-number">2.11</span> 段落</h2>
-<p>markdown中对于段落的控制比较上,如果需要对段落进行修饰,比如对齐,段间距等等,需要使用HTML<code>&lt;p&gt;</code>标签进行设置.</p>
+<p>markdown中对于段落的控制比较少,如果需要对段落进行修饰,比如对齐,段间距等等,需要使用HTML<code>&lt;p&gt;</code>标签进行设置.</p>
 <ul>
 <li>对齐</li>
 </ul>
@@ -816,36 +809,36 @@ setosa
 <ol style="list-style-type: decimal">
 <li>左对齐</li>
 </ol>
-<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb35-1" data-line-number="1">&lt;p align = &quot;left&quot;&gt; </a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb34-1" data-line-number="1">&lt;p align = &quot;left&quot;&gt; </a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
 <p align="left">
 Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 </p>
 <ol start="2" style="list-style-type: decimal">
 <li>右对齐</li>
 </ol>
-<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb36-1" data-line-number="1">&lt;p align = &quot;right&quot;&gt; </a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb35-1" data-line-number="1">&lt;p align = &quot;right&quot;&gt; </a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
 <p align="right">
 Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 </p>
 <ol start="3" style="list-style-type: decimal">
 <li>居中对齐</li>
 </ol>
-<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb37-1" data-line-number="1">&lt;p align = &quot;center&quot;&gt; </a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb36-1" data-line-number="1">&lt;p align = &quot;center&quot;&gt; </a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
 <p align="center">
 Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 </p>
 <ol start="3" style="list-style-type: decimal">
 <li>两端对齐</li>
 </ol>
-<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb38-1" data-line-number="1">&lt;p align = &quot;justify&quot;&gt; </a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb37-1" data-line-number="1">&lt;p align = &quot;justify&quot;&gt; </a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
 <p align="justify">
 Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 </p>
@@ -854,9 +847,9 @@ Markdown is a lightweight markup language with plain-text-formatting syntax. Its
 </ul>
 <p>使用<code>&lt;p&gt;</code>标签的<code>style</code>属性进行设置.</p>
 <p>将<code>line-height</code>设置为<code>300%</code>相当于是三倍行距.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb39-1" data-line-number="1">&lt;p align = &quot;justify&quot; style=&quot;line-height:300%&quot;&gt; </a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb38-1" data-line-number="1">&lt;p align = &quot;justify&quot; style=&quot;line-height:300%&quot;&gt; </a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">&lt;/p&gt;</a></code></pre></div>
 <p align="justify" style="line-height:300%">
 Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML.[9] Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
 </p>
@@ -865,16 +858,16 @@ Markdown is a lightweight markup language with plain-text-formatting syntax. Its
 <h2><span class="header-section-number">2.12</span> 插入icon</h2>
 <p>可以插入符号工具包<code>Font Awesome</code>.一般的markdown编辑器都已经支持直接使用HTML插入icon.</p>
 <p>比如插入微信图标:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb40-1" data-line-number="1">&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb39-1" data-line-number="1">&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;</a></code></pre></div>
 <p><i class="fa fa-weixin"></i></p>
 <p>如果不支持,可以在markdown的最底端插入下面的代码:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb41-1" data-line-number="1">&lt;head&gt; </a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; </span></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; </span></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4">&lt;/head&gt; </a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.0.13/css/all.css&quot;&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb40-1" data-line-number="1">&lt;head&gt; </a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/all.js&quot;&gt;&lt;/script&gt; </span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="bn">    &lt;script defer src=&quot;https://use.fontawesome.com/releases/v5.0.13/js/v4-shims.js&quot;&gt;&lt;/script&gt; </span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">&lt;/head&gt; </a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://use.fontawesome.com/releases/v5.0.13/css/all.css&quot;&gt;</a></code></pre></div>
 <p>当然也可以使用HTML的<code>&lt;a&gt;</code>标签让icon绑定一个超链接.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb42-1" data-line-number="1">&lt;a href=&quot;https://www.shenxt.info/files/wechat_QR.jpg&quot;&gt;&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;&lt;/a&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb41-1" data-line-number="1">&lt;a href=&quot;https://www.shenxt.info/files/wechat_QR.jpg&quot;&gt;&lt;i class=&quot;fa fa-weixin&quot;&gt;&lt;/i&gt;&lt;/a&gt;</a></code></pre></div>
 <p><a href="https://www.shenxt.info/files/wechat_QR.jpg"><i class="fa fa-weixin"></i></a></p>
 </div>
 <div id="数学公式-equations" class="section level2">
@@ -1164,11 +1157,11 @@ Markdown is a lightweight markup language with plain-text-formatting syntax. Its
 <div id="视频-video和音乐-music" class="section level2">
 <h2><span class="header-section-number">2.14</span> 视频 (Video)和音乐 (music)</h2>
 <p>原生markdown并不支持视频插入,需要使用HTML语法.一般需要视频网站支持.比如插入youtube视频,需要到youtube视频下方,点击分享按钮,然后点击<code>Embed</code>,会给出内嵌的HTML代码.复制到markdown即可.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb43-1" data-line-number="1">&lt;iframe width=&quot;100%&quot; height=&quot;400&quot; src=&quot;https://www.youtube.com/embed/GCmnvXXrpRk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb42-1" data-line-number="1">&lt;iframe width=&quot;100%&quot; height=&quot;400&quot; src=&quot;https://www.youtube.com/embed/GCmnvXXrpRk&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</a></code></pre></div>
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/GCmnvXXrpRk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 </iframe>
 <p>同理,对于音乐,也需要音乐来源网站支持.比如我们插入网易音乐:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb44-1" data-line-number="1">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&#39;100%&#39; height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=85569&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb43-1" data-line-number="1">&lt;iframe frameborder=&quot;no&quot; border=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; width=&#39;100%&#39; height=86 src=&quot;//music.163.com/outchain/player?type=2&amp;id=85569&amp;auto=1&amp;height=66&quot;&gt;&lt;/iframe&gt;</a></code></pre></div>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&amp;id=85569&amp;auto=1&amp;height=66">
 </iframe>
 </div>

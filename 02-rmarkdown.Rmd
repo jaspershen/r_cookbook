@@ -92,7 +92,7 @@ geom_point() + theme_bw()
 ```
 ````
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE}
 library(ggplot2)
 ggplot(mtcars, aes(x = mpg, y = wt, 
 color = gear)) + 
@@ -110,7 +110,7 @@ geom_point() + theme_bw()
 ```
 ````
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = FALSE}
 library(ggplot2)
 ggplot(mtcars, aes(x = mpg, y = wt, 
 color = gear)) + 
@@ -212,7 +212,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = FALSE, strip.white = TRUE}
+```{r, eval = FALSE, strip.white = TRUE, echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 
@@ -235,7 +235,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = FALSE, strip.white = FALSE}
+```{r, eval = FALSE, strip.white = FALSE, echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 
@@ -269,7 +269,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = FALSE, highlight = TRUE}
+```{r, eval = FALSE, highlight = TRUE, echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 
@@ -328,7 +328,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = TRUE, fig.show = 'asis'}
+```{r, eval = TRUE, fig.show = 'asis', echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 library(ggsci)
@@ -383,7 +383,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = TRUE, fig.show = 'hold'}
+```{r, eval = TRUE, fig.show = 'hold', echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 library(ggsci)
@@ -437,7 +437,7 @@ theme_bw()
 ```
 ````
 
-````{r, eval = TRUE, fig.show = 'animate'}
+```{r, eval = TRUE, fig.show = 'animate', echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 library(ggsci)

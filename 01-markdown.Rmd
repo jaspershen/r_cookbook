@@ -286,7 +286,7 @@ theme_bw()
 ```
 ````
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, echo = FALSE}
 library(ggplot2)
 library(tidyverse)
 
@@ -474,7 +474,7 @@ knitr::kable(head(iris), format = 'html')
 
 ## 段落
 
-markdown中对于段落的控制比较上,如果需要对段落进行修饰,比如对齐,段间距等等,需要使用HTML`<p>`标签进行设置.
+markdown中对于段落的控制比较少,如果需要对段落进行修饰,比如对齐,段间距等等,需要使用HTML`<p>`标签进行设置.
 
 * 对齐
 
