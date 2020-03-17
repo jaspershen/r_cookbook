@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R cookbook from Xiaotao Shen</title>
+  <title>Chapter 7 正则表达式 | R cookbook from Xiaotao Shen</title>
   <meta name="description" content="记录所有跟R语言有关的内容" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R cookbook from Xiaotao Shen" />
+  <meta property="og:title" content="Chapter 7 正则表达式 | R cookbook from Xiaotao Shen" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="jaspershen/r_cookbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R cookbook from Xiaotao Shen" />
+  <meta name="twitter:title" content="Chapter 7 正则表达式 | R cookbook from Xiaotao Shen" />
   
   <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="markdown.html"/>
+<link rel="prev" href="multiomics.html"/>
+<link rel="next" href="tidyverse.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,21 +49,6 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.12/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -187,7 +172,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown特有语法"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown特有语法</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>2.8.1</b> 图片 (image)</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#表格-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格 (Table)</a></li>
-<li class="chapter" data-level="2.8.3" data-path="rmarkdown.html"><a href="rmarkdown.html#地图-map"><i class="fa fa-check"></i><b>2.8.3</b> 地图 (map)</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>2.9</b> 输出格式</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rmarkdown.html"><a href="rmarkdown.html#html格式"><i class="fa fa-check"></i><b>2.9.1</b> HTML格式</a></li>
@@ -265,11 +249,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>6</b> 多组学分析</a></li>
 <li class="chapter" data-level="7" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>7</b> 正则表达式</a><ul>
 <li class="chapter" data-level="7.1" data-path="regularexpression.html"><a href="regularexpression.html#匹配match"><i class="fa fa-check"></i><b>7.1</b> 匹配(match)</a></li>
-<li class="chapter" data-level="7.2" data-path="regularexpression.html"><a href="regularexpression.html#锚点anchors"><i class="fa fa-check"></i><b>7.2</b> 锚点(anchors)</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求开头"><i class="fa fa-check"></i><b>7.2.1</b> 以固定要求开头</a></li>
-<li class="chapter" data-level="7.2.2" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求结尾"><i class="fa fa-check"></i><b>7.2.2</b> 以固定要求结尾</a></li>
+<li class="chapter" data-level="7.2" data-path="regularexpression.html"><a href="regularexpression.html#替换-alternates"><i class="fa fa-check"></i><b>7.2</b> 替换 (Alternates)</a></li>
+<li class="chapter" data-level="7.3" data-path="regularexpression.html"><a href="regularexpression.html#锚点anchors"><i class="fa fa-check"></i><b>7.3</b> 锚点(anchors)</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求开头"><i class="fa fa-check"></i><b>7.3.1</b> 以固定要求开头</a></li>
+<li class="chapter" data-level="7.3.2" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求结尾"><i class="fa fa-check"></i><b>7.3.2</b> 以固定要求结尾</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="regularexpression.html"><a href="regularexpression.html#数量quantifiers"><i class="fa fa-check"></i><b>7.3</b> 数量(Quantifiers)</a></li>
+<li class="chapter" data-level="7.4" data-path="regularexpression.html"><a href="regularexpression.html#数量quantifiers"><i class="fa fa-check"></i><b>7.4</b> 数量(Quantifiers)</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>8</b> Tidyverse用于数据分析</a><ul>
 <li class="chapter" data-level="8.1" data-path="tidyverse.html"><a href="tidyverse.html#stringr-package"><i class="fa fa-check"></i><b>8.1</b> <code>stringr</code> package</a><ul>
@@ -299,23 +284,180 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R cookbook from Xiaotao Shen</h1>
-<p class="author"><em><br><br>Dr. Xiaotao Shen <br> Postdoctoral at <a href="http://snyderlab.stanford.edu/" target="_blank">Snyder lab</a> <br> Stanford Universiy School of Medicine <br> <a href="http://shenxt.info" target="_blank"> <i class="fa fa-home fa-fw"></i>  shenxt.info</a><br> <a href="mailto:shenxt@stanford.edu" target="_blank"><i class="fa fa-paper-plane fa-fw"></i>  shenxt@stanford.edu</a><br></em></p>
-<p class="date"><em>Begin at 2020-03-01 and Update at 2020-03-16</em></p>
+<div id="regularexpression" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> 正则表达式</h1>
+<p>正则表达式是文本处理中经常用到的方法.在R中,正则表达式跟其他语言基本一致,要写成文本的格式,也就是需要使用双引号或者单引号括起来.</p>
+<!-- ## 元字符 -->
+<!-- 在正则表达式中有一些字符是有特殊含义的,比如点(.),如果只写点,它代表任意字符,这些称之为元字符.正则表达式中就有很多这样元字符,总结如下. -->
+<!-- |正则表达式|含义           | -->
+<!-- |----------|---------------| -->
+<!-- |.         |任意字符| -->
+<!-- |^         |匹配字符的开始位置| -->
+<!-- |$         |匹配字符的结束位置| -->
+<!-- |$         |匹配字符的结束位置| -->
+<div id="匹配match" class="section level2">
+<h2><span class="header-section-number">7.1</span> 匹配(match)</h2>
+<p>有一些特殊含义的匹配,在正则表达式有固定表达方式,比如任意一个数字,任意字母等.</p>
+<table>
+<thead>
+<tr class="header">
+<th>正则表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>\\.</code></td>
+<td>匹配点.</td>
+</tr>
+<tr class="even">
+<td><code>\\n</code></td>
+<td>匹配换行符</td>
+</tr>
+<tr class="odd">
+<td><code>\\t</code></td>
+<td>匹配tab</td>
+</tr>
+<tr class="even">
+<td><code>\\s</code></td>
+<td>匹配空格(white space)</td>
+</tr>
+<tr class="odd">
+<td><code>\\d</code></td>
+<td>匹配任意数字</td>
+</tr>
+<tr class="even">
+<td><code>\\w</code></td>
+<td>匹配任意字符</td>
+</tr>
+<tr class="odd">
+<td><code>\\b</code></td>
+<td>匹配所有字符的边界</td>
+</tr>
+<tr class="even">
+<td><code>[:digit:]</code></td>
+<td>任意数字</td>
+</tr>
+<tr class="odd">
+<td><code>[:alpha:]</code></td>
+<td>任意字母</td>
+</tr>
+<tr class="even">
+<td><code>[:lower:]</code></td>
+<td>任意小写字母</td>
+</tr>
+<tr class="odd">
+<td><code>[:upper:]</code></td>
+<td>任意大写字母</td>
+</tr>
+<tr class="even">
+<td><code>[:alnum:]</code></td>
+<td>任意数字和字母</td>
+</tr>
+<tr class="odd">
+<td><code>[:punct:]</code></td>
+<td>任意标点符号</td>
+</tr>
+<tr class="even">
+<td><code>[:graph:]</code></td>
+<td>任意数字字母或者标点符号</td>
+</tr>
+<tr class="odd">
+<td><code>[:space:]</code></td>
+<td>空格</td>
+</tr>
+<tr class="even">
+<td><code>[:blank:]</code></td>
+<td>空格和tab,但是不包括新行</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="welcome" class="section level1 unnumbered">
-<h1>Welcome</h1>
-<p>这本书用来系统记录在学习过程中的遇到的问题,学到的知识.</p>
-<p>You can contact me via the social website below:</p>
-<p><a href="https://www.shenxt.info/" target='_blank'><i class="fa fa-home"> Personal website</i></a></p>
-<p><a href="https://github.com/jaspershen" target='_blank'><i class="fa fa-github"> Github</i></a></p>
-<p><a href="https://www.shenxt.info/files/wechat_QR.jpg" target='_blank'><i class="fa fa-weixin"> Wechat</i></a></p>
-<p><a href="https://www.shenxt.info/files/qq_QR.jpg" target='_blank'><i class="fa fa-qq"> QQ</i></a></p>
-<p><a href="shenxt@stanford.edu" target='_blank'><i class="fa fa-envelope"> shenxt at stanford.edu</i></a></p>
-<p><a href="https://www.linkedin.com/in/shenxt/" target='_blank'><i class="fa fa-linkedin"> Linkedin</i></a></p>
-<div id="htmlwidget-450e426ad7e3a0a0d253" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-450e426ad7e3a0a0d253">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[37.432748,-122.176758,"My office is <b>M339, Alway Building, Cooper Lane, Palo Alto, CA 94304",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[37.432748,-122.176758],17,[]],"limits":{"lat":[37.432748,37.432748],"lng":[-122.176758,-122.176758]}},"evals":[],"jsHooks":[]}</script>
+<div id="替换-alternates" class="section level2">
+<h2><span class="header-section-number">7.2</span> 替换 (Alternates)</h2>
+<table>
+<thead>
+<tr class="header">
+<th>正则表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>a|b</code></td>
+<td>或者,a或者b</td>
+</tr>
+<tr class="even">
+<td><code>[abc]</code></td>
+<td>abc中的任意一个</td>
+</tr>
+<tr class="odd">
+<td><code>[^abc]</code></td>
+<td>除abc之外的任意字符</td>
+</tr>
+<tr class="even">
+<td><code>[a-c]</code></td>
+<td>range,abc</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="锚点anchors" class="section level2">
+<h2><span class="header-section-number">7.3</span> 锚点(anchors)</h2>
+<div id="以固定要求开头" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> 以固定要求开头</h3>
+<p>以固定要求开头的正则表达式是<code>^</code>,比如我们要查找那些以字母a开头的字符串,就可以写作:</p>
+<pre class="markdonw"><code>&#39;^a&#39;</code></pre>
+<p>在R语言中:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;^a&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ade&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] 1 4</code></pre>
+</div>
+<div id="以固定要求结尾" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> 以固定要求结尾</h3>
+<p>以固定要求结尾的正则表达式是<code>$</code>,比如我们要查找那些以字母a结尾的字符串,就可以写作:</p>
+<pre class="markdonw"><code>&#39;a$&#39;</code></pre>
+<p>在R语言中:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;a$&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ada&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+</div>
+<div id="数量quantifiers" class="section level2">
+<h2><span class="header-section-number">7.4</span> 数量(Quantifiers)</h2>
+<p>正则表达式中经常需要有一些表达数量的内容,比如重复1次,重复多于一次等等.一般是使用一些特殊字符在某个要重复的内容之后.</p>
+<table>
+<thead>
+<tr class="header">
+<th>正则表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>?</td>
+<td>重复0次或者一次</td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td>0次或者多次</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>1次或者多次</td>
+</tr>
+<tr class="even">
+<td>{n}</td>
+<td>正好n次</td>
+</tr>
+<tr class="odd">
+<td>{n,}</td>
+<td>n次或者多于n次</td>
+</tr>
+<tr class="even">
+<td>{n,m}</td>
+<td>大于等于n次小于等于m次</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <div id="disqus_thread">
 
@@ -343,13 +485,14 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 
 </div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="markdown.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -399,20 +542,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -1,0 +1,89 @@
+# Tidyverse用于数据分析 {#tidyverse}
+
+## `stringr` package
+
+`stringr`是R中进行文本处理的包.cheatsheet可以看这里.
+
+https://github.com/rstudio/cheatsheets/blob/master/strings.pdf
+
+
+### 安装
+
+```{r, echo = TRUE, eval=FALSE}
+# Install the released version from CRAN:
+install.packages("stringr")
+
+# Install the cutting edge development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("tidyverse/stringr")
+```
+
+### Rstudio Addin
+
+使用Rstudio Addin,可以很方便的使用正则表达式.
+
+需要安装一个包:
+
+```{r, eval=FALSE,echo=TRUE}
+# install.packages("devtools")
+devtools::install_github("gadenbuie/regexplain")
+```
+
+安装结束之后,可以在Addins中找到.
+
+### Pattern matching
+
+1. 计算一个文本中符合要求的数目
+
+使用`str_count()`函数:
+
+比如要统计某个单词中某个字母的个数:
+
+```{r, eval=TRUE,echo=TRUE}
+fruit <- c("apple", "banana", "pear", "pineapple")
+str_count(fruit, "a")
+
+str_count(fruit, c("a", "b", "p", "p"))
+```
+
+其中第二个参数`pattern`是支持正则表达式的.
+
+2. 判断一个文本中是否存在一个pattern
+
+使用`str_detect()`函数.
+
+```{r, echo=TRUE,eval=FALSE}
+str_detect(string, pattern, negate = FALSE)
+```
+
+其中`negate`是在`stringr`中的很多函数都有的一个参数,如果设置为`TRUE`,就会返回没有match到的内容.
+
+```{r, eval=TRUE, echo=TRUE}
+fruit <- c("apple", "banana", "pear", "pinapple")
+str_detect(fruit, "a")
+```
+
+
+---
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://r-cookbook-shen.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            

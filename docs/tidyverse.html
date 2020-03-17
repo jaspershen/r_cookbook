@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen</title>
+  <title>Chapter 8 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen</title>
   <meta name="description" content="记录所有跟R语言有关的内容" />
   <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen" />
+  <meta property="og:title" content="Chapter 8 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="jaspershen/r_cookbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen" />
+  <meta name="twitter:title" content="Chapter 8 Tidyverse用于数据分析 | R cookbook from Xiaotao Shen" />
   
   <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="multiomics.html"/>
+<link rel="prev" href="regularexpression.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -263,7 +263,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>6</b> 多组学分析</a></li>
-<li class="chapter" data-level="7" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>7</b> Tidyverse用于数据分析</a></li>
+<li class="chapter" data-level="7" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>7</b> 正则表达式</a><ul>
+<li class="chapter" data-level="7.1" data-path="regularexpression.html"><a href="regularexpression.html#匹配match"><i class="fa fa-check"></i><b>7.1</b> 匹配(match)</a></li>
+<li class="chapter" data-level="7.2" data-path="regularexpression.html"><a href="regularexpression.html#锚点anchors"><i class="fa fa-check"></i><b>7.2</b> 锚点(anchors)</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求开头"><i class="fa fa-check"></i><b>7.2.1</b> 以固定要求开头</a></li>
+<li class="chapter" data-level="7.2.2" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求结尾"><i class="fa fa-check"></i><b>7.2.2</b> 以固定要求结尾</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="regularexpression.html"><a href="regularexpression.html#数量quantifiers"><i class="fa fa-check"></i><b>7.3</b> 数量(Quantifiers)</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="tidyverse.html"><a href="tidyverse.html"><i class="fa fa-check"></i><b>8</b> Tidyverse用于数据分析</a><ul>
+<li class="chapter" data-level="8.1" data-path="tidyverse.html"><a href="tidyverse.html#stringr-package"><i class="fa fa-check"></i><b>8.1</b> <code>stringr</code> package</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="tidyverse.html"><a href="tidyverse.html#安装-2"><i class="fa fa-check"></i><b>8.1.1</b> 安装</a></li>
+<li class="chapter" data-level="8.1.2" data-path="tidyverse.html"><a href="tidyverse.html#rstudio-addin"><i class="fa fa-check"></i><b>8.1.2</b> Rstudio Addin</a></li>
+<li class="chapter" data-level="8.1.3" data-path="tidyverse.html"><a href="tidyverse.html#pattern-matching"><i class="fa fa-check"></i><b>8.1.3</b> Pattern matching</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -286,8 +300,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="tidyverse" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Tidyverse用于数据分析</h1>
-<p>You can label chapter and section titles using <code>{#label}</code> after them, e.g., we can reference Chapter <a href="rmarkdown.html#rmarkdown">2</a>. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter <a href="rmarkdown.html#rmarkdown">2</a>.</p>
+<h1><span class="header-section-number">Chapter 8</span> Tidyverse用于数据分析</h1>
+<div id="stringr-package" class="section level2">
+<h2><span class="header-section-number">8.1</span> <code>stringr</code> package</h2>
+<p><code>stringr</code>是R中进行文本处理的包.cheatsheet可以看这里.</p>
+<p><a href="https://github.com/rstudio/cheatsheets/blob/master/strings.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/strings.pdf</a></p>
+<div id="安装-2" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> 安装</h3>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="co"># Install the released version from CRAN:</span></a>
+<a class="sourceLine" id="cb140-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;stringr&quot;</span>)</a>
+<a class="sourceLine" id="cb140-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb140-4" data-line-number="4"><span class="co"># Install the cutting edge development version from GitHub:</span></a>
+<a class="sourceLine" id="cb140-5" data-line-number="5"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb140-6" data-line-number="6">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/stringr&quot;</span>)</a></code></pre></div>
+</div>
+<div id="rstudio-addin" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Rstudio Addin</h3>
+<p>使用Rstudio Addin,可以很方便的使用正则表达式.</p>
+<p>需要安装一个包:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;gadenbuie/regexplain&quot;</span>)</a></code></pre></div>
+<p>安装结束之后,可以在Addins中找到.</p>
+</div>
+<div id="pattern-matching" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> Pattern matching</h3>
+<ol style="list-style-type: decimal">
+<li>计算一个文本中符合要求的数目</li>
+</ol>
+<p>使用<code>str_count()</code>函数:</p>
+<p>比如要统计某个单词中某个字母的个数:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;pineapple&quot;</span>)</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2"><span class="kw">str_count</span>(fruit, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 1 3 1 1</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="kw">str_count</span>(fruit, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;p&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] 1 1 1 3</code></pre>
+<p>其中第二个参数<code>pattern</code>是支持正则表达式的.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>判断一个文本中是否存在一个pattern</li>
+</ol>
+<p>使用<code>str_detect()</code>函数.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">str_detect</span>(string, pattern, <span class="dt">negate =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>其中<code>negate</code>是在<code>stringr</code>中的很多函数都有的一个参数,如果设置为<code>TRUE</code>,就会返回没有match到的内容.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;pinapple&quot;</span>)</a>
+<a class="sourceLine" id="cb147-2" data-line-number="2"><span class="kw">str_detect</span>(fruit, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
 <hr />
 <div id="disqus_thread">
 
@@ -315,12 +371,14 @@ Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
 </noscript>
 
 </div>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="multiomics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regularexpression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
