@@ -1,9 +1,74 @@
+```{r, include = FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
 # ggplot2 {#ggplot2}
 
 ## 安装
 
 ```{r, eval=FALSE,echo=TRUE, cache=TRUE}
 install.packages("ggplot2")
+```
+
+## 基础知识
+
+### ggplot图像的三个元素
+
+每个`ggplot`都有三个元素组成:
+
+* 数据(data)
+
+* 一系列的美学映射(aesthetic mappings),将数据的变量和可视化的特征联系起来.
+
+* 至少一个图层(layer)用来描述变量如何展示?图层一般使用前缀为`geom_`的函数进行创建.
+
+一个简单的例子:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
+```
+
+这幅图中:
+
+1. 数据为`mpg`
+
+2. 美学映射:`displ`映射到x轴,`hwy`映射到y轴.
+
+3. 图层:点图.
+
+`aes()`函数的前两个参数默认是`x`和`y`.
+
+### 颜色,性状,大小和其他的美学属性(aesthetic attributes)
+
+为了在一幅图中将=映射更多的变量,我们可以使用一些其他的美学属性(aesthetic attributes).比如,颜色,性状还有大小.
+
+比如,将颜色映射到变量`class`上:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE}
+ggplot(mpg, aes(displ, cty, colour = class)) + 
+  geom_point()
+```
+
+如果想要将某个美学属性设置为固定值,应当在`aes`函数之外进行设置:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,out.width="50%",fig.show='hold'}
+ggplot(mpg, aes(displ, hwy)) + geom_point(aes(colour = "blue"))
+ggplot(mpg, aes(displ, hwy)) + geom_point(colour = "blue")
+```
+
+可以看一下这两幅图的差异.
+
+### 分面(Facetting)
+
+分面也是一种展示分类变量的方法.
+
+`ggplot2`中有两种分面方式:`grid`和`wrapped`.其中`wrapped`.其中wrapped更为重要.需要使用`facet_wrap()`函数.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  facet_wrap(~class)
 ```
 
 ---

@@ -49,21 +49,6 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.12/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -187,7 +172,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown特有语法"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown特有语法</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>2.8.1</b> 图片 (image)</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#表格-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格 (Table)</a></li>
-<li class="chapter" data-level="2.8.3" data-path="rmarkdown.html"><a href="rmarkdown.html#地图-map"><i class="fa fa-check"></i><b>2.8.3</b> 地图 (map)</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>2.9</b> 输出格式</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rmarkdown.html"><a href="rmarkdown.html#html格式"><i class="fa fa-check"></i><b>2.9.1</b> HTML格式</a></li>
@@ -262,6 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2</a><ul>
 <li class="chapter" data-level="5.1" data-path="ggplot2.html"><a href="ggplot2.html#安装-2"><i class="fa fa-check"></i><b>5.1</b> 安装</a></li>
+<li class="chapter" data-level="5.2" data-path="ggplot2.html"><a href="ggplot2.html#基础知识"><i class="fa fa-check"></i><b>5.2</b> 基础知识</a></li>
+<li class="chapter" data-level="5.3" data-path="ggplot2.html"><a href="ggplot2.html#颜色性状大小和其他的美学属性aesthetic-attributes"><i class="fa fa-check"></i><b>5.3</b> 颜色,性状,大小和其他的美学属性(aesthetic attributes)</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
 <li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
@@ -293,6 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中替换匹配到的pattern"><i class="fa fa-check"></i><b>9.3.7</b> 从文本中替换匹配到的pattern</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>10</b> Modern Statistics for Modern Biology</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -363,24 +350,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>主要,下面的所有操作,命令,max和linux’是在<code>终端(terminal)</code>中进行的,在windows中,是在<code>git bash</code>中.</p>
 </blockquote>
 <p>设置的主要命令是<code>git config</code>:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb85-1" data-line-number="1">git config --global user.name &quot;your name&quot; </a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">git config --global user.email &quot;your email&quot; </a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb1-1" data-line-number="1">git config --global user.name &quot;your name&quot; </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">git config --global user.email &quot;your email&quot; </a></code></pre></div>
 <p>其中,<code>--global</code>是指全局配置,如果不写(或者写为<code>local</code>),则只为当前仓库(repository)配置.</p>
 <p>如果有多个git用户,这时候需要先确定某个仓库使用的哪个账户.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb86-1" data-line-number="1">git config user.name</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">git config user.email </a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb2-1" data-line-number="1">git config user.name</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">git config user.email </a></code></pre></div>
 <p>查询全局的git账户信息:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb87-1" data-line-number="1">git config --global user.name</a>
-<a class="sourceLine" id="cb87-2" data-line-number="2">git config --global user.email </a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb3-1" data-line-number="1">git config --global user.name</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">git config --global user.email </a></code></pre></div>
 <p>如果想要去掉全局用户和邮箱设置.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb88-1" data-line-number="1">git config --global --unset user_name</a>
-<a class="sourceLine" id="cb88-2" data-line-number="2">git config --global --unset user_email</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb4-1" data-line-number="1">git config --global --unset user_name</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">git config --global --unset user_email</a></code></pre></div>
 </div>
 <div id="生成秘钥" class="section level3">
 <h3><span class="header-section-number">4.4.2</span> 生成秘钥</h3>
-<div class="sourceCode" id="cb89"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb89-1" data-line-number="1">ssh-keygen -t rsa -C &quot;shenxt1990@163.com&quot;</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb5-1" data-line-number="1">ssh-keygen -t rsa -C &quot;shenxt1990@163.com&quot;</a></code></pre></div>
 <p>然后会在<code>~/.ssh/</code>文件夹中会产生秘钥文件,我们只需要将公钥(<code>pub</code>后缀)的内容拷贝到github中即可.</p>
 <p><img src="images/Screen%20Shot%202020-03-17%20at%2010.13.13%20PM.png" /></p>
+<p>对于windows用户,请参考这个帖子:</p>
+<p><a href="https://www.jianshu.com/p/95262f5eba7a" class="uri">https://www.jianshu.com/p/95262f5eba7a</a></p>
 </div>
 </div>
 <div id="git基本操作" class="section level2">
@@ -389,11 +378,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.5.1</span> 创建本地git仓库(reop)</h3>
 <p>使用<code>git init</code>命令</p>
 <p>首先,创建一个你要当作仓库的文件夹,然后将其设置为工作路径,然后执行.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb90-1" data-line-number="1">mkdir git_test#创建本地文件夹</a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">cd git_test#进入到该文件夹将其作为工作目录</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">git init#创建本地git仓库</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" data-line-number="1">mkdir git_test#创建本地文件夹</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">cd git_test#进入到该文件夹将其作为工作目录</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">git init#创建本地git仓库</a></code></pre></div>
 <p>这时候查看目录结构,就可以看到创建了一个名为<code>.git</code>的子目录,这就说明创建版本库成功了.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb91-1" data-line-number="1">ls -la</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" data-line-number="1">ls -la</a></code></pre></div>
 </div>
 <div id="将文件添加到版本库" class="section level3">
 <h3><span class="header-section-number">4.5.2</span> 将文件添加到版本库</h3>
@@ -402,16 +391,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>使用<code>git add</code>命令将文件添加到暂存区:</li>
 </ul>
 <p>比如我们首先新建一个名为<code>README.md</code>的文件,然后将其添加到暂存区.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb92-1" data-line-number="1">touch README.md#创建文件</a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">git add README.md#将该文件加入到暂存区</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" data-line-number="1">touch README.md#创建文件</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">git add README.md#将该文件加入到暂存区</a></code></pre></div>
 <p>当然也可以使用下面命令将所有修改添加到暂存区:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb93-1" data-line-number="1">git add .</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb9-1" data-line-number="1">git add .</a></code></pre></div>
 <p><code>.</code> 是正则表达式,代表任意文件.但是空文件夹是不会添加到暂存区的.</p>
 <ul>
 <li>使用<code>git commit</code>命令将暂存区文件提交到仓库中.</li>
 </ul>
-<div class="sourceCode" id="cb94"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb94-1" data-line-number="1">git commit #如果暂存区有文件,则将其中的文件提交到仓库</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2">git commit -m &quot;your note for this commit&quot; #用于注明提交的内容,变更等信息,方便溯源</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb10-1" data-line-number="1">git commit #如果暂存区有文件,则将其中的文件提交到仓库</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">git commit -m &quot;your note for this commit&quot; #用于注明提交的内容,变更等信息,方便溯源</a></code></pre></div>
 <p>如果直接使用<code>git commit</code>提交,不带注释信息,则会先弹出评论界面,需要评论.</p>
 <p>注意这时候是使用vi打开的文件,所以需要掌握一点vi的基础知识.参考下面帖子:</p>
 <p><a href="https://www.cnblogs.com/itech/archive/2009/04/17/1438439.html" class="uri">https://www.cnblogs.com/itech/archive/2009/04/17/1438439.html</a></p>
@@ -436,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="rmarkdown"><code>git diff #查看所有改动
 git diff README.md #查看具体文件的改动</code></pre>
 <p>比如我们在<code>test.txt</code>文件中加入一行,然后查看:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb96-1" data-line-number="1">git diff test.txt</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb12-1" data-line-number="1">git diff test.txt</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20105306.png" /></p>
 <p>可以看到记录了对该文件的修改内容.</p>
 <blockquote>
@@ -447,8 +436,8 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="查看提交的历史记录" class="section level3">
 <h3><span class="header-section-number">4.5.5</span> 查看提交的历史记录</h3>
 <p>有的时候,你需要查看自己做过哪些提交(commit),来回顾自己的完成部分,这时候需要使用<code>git log</code>命令.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb97-1" data-line-number="1">git log #显示所有提交的历史记录</a>
-<a class="sourceLine" id="cb97-2" data-line-number="2">git log --pretty=oneline #单行显示提交历史记录的内容</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb13-1" data-line-number="1">git log #显示所有提交的历史记录</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">git log --pretty=oneline #单行显示提交历史记录的内容</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20105927.png" /></p>
 <p>可以看到我们现在一共进行了4次提交,每次提交的第一行commit之后是该次提交的唯一<code>ID</code>.然后后面显示提交者,时间以及一些记录等.</p>
 <p>如果提交非常多,需要显示内容精简一些,就需要使用<code>git log --pretty=oneline</code>命令.</p>
@@ -457,13 +446,13 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="版本回退" class="section level3">
 <h3><span class="header-section-number">4.5.6</span> 版本回退</h3>
 <p>有了<code>git log</code>来查看提交的历史记录,我们就可以通过<code>git reset --hard</code>来退回到我们需要的某个特定版本.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb98-1" data-line-number="1">git reset --hard HEAD^ # 回退到上一个提交版本</a>
-<a class="sourceLine" id="cb98-2" data-line-number="2">git reset --hard HEAD^^ # 回退到上上一个提交版本</a>
-<a class="sourceLine" id="cb98-3" data-line-number="3">git reset --hard &#39;commit_id&#39; # 会退到 commit_id 指定的提交版本</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb14-1" data-line-number="1">git reset --hard HEAD^ # 回退到上一个提交版本</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">git reset --hard HEAD^^ # 回退到上上一个提交版本</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">git reset --hard &#39;commit_id&#39; # 会退到 commit_id 指定的提交版本</a></code></pre></div>
 <p>使用<code>git log</code>我们可以看到每个提交都有一个唯一的commit ID,其中上一个也可以使用<code>HEAD</code>代表.因此我们可以退回到上一个版本.比如,我们在最近的一次提交中修改了test.txt,在其中加入一行.</p>
 <p><img src="images/Annotation%202020-03-04%20110543.png" /></p>
 <p>我们想退回到上一个版本,不想加入这一行,可以使用下面命令.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb99-1" data-line-number="1">git reset --hard HEAD^</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb15-1" data-line-number="1">git reset --hard HEAD^</a></code></pre></div>
 <p>这时候再查看log,可以看到最近的一个commit已经消失,回到了上一个提交.而上一次的修改也已经消失.</p>
 <p><img src="images/Annotation%202020-03-04%20110857.png" /></p>
 </div>
@@ -480,19 +469,19 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="丢弃工作区中的文件修改" class="section level4">
 <h4><span class="header-section-number">4.5.8.1</span> 丢弃工作区中的文件修改</h4>
 <p>使用如下命令.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb100-1" data-line-number="1">git checkout -- README.md    #如果 README.md 文件在工作区，则丢弃其修改</a>
-<a class="sourceLine" id="cb100-2" data-line-number="2">git checkout -- .            #丢弃当前目录下所有工作区中文件的修改</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb16-1" data-line-number="1">git checkout -- README.md    #如果 README.md 文件在工作区，则丢弃其修改</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">git checkout -- .            #丢弃当前目录下所有工作区中文件的修改</a></code></pre></div>
 <p>比如我们再<code>test.txt</code>中添加另外一行,然后不加入暂存区,然后将其丢弃掉.</p>
 <p><img src="images/Annotation%202020-03-04%20112427.png" /></p>
 <p>然后运行:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb101-1" data-line-number="1">git checkout -- test.txt</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb17-1" data-line-number="1">git checkout -- test.txt</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20112527.png" /></p>
 </div>
 <div id="丢弃暂存区的修改" class="section level4">
 <h4><span class="header-section-number">4.5.8.2</span> 丢弃暂存区的修改</h4>
 <p>如果已经运行了<code>git add</code>将修改放入了暂存区,可以通过下列命令进行丢弃:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb102-1" data-line-number="1">git reset HEAD README.md #将 README.md 恢复到 HEAD 提交版本的状态</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2">git checkout -- README.md</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb18-1" data-line-number="1">git reset HEAD README.md #将 README.md 恢复到 HEAD 提交版本的状态</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">git checkout -- README.md</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20112956.png" /></p>
 <p>然后将其删除掉.</p>
 <p><img src="images/Annotation%202020-03-04%20113351.png" /></p>
@@ -501,7 +490,7 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="删除文件" class="section level3">
 <h3><span class="header-section-number">4.5.9</span> 删除文件</h3>
 <p>在文件未添加到暂存区之前,对想删除文件可以直接物理删除.或者通过<code>git checkout -- file</code>来丢弃.如果文件已经被提交,则需要<code>git rm</code>来删除.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb103-1" data-line-number="1">git rm Readme.md #删除已经提交(commit)过的文件</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb19-1" data-line-number="1">git rm Readme.md #删除已经提交(commit)过的文件</a></code></pre></div>
 <blockquote>
 <p>注意: <code>git rm</code>只能删除已经提交到版本库中的文件.其他状态的文件直接用这个命令操作是出错的.</p>
 </blockquote>
@@ -518,16 +507,16 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="查看分支" class="section level3">
 <h3><span class="header-section-number">4.6.1</span> 查看分支</h3>
 <p>使用<code>git branch</code>命令查看分支信息.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb104-1" data-line-number="1">git branch        #查看本地分支信息</a>
-<a class="sourceLine" id="cb104-2" data-line-number="2">git branch -v     #查看相对详细的本地分支信息</a>
-<a class="sourceLine" id="cb104-3" data-line-number="3">git branch -av     #查看包括远程仓库在内的分支信息</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb20-1" data-line-number="1">git branch        #查看本地分支信息</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">git branch -v     #查看相对详细的本地分支信息</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">git branch -av     #查看包括远程仓库在内的分支信息</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20210006.png" /></p>
 <p>可以看到我们现在只有一个分支,也就是master,然后星号标识的就是当前所在的分支.</p>
 </div>
 <div id="创建分支" class="section level3">
 <h3><span class="header-section-number">4.6.2</span> 创建分支</h3>
 <p>使用 <code>git branch new.name</code>用来创建新的分支.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb105-1" data-line-number="1">git branch development ##创建一个新的名字叫做development的分支</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb21-1" data-line-number="1">git branch development ##创建一个新的名字叫做development的分支</a></code></pre></div>
 <blockquote>
 <p>需要注意的是,在哪个分支下面新建分支,则该分支就是copy自当前所在的分支.</p>
 </blockquote>
@@ -535,19 +524,19 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="切换分支" class="section level3">
 <h3><span class="header-section-number">4.6.3</span> 切换分支</h3>
 <p>使用<code>git checkout</code>命令来切换分支.比如我们先新建一个development的分支,然后切换到该分支下.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb106-1" data-line-number="1">git branch development</a>
-<a class="sourceLine" id="cb106-2" data-line-number="2">git checkout development</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" data-line-number="1">git branch development</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">git checkout development</a></code></pre></div>
 <p>当然也可以使用下面命令直接创建并切换到新建的分支下.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb107-1" data-line-number="1">git checkout -b development</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" data-line-number="1">git checkout -b development</a></code></pre></div>
 </div>
 <div id="switch命令" class="section level3">
 <h3><span class="header-section-number">4.6.4</span> <code>switch</code>命令</h3>
 <p>我们注意到切换分支使用<code>git checkout &lt;branch&gt;</code>,而前面讲过的撤销修改则是<code>git checkout -- &lt;file&gt;</code>,同一个命令,有两种作用,确实有点令人迷惑.</p>
 <p>实际上,切换分支这个动作,用<code>switch</code>更科学。因此，最新版本的Git提供了新的<code>git switch</code>命令来切换分支：</p>
 <p>创建并切换到新的development分支,可以使用:</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb108-1" data-line-number="1">git switch -c development </a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb24-1" data-line-number="1">git switch -c development </a></code></pre></div>
 <p>直接切换到已有分支:</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb109-1" data-line-number="1">git switch master</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb25-1" data-line-number="1">git switch master</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20210500.png" /></p>
 <p>我们下面在development分支下面再新建一个<code>development.txt</code>文件,然后写入一些内容.</p>
 <p><img src="images/Annotation%202020-03-04%20211512.png" /></p>
@@ -557,16 +546,16 @@ git diff README.md #查看具体文件的改动</code></pre>
 <h3><span class="header-section-number">4.6.5</span> 合并分支(merge)</h3>
 <p>当我们修复完成一个Bug,或者开发完成一个新特性,我们就会把相关的Bug或者特性的上修改合并回原来的主分支上,这时候就需要<code>git merge</code>命令来做分支的合并.</p>
 <p>首先需要切换回最终需要合并的分支,也就是<code>master</code>分支,然后再合并.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb110-1" data-line-number="1">git checkout master   #切换回master分支</a>
-<a class="sourceLine" id="cb110-2" data-line-number="2">git merge development #将development分支中的修改合并回master分支</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb26-1" data-line-number="1">git checkout master   #切换回master分支</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">git merge development #将development分支中的修改合并回master分支</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20212532.png" /></p>
 </div>
 <div id="删除分支" class="section level3">
 <h3><span class="header-section-number">4.6.6</span> 删除分支</h3>
 <p>当之前创建的分支,完成了它的使命,如Bug修复完,分支合并以后,这个分支就不在需要了,就可以删除它.</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb111-1" data-line-number="1">git branch -d development #删除development分支</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb27-1" data-line-number="1">git branch -d development #删除development分支</a></code></pre></div>
 <p>如果分支没有合并到master分支中,直接使用上面命令会报错,可以使用下面的命令强制删除.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb112-1" data-line-number="1">git branch -D development</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb28-1" data-line-number="1">git branch -D development</a></code></pre></div>
 </div>
 <div id="分支提交冲突" class="section level3">
 <h3><span class="header-section-number">4.6.7</span> 分支提交冲突</h3>
@@ -574,7 +563,7 @@ git diff README.md #查看具体文件的改动</code></pre>
 <p>随后然后切换到<code>master</code>分支,然后也对<code>readme.txt</code>进行修改,然后也提交.</p>
 <p>这样,两个分支分别有了不同的提交.这种情况下,再进行合并就会有冲突.</p>
 <p>我们合并一下试试:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb113-1" data-line-number="1">![](images/Screen Shot 2020-03-11 at 9.20.30 PM.png)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb29-1" data-line-number="1">![](images/Screen Shot 2020-03-11 at 9.20.30 PM.png)</a></code></pre></div>
 <p>可以看到报错,Git告诉我们,<code>readme.txt</code>文件存在冲突,必须手动解决冲突后再提交.<code>git status</code>也可以告诉我们冲突的文件:</p>
 <pre><code>git status</code></pre>
 <p><img src="images/Screen%20Shot%202020-03-11%20at%209.25.20%20PM.png" /></p>
@@ -582,8 +571,8 @@ git diff README.md #查看具体文件的改动</code></pre>
 <p><img src="images/Screen%20Shot%202020-03-11%20at%209.32.06%20PM.png" /></p>
 <p>Git用<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code>=======</code>，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改如下后保存：</p>
 <p>我们将这些记号删除,然后保留自己想要保留的修改就可.然后重新提交.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb115-1" data-line-number="1">git add .</a>
-<a class="sourceLine" id="cb115-2" data-line-number="2">git commit-m &#39;remove conflict&#39;</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb31-1" data-line-number="1">git add .</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">git commit-m &#39;remove conflict&#39;</a></code></pre></div>
 <p>这时候就完成了合并.可以删除development分支了.</p>
 <p>这时候使用<code>git log</code>也可以看到分支的提交情况.使用<code>git log --graph</code>可以观察分支合并图.</p>
 </div>
@@ -601,7 +590,7 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="添加到远程仓库" class="section level3">
 <h3><span class="header-section-number">4.7.1</span> 添加到远程仓库</h3>
 <p>比如我们上面所建立的<code>git_test</code>本地仓库,我们需要将其添加到github的远程仓库中.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb116-1" data-line-number="1">git remote add origin your_remote_git_repo #为本地仓库添加远程仓库</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb32-1" data-line-number="1">git remote add origin your_remote_git_repo #为本地仓库添加远程仓库</a></code></pre></div>
 <p>其中<code>your_remote_git_repo</code>是在github中创建的.我们先创建一下,然后进行尝试.</p>
 <p>格式为<code>git@github.com:user.name/repo_name</code>.
 当然,也可以直接使用远程仓库的网址:</p>
@@ -611,8 +600,8 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="推送到远程仓库" class="section level3">
 <h3><span class="header-section-number">4.7.2</span> 推送到远程仓库</h3>
 <p>使用<code>git push</code>将本地仓库的内容推送到远程仓库.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb117-1" data-line-number="1">git push -u origin master #第一次推送时使用,可以简化后面的推送或者拉取命令使用</a>
-<a class="sourceLine" id="cb117-2" data-line-number="2">git push origin master #将本地master分支推送到origin远程分支,后面之后就可以直接使用该命令推送</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb33-1" data-line-number="1">git push -u origin master #第一次推送时使用,可以简化后面的推送或者拉取命令使用</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">git push origin master #将本地master分支推送到origin远程分支,后面之后就可以直接使用该命令推送</a></code></pre></div>
 <p><img src="images/Annotation%202020-03-04%20214807.png" /></p>
 <p>以后再推送的时候,就使用<code>git push</code>就可以了.</p>
 <p>这时候可以看到github中已经有了内容.</p>
@@ -622,8 +611,8 @@ git diff README.md #查看具体文件的改动</code></pre>
 <h3><span class="header-section-number">4.7.3</span> 从远程仓库获取最新内容</h3>
 <p>在多人协作过程中,当自己完成了本地仓库中的提交,想要向远程仓库推送前,需要先获取到远程仓库的最新内容。</p>
 <p>可以通过<code>git fetch</code>和<code>git pull</code>来获取远程仓库的内容.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb118-1" data-line-number="1">git fetch origin master    </a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">git pull origin master</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb34-1" data-line-number="1">git fetch origin master    </a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">git pull origin master</a></code></pre></div>
 <p>两者之间的区别:</p>
 <ul>
 <li><p><code>git fetch</code>是仅仅获取远程仓库的更新内容,并不会自动做合并.</p></li>
@@ -632,13 +621,13 @@ git diff README.md #查看具体文件的改动</code></pre>
 </div>
 <div id="查看远程仓库信息" class="section level3">
 <h3><span class="header-section-number">4.7.4</span> 查看远程仓库信息</h3>
-<div class="sourceCode" id="cb119"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb119-1" data-line-number="1">git remote -v</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb35-1" data-line-number="1">git remote -v</a></code></pre></div>
 </div>
 <div id="从远程仓库克隆" class="section level3">
 <h3><span class="header-section-number">4.7.5</span> 从远程仓库克隆</h3>
 <p>如果你本地没有仓库,希望从已有的远程仓库上复制一份代码,那么你需要<code>git clone</code>.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb120-1" data-line-number="1">git clone https://github.com/jaspershen/git_test #通过 https 协议,克隆Github上git仓库的源码</a>
-<a class="sourceLine" id="cb120-2" data-line-number="2">git clone jaspershen@github.com/git/git_test #通过ssh协议,克隆Github上git仓库的源码</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb36-1" data-line-number="1">git clone https://github.com/jaspershen/git_test #通过 https 协议,克隆Github上git仓库的源码</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">git clone jaspershen@github.com/git/git_test #通过ssh协议,克隆Github上git仓库的源码</a></code></pre></div>
 </div>
 </div>
 <div id="设置忽略文件" class="section level2">
@@ -656,9 +645,9 @@ git diff README.md #查看具体文件的改动</code></pre>
 <div id="本地创建分支并推送到远程仓库" class="section level3">
 <h3><span class="header-section-number">4.9.2</span> 本地创建分支并推送到远程仓库</h3>
 <p>比如我们在<code>shenxt</code>账户上有一个远程仓库,创建一个<code>jaspershen</code>分支.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb121-1" data-line-number="1">git branch jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb37-1" data-line-number="1">git branch jaspershen</a></code></pre></div>
 <p>然后将该分支推送到远程仓库.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb122-1" data-line-number="1">git push origin jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb38-1" data-line-number="1">git push origin jaspershen</a></code></pre></div>
 <p>这时候再去远程仓库就可以看到<code>jaspershen</code>分支了.</p>
 </div>
 <div id="邀请合作者" class="section level3">
@@ -671,12 +660,12 @@ git diff README.md #查看具体文件的改动</code></pre>
 </div>
 <div id="克隆项目" class="section level3">
 <h3><span class="header-section-number">4.9.5</span> 克隆项目</h3>
-<div class="sourceCode" id="cb123"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb123-1" data-line-number="1">git clone git@github_jaspershen:shenxt/github_test4.git</a>
-<a class="sourceLine" id="cb123-2" data-line-number="2">cd github_test4</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb39-1" data-line-number="1">git clone git@github_jaspershen:shenxt/github_test4.git</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">cd github_test4</a></code></pre></div>
 <p>这时候查看分支,</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb124-1" data-line-number="1">git branch</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb40-1" data-line-number="1">git branch</a></code></pre></div>
 <p>会看到只有master分支.所以要创建远程仓库的分支到本地.</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb125-1" data-line-number="1">git checkout -b jaspershen origin/jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb41-1" data-line-number="1">git checkout -b jaspershen origin/jaspershen</a></code></pre></div>
 <p>这时候再查看分支,就会在<code>jaspershen</code>分支了.这时候合作者jaspershen就可以在该分支下进行工作了.</p>
 </div>
 <div id="开始工作" class="section level3">
@@ -685,15 +674,15 @@ git diff README.md #查看具体文件的改动</code></pre>
 <ul>
 <li>创建文件</li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb126-1" data-line-number="1">touch heloworld.txt</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb42-1" data-line-number="1">touch heloworld.txt</a></code></pre></div>
 <p>然后在该文件下写入一行文字:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb127-1" data-line-number="1">test from jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb43-1" data-line-number="1">test from jaspershen</a></code></pre></div>
 <ul>
 <li>提交</li>
 </ul>
 <p>然后加入到暂存区并提交.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb128-1" data-line-number="1">git add helloworld.txt</a>
-<a class="sourceLine" id="cb128-2" data-line-number="2">git commit -m &quot;test from jaspershen&quot;</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb44-1" data-line-number="1">git add helloworld.txt</a>
+<a class="sourceLine" id="cb44-2" data-line-number="2">git commit -m &quot;test from jaspershen&quot;</a></code></pre></div>
 <ul>
 <li>合并分支</li>
 </ul>
@@ -703,8 +692,8 @@ git merge jaspershen</code></pre>
 <li>推送到远程仓库</li>
 </ul>
 <p>然后可以将其推送到远程分支(包括master和jaspershen分支).注意是直接推送到<code>shenxt</code>账户的远程仓库.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb130-1" data-line-number="1">git push origin master</a>
-<a class="sourceLine" id="cb130-2" data-line-number="2">git push origin jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb46-1" data-line-number="1">git push origin master</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2">git push origin jaspershen</a></code></pre></div>
 <p>这时候就可以在<code>shenxt</code>的远程仓库下看到<code>jaspershen</code>的提交工作了.</p>
 </div>
 <div id="有冲突怎么办" class="section level3">
@@ -716,7 +705,7 @@ git merge jaspershen</code></pre>
 <h3><span class="header-section-number">4.9.8</span> 抓取分支</h3>
 <p>多人协作时，大家都会往<code>master</code>分支上推送各自的修改。如果两个人同时对同一个文件进行了修改,并且同试图推送到<code>master</code>分支,那么就会冲突,报错.这时候,应该先使用<code>git pull</code>命令将最新的提交从<code>origin/master</code>下抓取下来,然后本地合并,解决冲突,再推送.</p>
 <p>比如我们在<code>shenxt</code>账户下也创建一个<code>helloworld.txt</code>文件.然后提交,推送到远程仓库.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb131-1" data-line-number="1">git push origin master</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb47-1" data-line-number="1">git push origin master</a></code></pre></div>
 <p>会得到下面的报错:</p>
 <pre><code> ! [rejected]        master -&gt; master (fetch first)
 error: failed to push some refs to &#39;git@github_shenxt:shenxt/github_test4.git&#39;
@@ -726,10 +715,10 @@ hint: to the same ref. You may want to first integrate the remote changes
 hint: (e.g., &#39;git pull ...&#39;) before pushing again.
 hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; for details.</code></pre>
 <p>我们先使用<code>git pull</code>抓取分支的最新提交.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb133-1" data-line-number="1">git pull</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb49-1" data-line-number="1">git pull</a></code></pre></div>
 <p>也失败了,因为没有指定本地分支与远程<code>origin/xxx</code>分支的链接，根据提示，设置本地分支和远程分支的链接：</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb134-1" data-line-number="1">git branch --set-upstream-to=origin/master master</a>
-<a class="sourceLine" id="cb134-2" data-line-number="2">git branch --set-upstream-to=origin/jaspershen jaspershen</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb50-1" data-line-number="1">git branch --set-upstream-to=origin/master master</a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">git branch --set-upstream-to=origin/jaspershen jaspershen</a></code></pre></div>
 <p>然后在pull.</p>
 <p>这回<code>git pull</code>成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，提交，再<code>push</code>：</p>
 </div>
@@ -828,20 +817,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

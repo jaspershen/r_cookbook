@@ -1,3 +1,7 @@
+```{r, include = FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
 # Git和github {#git}
 
 git是版本控制系统,而github是开源代码托管平台,提供的是基于git的开源代码托管服务.对于一个团队来说,即使没有github,也可以通过自己搭建git服务器来进行代码的管理,甚至还有一些其他的基于git的代码托管平台使用,比如gitlab,gitee(码云)等.
@@ -95,6 +99,9 @@ ssh-keygen -t rsa -C "shenxt1990@163.com"
 
 ![](images/Screen Shot 2020-03-17 at 10.13.13 PM.png)
 
+对于windows用户,请参考这个帖子:
+
+https://www.jianshu.com/p/95262f5eba7a
 
 ## Git基本操作
 

@@ -16,6 +16,10 @@ description: "记录所有跟R语言有关的内容"
 github-repo: 'jaspershen/r_cookbook'
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
 # Welcome {-}
 
 这本书用来系统记录在学习过程中的遇到的问题,学到的知识.
