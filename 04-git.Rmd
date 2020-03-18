@@ -86,6 +86,16 @@ git config --global --unset user_name
 git config --global --unset user_email
 ```
 
+### 生成秘钥
+
+```markdown
+ssh-keygen -t rsa -C "shenxt1990@163.com"
+```
+然后会在`~/.ssh/`文件夹中会产生秘钥文件,我们只需要将公钥(`pub`后缀)的内容拷贝到github中即可.
+
+![](images/Screen Shot 2020-03-17 at 10.13.13 PM.png)
+
+
 ## Git基本操作
 
 ### 创建本地git仓库(reop)

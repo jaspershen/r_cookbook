@@ -1,6 +1,9 @@
-# ggplot2学习总结 {#ggplot2}
+# ggplot2 {#ggplot2}
 
-We describe our methods in this chapter.
+## 安装
+
+```{r, eval=FALSE,echo=TRUE, cache=TRUE}
+```
 
 ---
 
