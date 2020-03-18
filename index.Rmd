@@ -1,11 +1,10 @@
 --- 
 title: "R cookbook from Xiaotao Shen"
-author: '<br><br>Dr. Xiaotao Shen <br> Postdoctoral at <a href="http://snyderlab.stanford.edu/" target="_blank">Snyder lab</a> <br> Stanford Universiy School of Medicine <br> <a href="http://shenxt.info" target="_blank"> <i class="fa fa-home fa-fw"></i>&nbsp; shenxt.info</a><br> <a href="mailto:shenxt@stanford.edu" target="_blank"><i class="fa fa-paper-plane fa-fw"></i>&nbsp; shenxt@stanford.edu</a><br>'
+author: '<br><br>Dr. Xiaotao Shen <br> Postdoctoral at <a href="http://snyderlab.stanford.edu/" target="_blank">Snyder lab</a> <br> Stanford University School of Medicine <br> <a href="http://shenxt.info" target="_blank"> <i class="fa fa-home fa-fw"></i>&nbsp; shenxt.info</a><br> <a href="mailto:shenxt@stanford.edu" target="_blank"><i class="fa fa-paper-plane fa-fw"></i>&nbsp; shenxt@stanford.edu</a><br>'
 date: "Begin at 2020-03-01 and Update at `r Sys.Date()`"
 site: bookdown::bookdown_site
 output:
   bookdown::html_book:
-    theme: ceruleans
     includes: 
       after_body: disqus.html
     highlight: tango
@@ -21,7 +20,7 @@ github-repo: 'jaspershen/r_cookbook'
 
 这本书用来系统记录在学习过程中的遇到的问题,学到的知识.
 
-You can contact me via the social website below:
+You can contact me via the social websites below:
 
 <a href="https://www.shenxt.info/" target='_blank'><i class="fa fa-home"> Personal website</i></a> 
 

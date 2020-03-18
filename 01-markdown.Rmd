@@ -1,10 +1,3 @@
----
-output:
-  bookdown::gitbook:
-    includes:
-      after_body: disqus.html
----
-
 # Markdown {#markdown}
 
 首先从`Markdown`的基础语法开始.

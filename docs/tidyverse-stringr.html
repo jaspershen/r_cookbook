@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Tidyverse用于数据分析stringr | R cookbook from Xiaotao Shen</title>
+  <meta name="description" content="记录所有跟R语言有关的内容" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Tidyverse用于数据分析stringr | R cookbook from Xiaotao Shen" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="记录所有跟R语言有关的内容" />
+  <meta name="github-repo" content="jaspershen/r_cookbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Tidyverse用于数据分析stringr | R cookbook from Xiaotao Shen" />
+  
+  <meta name="twitter:description" content="记录所有跟R语言有关的内容" />
+  
+
+<meta name="author" content="  Dr. Xiaotao Shen   Postdoctoral at Snyder lab   Stanford University School of Medicine      shenxt.info    shenxt@stanford.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regularexpression.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.12/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R cookbook of Xiaotao Shen</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="markdown.html"><a href="markdown.html"><i class="fa fa-check"></i><b>1</b> Markdown</a><ul>
+<li class="chapter" data-level="1.1" data-path="markdown.html"><a href="markdown.html#markdown语法"><i class="fa fa-check"></i><b>1.1</b> Markdown语法</a></li>
+<li class="chapter" data-level="1.2" data-path="markdown.html"><a href="markdown.html#标题-header"><i class="fa fa-check"></i><b>1.2</b> 标题 (Header)</a></li>
+<li class="chapter" data-level="1.3" data-path="markdown.html"><a href="markdown.html#图片-image"><i class="fa fa-check"></i><b>1.3</b> 图片 (Image)</a></li>
+<li class="chapter" data-level="1.4" data-path="markdown.html"><a href="markdown.html#链接-links"><i class="fa fa-check"></i><b>1.4</b> 链接 (Links)</a></li>
+<li class="chapter" data-level="1.5" data-path="markdown.html"><a href="markdown.html#强调-emphasize"><i class="fa fa-check"></i><b>1.5</b> 强调 (Emphasize)</a></li>
+<li class="chapter" data-level="1.6" data-path="markdown.html"><a href="markdown.html#引用blockquotes"><i class="fa fa-check"></i><b>1.6</b> 引用(Blockquotes)</a></li>
+<li class="chapter" data-level="1.7" data-path="markdown.html"><a href="markdown.html#代码块-code-chunks"><i class="fa fa-check"></i><b>1.7</b> 代码块 (Code chunks)</a></li>
+<li class="chapter" data-level="1.8" data-path="markdown.html"><a href="markdown.html#水平线-horizontal-rule"><i class="fa fa-check"></i><b>1.8</b> 水平线 (Horizontal rule)</a></li>
+<li class="chapter" data-level="1.9" data-path="markdown.html"><a href="markdown.html#列表-list"><i class="fa fa-check"></i><b>1.9</b> 列表 (List)</a></li>
+<li class="chapter" data-level="1.10" data-path="markdown.html"><a href="markdown.html#表格-tables"><i class="fa fa-check"></i><b>1.10</b> 表格 (Tables)</a></li>
+<li class="chapter" data-level="1.11" data-path="markdown.html"><a href="markdown.html#段落"><i class="fa fa-check"></i><b>1.11</b> 段落</a></li>
+<li class="chapter" data-level="1.12" data-path="markdown.html"><a href="markdown.html#插入icon"><i class="fa fa-check"></i><b>1.12</b> 插入icon</a></li>
+<li class="chapter" data-level="1.13" data-path="markdown.html"><a href="markdown.html#数学公式-equations"><i class="fa fa-check"></i><b>1.13</b> 数学公式 (Equations)</a><ul>
+<li class="chapter" data-level="1.13.1" data-path="markdown.html"><a href="markdown.html#行内和行外"><i class="fa fa-check"></i><b>1.13.1</b> 行内和行外</a></li>
+<li class="chapter" data-level="1.13.2" data-path="markdown.html"><a href="markdown.html#上标和下标"><i class="fa fa-check"></i><b>1.13.2</b> 上标和下标</a></li>
+<li class="chapter" data-level="1.13.3" data-path="markdown.html"><a href="markdown.html#占位符"><i class="fa fa-check"></i><b>1.13.3</b> 占位符</a></li>
+<li class="chapter" data-level="1.13.4" data-path="markdown.html"><a href="markdown.html#四则运算"><i class="fa fa-check"></i><b>1.13.4</b> 四则运算</a></li>
+<li class="chapter" data-level="1.13.5" data-path="markdown.html"><a href="markdown.html#集合运算"><i class="fa fa-check"></i><b>1.13.5</b> 集合运算</a></li>
+<li class="chapter" data-level="1.13.6" data-path="markdown.html"><a href="markdown.html#数学符号"><i class="fa fa-check"></i><b>1.13.6</b> 数学符号</a></li>
+<li class="chapter" data-level="1.13.7" data-path="markdown.html"><a href="markdown.html#希腊字母"><i class="fa fa-check"></i><b>1.13.7</b> 希腊字母</a></li>
+</ul></li>
+<li class="chapter" data-level="1.14" data-path="markdown.html"><a href="markdown.html#视频-video和音乐-music"><i class="fa fa-check"></i><b>1.14</b> 视频 (Video)和音乐 (music)</a></li>
+<li class="chapter" data-level="1.15" data-path="markdown.html"><a href="markdown.html#markdown编辑器"><i class="fa fa-check"></i><b>1.15</b> Markdown编辑器</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Rmarkdown</a><ul>
+<li class="chapter" data-level="2.1" data-path="rmarkdown.html"><a href="rmarkdown.html#安装"><i class="fa fa-check"></i><b>2.1</b> 安装</a></li>
+<li class="chapter" data-level="2.2" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown结构"><i class="fa fa-check"></i><b>2.2</b> Rmarkdown结构</a></li>
+<li class="chapter" data-level="2.3" data-path="rmarkdown.html"><a href="rmarkdown.html#yaml"><i class="fa fa-check"></i><b>2.3</b> YAML</a></li>
+<li class="chapter" data-level="2.4" data-path="rmarkdown.html"><a href="rmarkdown.html#r代码块"><i class="fa fa-check"></i><b>2.4</b> R代码块</a></li>
+<li class="chapter" data-level="2.5" data-path="rmarkdown.html"><a href="rmarkdown.html#代码块参数-chunk-options"><i class="fa fa-check"></i><b>2.5</b> 代码块参数 (Chunk options)</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="rmarkdown.html"><a href="rmarkdown.html#代码是否执行"><i class="fa fa-check"></i><b>2.5.1</b> 代码是否执行</a></li>
+<li class="chapter" data-level="2.5.2" data-path="rmarkdown.html"><a href="rmarkdown.html#代码控制-code-decoration"><i class="fa fa-check"></i><b>2.5.2</b> 代码控制 (code decoration)</a></li>
+<li class="chapter" data-level="2.5.3" data-path="rmarkdown.html"><a href="rmarkdown.html#缓冲-cache"><i class="fa fa-check"></i><b>2.5.3</b> 缓冲 (cache)</a></li>
+<li class="chapter" data-level="2.5.4" data-path="rmarkdown.html"><a href="rmarkdown.html#图像控制plot"><i class="fa fa-check"></i><b>2.5.4</b> 图像控制(plot)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="rmarkdown.html"><a href="rmarkdown.html#全局代码块参数"><i class="fa fa-check"></i><b>2.6</b> 全局代码块参数</a></li>
+<li class="chapter" data-level="2.7" data-path="rmarkdown.html"><a href="rmarkdown.html#具体问题的cookbook"><i class="fa fa-check"></i><b>2.7</b> 具体问题的cookbook</a></li>
+<li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown特有语法"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown特有语法</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>2.8.1</b> 图片 (image)</a></li>
+<li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#表格-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格 (Table)</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rmarkdown.html"><a href="rmarkdown.html#地图-map"><i class="fa fa-check"></i><b>2.8.3</b> 地图 (map)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>2.9</b> 输出格式</a><ul>
+<li class="chapter" data-level="2.9.1" data-path="rmarkdown.html"><a href="rmarkdown.html#html格式"><i class="fa fa-check"></i><b>2.9.1</b> HTML格式</a></li>
+<li class="chapter" data-level="2.9.2" data-path="rmarkdown.html"><a href="rmarkdown.html#pdf格式"><i class="fa fa-check"></i><b>2.9.2</b> PDF格式</a></li>
+<li class="chapter" data-level="2.9.3" data-path="rmarkdown.html"><a href="rmarkdown.html#word格式"><i class="fa fa-check"></i><b>2.9.3</b> Word格式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html"><i class="fa fa-check"></i><b>3</b> Rmarkdown拓展</a><ul>
+<li class="chapter" data-level="3.1" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#blogdown"><i class="fa fa-check"></i><b>3.1</b> Blogdown</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#需要准备的东西"><i class="fa fa-check"></i><b>3.1.1</b> 需要准备的东西</a></li>
+<li class="chapter" data-level="3.1.2" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#安装-1"><i class="fa fa-check"></i><b>3.1.2</b> 安装</a></li>
+<li class="chapter" data-level="3.1.3" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#创建项目"><i class="fa fa-check"></i><b>3.1.3</b> 创建项目</a></li>
+<li class="chapter" data-level="3.1.4" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#预览"><i class="fa fa-check"></i><b>3.1.4</b> 预览</a></li>
+<li class="chapter" data-level="3.1.5" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#使用rstudio-ide来管理网站"><i class="fa fa-check"></i><b>3.1.5</b> 使用Rstudio IDE来管理网站</a></li>
+<li class="chapter" data-level="3.1.6" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#更改为其他的主题"><i class="fa fa-check"></i><b>3.1.6</b> 更改为其他的主题</a></li>
+<li class="chapter" data-level="3.1.7" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#发布自己的网站"><i class="fa fa-check"></i><b>3.1.7</b> 发布自己的网站</a></li>
+<li class="chapter" data-level="3.1.8" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#发布到github上"><i class="fa fa-check"></i><b>3.1.8</b> 发布到github上</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#bookdown"><i class="fa fa-check"></i><b>3.2</b> Bookdown</a></li>
+<li class="chapter" data-level="3.3" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#presentation"><i class="fa fa-check"></i><b>3.3</b> Presentation</a></li>
+<li class="chapter" data-level="3.4" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#pagedown"><i class="fa fa-check"></i><b>3.4</b> Pagedown</a></li>
+<li class="chapter" data-level="3.5" data-path="rmarkdown-beyond.html"><a href="rmarkdown-beyond.html#pkgdown"><i class="fa fa-check"></i><b>3.5</b> Pkgdown</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>4</b> Git和github</a><ul>
+<li class="chapter" data-level="4.1" data-path="git.html"><a href="git.html#安装git"><i class="fa fa-check"></i><b>4.1</b> 安装git</a></li>
+<li class="chapter" data-level="4.2" data-path="git.html"><a href="git.html#注册github账户"><i class="fa fa-check"></i><b>4.2</b> 注册github账户</a></li>
+<li class="chapter" data-level="4.3" data-path="git.html"><a href="git.html#git基础知识"><i class="fa fa-check"></i><b>4.3</b> Git基础知识</a></li>
+<li class="chapter" data-level="4.4" data-path="git.html"><a href="git.html#git配制"><i class="fa fa-check"></i><b>4.4</b> Git配制</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="git.html"><a href="git.html#安装git之后需要进行一些全局设置比如用户名邮箱."><i class="fa fa-check"></i><b>4.4.1</b> 安装git之后,需要进行一些全局设置,比如用户名邮箱.</a></li>
+<li class="chapter" data-level="4.4.2" data-path="git.html"><a href="git.html#生成秘钥"><i class="fa fa-check"></i><b>4.4.2</b> 生成秘钥</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="git.html"><a href="git.html#git基本操作"><i class="fa fa-check"></i><b>4.5</b> Git基本操作</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="git.html"><a href="git.html#创建本地git仓库reop"><i class="fa fa-check"></i><b>4.5.1</b> 创建本地git仓库(reop)</a></li>
+<li class="chapter" data-level="4.5.2" data-path="git.html"><a href="git.html#将文件添加到版本库"><i class="fa fa-check"></i><b>4.5.2</b> 将文件添加到版本库</a></li>
+<li class="chapter" data-level="4.5.3" data-path="git.html"><a href="git.html#查看仓库状态"><i class="fa fa-check"></i><b>4.5.3</b> 查看仓库状态</a></li>
+<li class="chapter" data-level="4.5.4" data-path="git.html"><a href="git.html#查看仓库中的具体修改"><i class="fa fa-check"></i><b>4.5.4</b> 查看仓库中的具体修改</a></li>
+<li class="chapter" data-level="4.5.5" data-path="git.html"><a href="git.html#查看提交的历史记录"><i class="fa fa-check"></i><b>4.5.5</b> 查看提交的历史记录</a></li>
+<li class="chapter" data-level="4.5.6" data-path="git.html"><a href="git.html#版本回退"><i class="fa fa-check"></i><b>4.5.6</b> 版本回退</a></li>
+<li class="chapter" data-level="4.5.7" data-path="git.html"><a href="git.html#回到未来某个版本"><i class="fa fa-check"></i><b>4.5.7</b> 回到未来某个版本</a></li>
+<li class="chapter" data-level="4.5.8" data-path="git.html"><a href="git.html#撤销修改"><i class="fa fa-check"></i><b>4.5.8</b> 撤销修改</a></li>
+<li class="chapter" data-level="4.5.9" data-path="git.html"><a href="git.html#删除文件"><i class="fa fa-check"></i><b>4.5.9</b> 删除文件</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="git.html"><a href="git.html#git的分支管理"><i class="fa fa-check"></i><b>4.6</b> git的分支管理</a><ul>
+<li class="chapter" data-level="4.6.1" data-path="git.html"><a href="git.html#查看分支"><i class="fa fa-check"></i><b>4.6.1</b> 查看分支</a></li>
+<li class="chapter" data-level="4.6.2" data-path="git.html"><a href="git.html#创建分支"><i class="fa fa-check"></i><b>4.6.2</b> 创建分支</a></li>
+<li class="chapter" data-level="4.6.3" data-path="git.html"><a href="git.html#切换分支"><i class="fa fa-check"></i><b>4.6.3</b> 切换分支</a></li>
+<li class="chapter" data-level="4.6.4" data-path="git.html"><a href="git.html#switch命令"><i class="fa fa-check"></i><b>4.6.4</b> <code>switch</code>命令</a></li>
+<li class="chapter" data-level="4.6.5" data-path="git.html"><a href="git.html#合并分支merge"><i class="fa fa-check"></i><b>4.6.5</b> 合并分支(merge)</a></li>
+<li class="chapter" data-level="4.6.6" data-path="git.html"><a href="git.html#删除分支"><i class="fa fa-check"></i><b>4.6.6</b> 删除分支</a></li>
+<li class="chapter" data-level="4.6.7" data-path="git.html"><a href="git.html#分支提交冲突"><i class="fa fa-check"></i><b>4.6.7</b> 分支提交冲突</a></li>
+<li class="chapter" data-level="4.6.8" data-path="git.html"><a href="git.html#分支策略"><i class="fa fa-check"></i><b>4.6.8</b> 分支策略</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="git.html"><a href="git.html#远程仓库github"><i class="fa fa-check"></i><b>4.7</b> 远程仓库(GitHub)</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="git.html"><a href="git.html#添加到远程仓库"><i class="fa fa-check"></i><b>4.7.1</b> 添加到远程仓库</a></li>
+<li class="chapter" data-level="4.7.2" data-path="git.html"><a href="git.html#推送到远程仓库"><i class="fa fa-check"></i><b>4.7.2</b> 推送到远程仓库</a></li>
+<li class="chapter" data-level="4.7.3" data-path="git.html"><a href="git.html#从远程仓库获取最新内容"><i class="fa fa-check"></i><b>4.7.3</b> 从远程仓库获取最新内容</a></li>
+<li class="chapter" data-level="4.7.4" data-path="git.html"><a href="git.html#查看远程仓库信息"><i class="fa fa-check"></i><b>4.7.4</b> 查看远程仓库信息</a></li>
+<li class="chapter" data-level="4.7.5" data-path="git.html"><a href="git.html#从远程仓库克隆"><i class="fa fa-check"></i><b>4.7.5</b> 从远程仓库克隆</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="git.html"><a href="git.html#设置忽略文件"><i class="fa fa-check"></i><b>4.8</b> 设置忽略文件</a></li>
+<li class="chapter" data-level="4.9" data-path="git.html"><a href="git.html#多人协作"><i class="fa fa-check"></i><b>4.9</b> 多人协作</a><ul>
+<li class="chapter" data-level="4.9.1" data-path="git.html"><a href="git.html#创建远程仓库"><i class="fa fa-check"></i><b>4.9.1</b> 创建远程仓库</a></li>
+<li class="chapter" data-level="4.9.2" data-path="git.html"><a href="git.html#本地创建分支并推送到远程仓库"><i class="fa fa-check"></i><b>4.9.2</b> 本地创建分支并推送到远程仓库</a></li>
+<li class="chapter" data-level="4.9.3" data-path="git.html"><a href="git.html#邀请合作者"><i class="fa fa-check"></i><b>4.9.3</b> 邀请合作者</a></li>
+<li class="chapter" data-level="4.9.4" data-path="git.html"><a href="git.html#合作者参与项目"><i class="fa fa-check"></i><b>4.9.4</b> 合作者参与项目</a></li>
+<li class="chapter" data-level="4.9.5" data-path="git.html"><a href="git.html#克隆项目"><i class="fa fa-check"></i><b>4.9.5</b> 克隆项目</a></li>
+<li class="chapter" data-level="4.9.6" data-path="git.html"><a href="git.html#开始工作"><i class="fa fa-check"></i><b>4.9.6</b> 开始工作</a></li>
+<li class="chapter" data-level="4.9.7" data-path="git.html"><a href="git.html#有冲突怎么办"><i class="fa fa-check"></i><b>4.9.7</b> 有冲突怎么办</a></li>
+<li class="chapter" data-level="4.9.8" data-path="git.html"><a href="git.html#抓取分支"><i class="fa fa-check"></i><b>4.9.8</b> 抓取分支</a></li>
+<li class="chapter" data-level="4.9.9" data-path="git.html"><a href="git.html#多人协作的工作模式"><i class="fa fa-check"></i><b>4.9.9</b> 多人协作的工作模式</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2</a><ul>
+<li class="chapter" data-level="5.1" data-path="ggplot2.html"><a href="ggplot2.html#安装-2"><i class="fa fa-check"></i><b>5.1</b> 安装</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
+<li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
+<li class="chapter" data-level="6.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a></li>
+<li class="chapter" data-level="8" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>8</b> 正则表达式</a><ul>
+<li class="chapter" data-level="8.1" data-path="regularexpression.html"><a href="regularexpression.html#特殊字符"><i class="fa fa-check"></i><b>8.1</b> 特殊字符</a></li>
+<li class="chapter" data-level="8.2" data-path="regularexpression.html"><a href="regularexpression.html#匹配match"><i class="fa fa-check"></i><b>8.2</b> 匹配(match)</a></li>
+<li class="chapter" data-level="8.3" data-path="regularexpression.html"><a href="regularexpression.html#替换-alternates"><i class="fa fa-check"></i><b>8.3</b> 替换 (Alternates)</a></li>
+<li class="chapter" data-level="8.4" data-path="regularexpression.html"><a href="regularexpression.html#锚点anchors"><i class="fa fa-check"></i><b>8.4</b> 锚点(anchors)</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求开头"><i class="fa fa-check"></i><b>8.4.1</b> 以固定要求开头</a></li>
+<li class="chapter" data-level="8.4.2" data-path="regularexpression.html"><a href="regularexpression.html#以固定要求结尾"><i class="fa fa-check"></i><b>8.4.2</b> 以固定要求结尾</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="regularexpression.html"><a href="regularexpression.html#数量quantifiers"><i class="fa fa-check"></i><b>8.5</b> 数量(Quantifiers)</a></li>
+<li class="chapter" data-level="8.6" data-path="regularexpression.html"><a href="regularexpression.html#整体匹配-groups"><i class="fa fa-check"></i><b>8.6</b> 整体匹配 (groups)</a></li>
+<li class="chapter" data-level="8.7" data-path="regularexpression.html"><a href="regularexpression.html#反义"><i class="fa fa-check"></i><b>8.7</b> 反义</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html"><i class="fa fa-check"></i><b>9</b> <code>Tidyverse</code>用于数据分析stringr</a><ul>
+<li class="chapter" data-level="9.1" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#安装-3"><i class="fa fa-check"></i><b>9.1</b> 安装</a></li>
+<li class="chapter" data-level="9.2" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#rstudio-addin"><i class="fa fa-check"></i><b>9.2</b> Rstudio Addin</a></li>
+<li class="chapter" data-level="9.3" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#pattern-matching"><i class="fa fa-check"></i><b>9.3</b> Pattern matching</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#计算一个文本中符合要求的数目"><i class="fa fa-check"></i><b>9.3.1</b> 计算一个文本中符合要求的数目</a></li>
+<li class="chapter" data-level="9.3.2" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#判断一个文本中是否存在一个pattern"><i class="fa fa-check"></i><b>9.3.2</b> 判断一个文本中是否存在一个pattern</a></li>
+<li class="chapter" data-level="9.3.3" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中提取pattern"><i class="fa fa-check"></i><b>9.3.3</b> 从文本中提取pattern</a></li>
+<li class="chapter" data-level="9.3.4" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#确定某个pattern在文本中的位置"><i class="fa fa-check"></i><b>9.3.4</b> 确定某个pattern在文本中的位置</a></li>
+<li class="chapter" data-level="9.3.5" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中提取extract匹配到的group"><i class="fa fa-check"></i><b>9.3.5</b> 从文本中提取(extract)匹配到的group</a></li>
+<li class="chapter" data-level="9.3.6" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中去除匹配到的pattern"><i class="fa fa-check"></i><b>9.3.6</b> 从文本中去除匹配到的pattern</a></li>
+<li class="chapter" data-level="9.3.7" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中替换匹配到的pattern"><i class="fa fa-check"></i><b>9.3.7</b> 从文本中替换匹配到的pattern</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R cookbook from Xiaotao Shen</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidyverse_stringr" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> <code>Tidyverse</code>用于数据分析stringr</h1>
+<p><code>stringr</code>是R中进行文本处理的包.cheatsheet可以看这里.</p>
+<p><a href="https://github.com/rstudio/cheatsheets/blob/master/strings.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/master/strings.pdf</a></p>
+<div id="安装-3" class="section level2">
+<h2><span class="header-section-number">9.1</span> 安装</h2>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="co"># Install the released version from CRAN:</span></a>
+<a class="sourceLine" id="cb143-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;stringr&quot;</span>)</a>
+<a class="sourceLine" id="cb143-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="co"># Install the cutting edge development version from GitHub:</span></a>
+<a class="sourceLine" id="cb143-5" data-line-number="5"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb143-6" data-line-number="6">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tidyverse/stringr&quot;</span>)</a></code></pre></div>
+</div>
+<div id="rstudio-addin" class="section level2">
+<h2><span class="header-section-number">9.2</span> Rstudio Addin</h2>
+<p>使用Rstudio Addin,可以很方便的使用正则表达式.</p>
+<p>需要安装一个包:</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb144-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;gadenbuie/regexplain&quot;</span>)</a></code></pre></div>
+<p>安装结束之后,可以在Addins中找到.</p>
+</div>
+<div id="pattern-matching" class="section level2">
+<h2><span class="header-section-number">9.3</span> Pattern matching</h2>
+<div id="计算一个文本中符合要求的数目" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> 计算一个文本中符合要求的数目</h3>
+<p>使用<code>str_count()</code>函数:</p>
+<p>比如要统计某个单词中某个字母的个数:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;pineapple&quot;</span>)</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2"><span class="kw">str_count</span>(fruit, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 1 3 1 1</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">str_count</span>(fruit, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;p&quot;</span>))</a></code></pre></div>
+<pre><code>## [1] 1 1 1 3</code></pre>
+<p>其中第二个参数<code>pattern</code>是支持正则表达式的.</p>
+</div>
+<div id="判断一个文本中是否存在一个pattern" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> 判断一个文本中是否存在一个pattern</h3>
+<p>使用<code>str_detect()</code>函数.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">str_detect</span>(string, pattern, <span class="dt">negate =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>其中<code>negate</code>是在<code>stringr</code>中的很多函数都有的一个参数,如果设置为<code>TRUE</code>,就会返回没有match到的内容.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;pinapple&quot;</span>)</a>
+<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="kw">str_detect</span>(fruit, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+</div>
+<div id="从文本中提取pattern" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> 从文本中提取pattern</h3>
+<p>有两个函数,<code>str_extract</code>和<code>str_extract_all</code>.</p>
+<p>用法如下:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">str_extract</span>(string, pattern)</a>
+<a class="sourceLine" id="cb152-2" data-line-number="2"><span class="kw">str_extract_all</span>(string, pattern, <span class="dt">simplify =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>从文本中提取符合要求的文本.</p>
+<p>例子:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">shopping_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples x4&quot;</span>, <span class="st">&quot;bag of flour&quot;</span>, <span class="st">&quot;bag of sugar&quot;</span>, <span class="st">&quot;milk x2&quot;</span>)</a>
+<a class="sourceLine" id="cb153-2" data-line-number="2"><span class="kw">str_extract</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;4&quot; NA  NA  &quot;2&quot;</code></pre>
+<p><code>\\d</code>是一种正则表达式的写法,代表任意数字.上面的代码代表我们想要从每个文本中提取所有的数字.</p>
+<p>如果没有数字,那么就会返回NA.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">shopping_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples x4&quot;</span>, <span class="st">&quot;bag of flour&quot;</span>, <span class="st">&quot;bag of sugar&quot;</span>, <span class="st">&quot;milk x2&quot;</span>)</a>
+<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="kw">str_extract</span>(shopping_list, <span class="st">&quot;[a-z]+&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;apples&quot; &quot;bag&quot;    &quot;bag&quot;    &quot;milk&quot;</code></pre>
+<p><code>[a-z]+</code>代表任意一个小写字母,然后重复1次或者多次.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">shopping_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples x4&quot;</span>, <span class="st">&quot;bag of flour&quot;</span>, <span class="st">&quot;bag of sugar&quot;</span>, <span class="st">&quot;milk x2&quot;</span>)</a>
+<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="kw">str_extract</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b[a-z]{1,4}</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] NA     &quot;bag&quot;  &quot;bag&quot;  &quot;milk&quot;</code></pre>
+<p><code>\\b</code>代表字符的边界.</p>
+<p><code>\\b[a-z]{1,4}\\b</code>代表<code>一个字符的边界+重复1-4次的任意小写字母+一个字符的边界</code>.</p>
+<p>可以看到,只会提取出第一个字母.</p>
+<p>如果想要把一个字符的所有符合要求的pattern都提取出来,可以使用<code>str_extract_all</code>.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">shopping_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples x4&quot;</span>, <span class="st">&quot;bag of flour&quot;</span>, <span class="st">&quot;bag of sugar&quot;</span>, <span class="st">&quot;milk x2&quot;</span>)</a>
+<a class="sourceLine" id="cb159-2" data-line-number="2"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;[a-z]+&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;apples&quot; &quot;x&quot;     
+## 
+## [[2]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;flour&quot;
+## 
+## [[3]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;sugar&quot;
+## 
+## [[4]]
+## [1] &quot;milk&quot; &quot;x&quot;</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b[a-z]+</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;apples&quot;
+## 
+## [[2]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;flour&quot;
+## 
+## [[3]]
+## [1] &quot;bag&quot;   &quot;of&quot;    &quot;sugar&quot;
+## 
+## [[4]]
+## [1] &quot;milk&quot;</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;4&quot;
+## 
+## [[2]]
+## character(0)
+## 
+## [[3]]
+## character(0)
+## 
+## [[4]]
+## [1] &quot;2&quot;</code></pre>
+<p>可以看到,这时候得到的就是一个和string同样长度的list.会把每个string中的符合要求的pattern都提取出来.</p>
+<p>我们注意到<code>str_extract_all()</code>有一个参数:<code>simplify</code>,它能够将返回的结果变为一个matrix:</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">shopping_list &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples x4&quot;</span>, <span class="st">&quot;bag of flour&quot;</span>, <span class="st">&quot;bag of sugar&quot;</span>, <span class="st">&quot;milk x2&quot;</span>)</a>
+<a class="sourceLine" id="cb165-2" data-line-number="2"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;[a-z]+&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##      [,1]     [,2] [,3]   
+## [1,] &quot;apples&quot; &quot;x&quot;  &quot;&quot;     
+## [2,] &quot;bag&quot;    &quot;of&quot; &quot;flour&quot;
+## [3,] &quot;bag&quot;    &quot;of&quot; &quot;sugar&quot;
+## [4,] &quot;milk&quot;   &quot;x&quot;  &quot;&quot;</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">b[a-z]+</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##      [,1]     [,2] [,3]   
+## [1,] &quot;apples&quot; &quot;&quot;   &quot;&quot;     
+## [2,] &quot;bag&quot;    &quot;of&quot; &quot;flour&quot;
+## [3,] &quot;bag&quot;    &quot;of&quot; &quot;sugar&quot;
+## [4,] &quot;milk&quot;   &quot;&quot;   &quot;&quot;</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">str_extract_all</span>(shopping_list, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##      [,1]
+## [1,] &quot;4&quot; 
+## [2,] &quot;&quot;  
+## [3,] &quot;&quot;  
+## [4,] &quot;2&quot;</code></pre>
+</div>
+<div id="确定某个pattern在文本中的位置" class="section level3">
+<h3><span class="header-section-number">9.3.4</span> 确定某个pattern在文本中的位置</h3>
+<p>两个函数:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="kw">str_locate</span>(string, pattern)</a>
+<a class="sourceLine" id="cb171-2" data-line-number="2"><span class="kw">str_locate_all</span>(string, pattern)</a></code></pre></div>
+<p>例子:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;pineapple&quot;</span>)</a>
+<a class="sourceLine" id="cb172-2" data-line-number="2"><span class="kw">str_locate</span>(fruit, <span class="st">&quot;$&quot;</span>)</a></code></pre></div>
+<p><code>$</code>代表以某个东西结尾.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="kw">str_locate</span>(fruit, <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="kw">str_locate</span>(fruit, <span class="st">&quot;e&quot;</span>)</a>
+<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="kw">str_locate</span>(fruit, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;p&quot;</span>))</a></code></pre></div>
+<p>然后我们再查找字母<code>a</code>在所有字符中的位置.如果没有符合要求的pattern,则会返回NA.也可以设置pattern为一个长度和string相同的vector.</p>
+<p>如果想要查找所有符合要求的pattern的位置,要使用<code>str_locate_all()</code>函数:</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="kw">str_locate</span>(fruit, <span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb174-2" data-line-number="2"><span class="kw">str_locate_all</span>(fruit, <span class="st">&quot;a&quot;</span>)</a></code></pre></div>
+<p>返回是一个list.</p>
+</div>
+<div id="从文本中提取extract匹配到的group" class="section level3">
+<h3><span class="header-section-number">9.3.5</span> 从文本中提取(extract)匹配到的group</h3>
+<p>函数为:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">str_match</span>(string, pattern)</a>
+<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="kw">str_match_all</span>(string, pattern)</a></code></pre></div>
+<p>这两个函数跟<code>str_extract()</code>有些类似.</p>
+<p>例子:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1">strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot; 219 733 8965&quot;</span>, <span class="st">&quot;329-293-8753 &quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;595 794 7569&quot;</span>,</a>
+<a class="sourceLine" id="cb176-2" data-line-number="2">  <span class="st">&quot;387 287 6718&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;233.398.9187  &quot;</span>, <span class="st">&quot;482 952 3315&quot;</span>,</a>
+<a class="sourceLine" id="cb176-3" data-line-number="3">  <span class="st">&quot;239 923 8115 and 842 566 4692&quot;</span>, <span class="st">&quot;Work: 579-499-7527&quot;</span>, <span class="st">&quot;$1000&quot;</span>,</a>
+<a class="sourceLine" id="cb176-4" data-line-number="4">  <span class="st">&quot;Home: 543.355.3679&quot;</span>)</a>
+<a class="sourceLine" id="cb176-5" data-line-number="5">phone &lt;-<span class="st"> &quot;([2-9][0-9]{2})[- .]([0-9]{3})[- .]([0-9]{4})&quot;</span></a></code></pre></div>
+<p>phone代表符合电话号码的格式:</p>
+<ul>
+<li><p>第一个group: 小括号括起来的,数字2-9其中一个,重复一次(后面没有限定数量,则代表重复一次);数字0-9.重复两次. 然后中间是<code>-</code>或者空格,或者任意一个字符.</p></li>
+<li><p>group 2: 小括号括起来的.0-9任意数字重复三次.然后中间是<code>-</code>或者空格,或者任意一个字符.</p></li>
+<li><p>group 3: 小括号括起来的.0-9任意数字重复四次.</p></li>
+</ul>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">str_extract</span>(strings, phone)</a></code></pre></div>
+<pre><code>##  [1] &quot;219 733 8965&quot; &quot;329-293-8753&quot; NA             &quot;595 794 7569&quot; &quot;387 287 6718&quot; NA             &quot;233.398.9187&quot; &quot;482 952 3315&quot;
+##  [9] &quot;239 923 8115&quot; &quot;579-499-7527&quot; NA             &quot;543.355.3679&quot;</code></pre>
+<p>这时候我们试试使用<code>str_match()</code>函数:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">str_match</span>(strings, phone)</a></code></pre></div>
+<pre><code>##       [,1]           [,2]  [,3]  [,4]  
+##  [1,] &quot;219 733 8965&quot; &quot;219&quot; &quot;733&quot; &quot;8965&quot;
+##  [2,] &quot;329-293-8753&quot; &quot;329&quot; &quot;293&quot; &quot;8753&quot;
+##  [3,] NA             NA    NA    NA    
+##  [4,] &quot;595 794 7569&quot; &quot;595&quot; &quot;794&quot; &quot;7569&quot;
+##  [5,] &quot;387 287 6718&quot; &quot;387&quot; &quot;287&quot; &quot;6718&quot;
+##  [6,] NA             NA    NA    NA    
+##  [7,] &quot;233.398.9187&quot; &quot;233&quot; &quot;398&quot; &quot;9187&quot;
+##  [8,] &quot;482 952 3315&quot; &quot;482&quot; &quot;952&quot; &quot;3315&quot;
+##  [9,] &quot;239 923 8115&quot; &quot;239&quot; &quot;923&quot; &quot;8115&quot;
+## [10,] &quot;579-499-7527&quot; &quot;579&quot; &quot;499&quot; &quot;7527&quot;
+## [11,] NA             NA    NA    NA    
+## [12,] &quot;543.355.3679&quot; &quot;543&quot; &quot;355&quot; &quot;3679&quot;</code></pre>
+<p>可以看到,除了将整体pattern匹配出来之后,还将每个<code>group</code>(也就是括号括起来的部分)分别匹配出来了.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">str_extract_all</span>(strings, phone)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;219 733 8965&quot;
+## 
+## [[2]]
+## [1] &quot;329-293-8753&quot;
+## 
+## [[3]]
+## character(0)
+## 
+## [[4]]
+## [1] &quot;595 794 7569&quot;
+## 
+## [[5]]
+## [1] &quot;387 287 6718&quot;
+## 
+## [[6]]
+## character(0)
+## 
+## [[7]]
+## [1] &quot;233.398.9187&quot;
+## 
+## [[8]]
+## [1] &quot;482 952 3315&quot;
+## 
+## [[9]]
+## [1] &quot;239 923 8115&quot; &quot;842 566 4692&quot;
+## 
+## [[10]]
+## [1] &quot;579-499-7527&quot;
+## 
+## [[11]]
+## character(0)
+## 
+## [[12]]
+## [1] &quot;543.355.3679&quot;</code></pre>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">str_match_all</span>(strings, phone)</a></code></pre></div>
+<pre><code>## [[1]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;219 733 8965&quot; &quot;219&quot; &quot;733&quot; &quot;8965&quot;
+## 
+## [[2]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;329-293-8753&quot; &quot;329&quot; &quot;293&quot; &quot;8753&quot;
+## 
+## [[3]]
+##      [,1] [,2] [,3] [,4]
+## 
+## [[4]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;595 794 7569&quot; &quot;595&quot; &quot;794&quot; &quot;7569&quot;
+## 
+## [[5]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;387 287 6718&quot; &quot;387&quot; &quot;287&quot; &quot;6718&quot;
+## 
+## [[6]]
+##      [,1] [,2] [,3] [,4]
+## 
+## [[7]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;233.398.9187&quot; &quot;233&quot; &quot;398&quot; &quot;9187&quot;
+## 
+## [[8]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;482 952 3315&quot; &quot;482&quot; &quot;952&quot; &quot;3315&quot;
+## 
+## [[9]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;239 923 8115&quot; &quot;239&quot; &quot;923&quot; &quot;8115&quot;
+## [2,] &quot;842 566 4692&quot; &quot;842&quot; &quot;566&quot; &quot;4692&quot;
+## 
+## [[10]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;579-499-7527&quot; &quot;579&quot; &quot;499&quot; &quot;7527&quot;
+## 
+## [[11]]
+##      [,1] [,2] [,3] [,4]
+## 
+## [[12]]
+##      [,1]           [,2]  [,3]  [,4]  
+## [1,] &quot;543.355.3679&quot; &quot;543&quot; &quot;355&quot; &quot;3679&quot;</code></pre>
+<p>另外一个例子:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&lt;a&gt; &lt;b&gt;&quot;</span>, <span class="st">&quot;&lt;a&gt; &lt;&gt;&quot;</span>, <span class="st">&quot;&lt;a&gt;&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb185-2" data-line-number="2"><span class="kw">str_match</span>(x, <span class="st">&quot;&lt;(.*?)&gt; &lt;(.*?)&gt;&quot;</span>)</a></code></pre></div>
+<pre><code>##      [,1]      [,2] [,3]
+## [1,] &quot;&lt;a&gt; &lt;b&gt;&quot; &quot;a&quot;  &quot;b&quot; 
+## [2,] &quot;&lt;a&gt; &lt;&gt;&quot;  &quot;a&quot;  &quot;&quot;  
+## [3,] NA        NA   NA  
+## [4,] NA        NA   NA  
+## [5,] NA        NA   NA</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">str_match_all</span>(x, <span class="st">&quot;&lt;(.*?)&gt;&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+##      [,1]  [,2]
+## [1,] &quot;&lt;a&gt;&quot; &quot;a&quot; 
+## [2,] &quot;&lt;b&gt;&quot; &quot;b&quot; 
+## 
+## [[2]]
+##      [,1]  [,2]
+## [1,] &quot;&lt;a&gt;&quot; &quot;a&quot; 
+## [2,] &quot;&lt;&gt;&quot;  &quot;&quot;  
+## 
+## [[3]]
+##      [,1]  [,2]
+## [1,] &quot;&lt;a&gt;&quot; &quot;a&quot; 
+## 
+## [[4]]
+##      [,1] [,2]
+## 
+## [[5]]
+##      [,1] [,2]
+## [1,] NA   NA</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">str_extract</span>(x, <span class="st">&quot;&lt;.*?&gt;&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;&lt;a&gt;&quot; &quot;&lt;a&gt;&quot; &quot;&lt;a&gt;&quot; NA    NA</code></pre>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1"><span class="kw">str_extract_all</span>(x, <span class="st">&quot;&lt;.*?&gt;&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;&lt;a&gt;&quot; &quot;&lt;b&gt;&quot;
+## 
+## [[2]]
+## [1] &quot;&lt;a&gt;&quot; &quot;&lt;&gt;&quot; 
+## 
+## [[3]]
+## [1] &quot;&lt;a&gt;&quot;
+## 
+## [[4]]
+## character(0)
+## 
+## [[5]]
+## [1] NA</code></pre>
+<p><code>&lt;(.*?)&gt;</code>其中的<code>*?</code>是贪婪用法,表示重复任意次,但尽可能少重复.请参考这一章<a href="regularexpression.html#regularexpression">正则表达式</a>.</p>
+</div>
+<div id="从文本中去除匹配到的pattern" class="section level3">
+<h3><span class="header-section-number">9.3.6</span> 从文本中去除匹配到的pattern</h3>
+<p>函数:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1"><span class="kw">str_remove</span>(string, pattern)</a>
+<a class="sourceLine" id="cb193-2" data-line-number="2"><span class="kw">str_remove_all</span>(string, pattern)</a></code></pre></div>
+<p>与<code>str_replace</code>用法作用一致.但是<code>str_replace</code>可以替换成其他pattern.</p>
+<p>例子:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one apple&quot;</span>, <span class="st">&quot;two pears&quot;</span>, <span class="st">&quot;three bananas&quot;</span>)</a>
+<a class="sourceLine" id="cb194-2" data-line-number="2"><span class="kw">str_remove</span>(fruits, <span class="st">&quot;[aeiou]&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;ne apple&quot;     &quot;tw pears&quot;     &quot;thre bananas&quot;</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1"><span class="kw">str_remove_all</span>(fruits, <span class="st">&quot;[aeiou]&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;n ppl&quot;    &quot;tw prs&quot;   &quot;thr bnns&quot;</code></pre>
+</div>
+<div id="从文本中替换匹配到的pattern" class="section level3">
+<h3><span class="header-section-number">9.3.7</span> 从文本中替换匹配到的pattern</h3>
+<p>函数:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">str_replace</span>(string, pattern, replacement)</a>
+<a class="sourceLine" id="cb198-2" data-line-number="2"><span class="kw">str_replace_all</span>(string, pattern, replacement)</a></code></pre></div>
+<p>例子:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one apple&quot;</span>, <span class="st">&quot;two pears&quot;</span>, <span class="st">&quot;three bananas&quot;</span>)</a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="kw">str_replace</span>(fruits, <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;-ne apple&quot;     &quot;tw- pears&quot;     &quot;thr-e bananas&quot;</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="kw">str_replace_all</span>(fruits, <span class="st">&quot;[aeiou]&quot;</span>, <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;-n- -ppl-&quot;     &quot;tw- p--rs&quot;     &quot;thr-- b-n-n-s&quot;</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">str_replace_all</span>(fruits, <span class="st">&quot;[aeiou]&quot;</span>, toupper)</a></code></pre></div>
+<pre><code>## [1] &quot;OnE ApplE&quot;     &quot;twO pEArs&quot;     &quot;thrEE bAnAnAs&quot;</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">str_replace_all</span>(fruits, <span class="st">&quot;b&quot;</span>, <span class="ot">NA_character_</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;one apple&quot; &quot;two pears&quot; NA</code></pre>
+<p>从这个例子可以看出来,<code>replacement</code>也可以是一个函数,将匹配到的所有pattern使用该函数转换之后替换.</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1"><span class="kw">str_replace</span>(fruits, <span class="st">&quot;([aeiou])&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;oone apple&quot;     &quot;twoo pears&quot;     &quot;threee bananas&quot;</code></pre>
+<hr />
+<div id="disqus_thread">
+
+</div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://r-cookbook-shen.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>
+Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regularexpression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["r_cookbook.pdf", "r_cookbook.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

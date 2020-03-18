@@ -3,6 +3,7 @@
 ## 安装
 
 ```{r, eval=FALSE,echo=TRUE, cache=TRUE}
+install.packages("ggplot2")
 ```
 
 ---

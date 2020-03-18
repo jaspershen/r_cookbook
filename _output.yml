@@ -2,13 +2,12 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
-      before: |ww
+      before: |
         <li><a href="./">R cookbook of Xiaotao Shen</a></li>
       after: |
         <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
     download: ["pdf", "epub"]
 bookdown::html_book:
-  theme: ceruleansssssss
   includes:
     in_header: preamble.tex
   latex_engine: xelatex

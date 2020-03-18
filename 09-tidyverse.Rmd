@@ -1,9 +1,8 @@
-# `Tidyverse`用于数据分析:stringr {#tidyverse_stringr}
+# `Tidyverse`用于数据分析stringr {#tidyverse_stringr}
 
 `stringr`是R中进行文本处理的包.cheatsheet可以看这里.
 
 https://github.com/rstudio/cheatsheets/blob/master/strings.pdf
-
 
 ## 安装
 
