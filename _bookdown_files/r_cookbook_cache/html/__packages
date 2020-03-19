@@ -13,3 +13,6 @@ leaflet
 DT
 ggsci
 ggvenn
+dynamicTreeCut
+fastcluster
+WGCNA

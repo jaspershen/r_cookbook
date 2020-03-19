@@ -49,6 +49,21 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.12/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -172,6 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown特有语法"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown特有语法</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>2.8.1</b> 图片 (image)</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#表格-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格 (Table)</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rmarkdown.html"><a href="rmarkdown.html#地图-map"><i class="fa fa-check"></i><b>2.8.3</b> 地图 (map)</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>2.9</b> 输出格式</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rmarkdown.html"><a href="rmarkdown.html#html格式"><i class="fa fa-check"></i><b>2.9.1</b> HTML格式</a></li>
@@ -256,7 +272,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
 <li class="chapter" data-level="6.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a></li>
+<li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a><ul>
+<li class="chapter" data-level="7.1" data-path="multiomics.html"><a href="multiomics.html#wgcna"><i class="fa fa-check"></i><b>7.1</b> WGCNA</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.1.1</b> Data input and cleaning</a></li>
+<li class="chapter" data-level="7.1.2" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.1.2</b> Network analysis of liver expression data in female mice</a></li>
+<li class="chapter" data-level="7.1.3" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.1.3</b> Relating modules to external information and identifying important</a></li>
+<li class="chapter" data-level="7.1.4" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.1.4</b> 对module进行分析</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>8</b> 正则表达式</a><ul>
 <li class="chapter" data-level="8.1" data-path="regularexpression.html"><a href="regularexpression.html#特殊字符"><i class="fa fa-check"></i><b>8.1</b> 特殊字符</a></li>
 <li class="chapter" data-level="8.2" data-path="regularexpression.html"><a href="regularexpression.html#匹配match"><i class="fa fa-check"></i><b>8.2</b> 匹配(match)</a></li>
@@ -308,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 5</span> ggplot2</h1>
 <div id="安装-2" class="section level2">
 <h2><span class="header-section-number">5.1</span> 安装</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 </div>
 <div id="基础知识" class="section level2">
 <h2><span class="header-section-number">5.2</span> 基础知识</h2>
@@ -321,9 +344,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>至少一个图层(layer)用来描述变量如何展示?图层一般使用前缀为<code>geom_</code>的函数进行创建.</p></li>
 </ul>
 <p>一个简单的例子:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb136-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-29-1.png" width="100%" /></p>
 <p>这幅图中:</p>
 <ol style="list-style-type: decimal">
 <li><p>数据为<code>mpg</code></p></li>
@@ -336,23 +359,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.2.2</span> 颜色,性状,大小和其他的美学属性(aesthetic attributes)</h3>
 <p>为了在一幅图中将=映射更多的变量,我们可以使用一些其他的美学属性(aesthetic attributes).比如,颜色,性状还有大小.</p>
 <p>比如,将颜色映射到变量<code>class</code>上:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, cty, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-4-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, cty, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-30-1.png" width="100%" /></p>
 <p>如果想要将某个美学属性设置为固定值,应当在<code>aes</code>函数之外进行设置:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>))</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-5-2.png" width="50%" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>))</a>
+<a class="sourceLine" id="cb138-2" data-line-number="2"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-31-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-31-2.png" width="50%" /></p>
 <p>可以看一下这两幅图的差异.</p>
 </div>
 <div id="分面facetting" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> 分面(Facetting)</h3>
 <p>分面也是一种展示分类变量的方法.</p>
 <p><code>ggplot2</code>中有两种分面方式:<code>grid</code>和<code>wrapped</code>.其中<code>wrapped</code>.其中wrapped更为重要.需要使用<code>facet_wrap()</code>函数.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb139-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-32-1.png" width="100%" /></p>
 <hr />
 <div id="disqus_thread">
 
@@ -438,6 +461,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

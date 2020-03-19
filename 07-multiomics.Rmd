@@ -1,6 +1,415 @@
+```{r, include = FALSE}
+knitr::opts_chunk$set(out.width = "100%")
+```
+
 # 多组学分析 {#multiomics}
 
-We have finished a nice book.
+## WGCNA
+
+使用官方例子进行学习.
+
+https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/
+
+### Data input and cleaning
+
+1. 首先读取数据
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+library(WGCNA)
+femData <- 
+  read.csv("/Users/shenxt/study/WGCNA_test/LiverFemale3600.csv")
+dim(femData)
+colnames(femData)
+```
+
+可以看到该数据行是基因,列是样品.
+
+然后将基因的描述列去掉.并且将其转置,行是样品,列是基因.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+data_exp0 <- as.data.frame(t(femData[, -c(1:8)]), stringsAsFactors = FALSE)
+names(data_exp0) = femData$substanceBXH
+rownames(data_exp0) = names(femData)[-c(1:8)]
+```
+
+然后需要去除掉数据(表达矩阵)中的outlier基因和样品
+
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+gsg <- goodSamplesGenes(data_exp0, verbose = 3)
+gsg$allOK
+```
+
+该函数用来检查数据中的基因是否符合要求,如果`allOK`为TRUE,则代表通过检查,如果不是TRUE,则需要手动去除基因和样品:
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+if (!gsg$allOK)
+{
+  # Optionally, print the gene and sample names that were removed:
+  if (sum(!gsg$goodGenes) > 0)
+    printFlush(paste("Removing genes:", paste(names(data_exp0)[!gsg$goodGenes], collapse = ", ")))
+  
+  if (sum(!gsg$goodSamples) > 0)
+    printFlush(paste("Removing samples:", paste(rownames(data_exp0)[!gsg$goodSamples], collapse = ", ")))
+  
+  # Remove the offending genes and samples from the data:
+  data_exp0 <- data_exp0[gsg$goodSamples, gsg$goodGenes]
+}
+```
+
+现在下面对样品进行聚类,然后观察有哪些明显的outlier samples.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+sampleTree <- hclust(dist(data_exp0), method = "average")
+# Plot the sample tree: Open a graphic output window of size 12 by 9 inches
+# The user should change the dimensions if the window is too large or too small.
+sizeGrWindow(12, 9)
+#pdf(file = "Plots/sampleClustering.pdf", width = 12, height = 9);
+par(cex = 0.6)
+par(mar = c(0, 4, 2, 0))
+plot(
+  sampleTree,
+  main = "Sample clustering to detect outliers",
+  sub = "",
+  xlab = "",
+  cex.lab = 1.5,
+  cex.axis = 1.5,
+  cex.main = 2
+)
+
+# Plot a line to show the cut
+abline(h = 15, col = "red")
+```
+
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Determine cluster under the line
+clust = cutreeStatic(sampleTree, cutHeight = 15, minSize = 10)
+table(clust)
+```
+
+可以明显的看到一个outlier sample.可以手动删除,也可以自动的办法.
+
+
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# clust 1 contains the samples we want to keep.
+keepSamples = (clust == 1)
+datExpr = data_exp0[keepSamples,]
+nGenes = ncol(datExpr)
+nSamples = nrow(datExpr)
+```
+
+`datExpr`就是我们最终用来进行network分析的表达数据.
+
+下面我们需要读取clinical data.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+traitData = read.csv("/Users/shenxt/study/WGCNA_test/ClinicalTraits.csv")
+dim(traitData)
+names(traitData)
+# remove columns that hold information we do not need.
+allTraits = traitData[, -c(31, 16)]
+allTraits = allTraits[, c(2, 11:36)]
+dim(allTraits)
+names(allTraits)
+# Form a data frame analogous to expression data that will hold the clinical traits.
+femaleSamples = rownames(datExpr)
+traitRows = match(femaleSamples, allTraits$Mice)
+datTraits = allTraits[traitRows, -1]
+rownames(datTraits) = allTraits[traitRows, 1]
+collectGarbage()
+```
+
+这时候我们得到的`datTraits`就是clinicaldata,其中行为样品,列为变量.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+rownames(datTraits) == rownames(datExpr)
+```
+
+下面我们来看看样品的临床数据的热图和样品的基因的聚类.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Re-cluster samples
+sampleTree2 = hclust(dist(datExpr), method = "average")
+# Convert traits to a color representation: white means low, red means high, grey means missing entry
+traitColors = numbers2colors(datTraits, signed = FALSE)
+
+# Plot the sample dendrogram and the colors underneath.
+plotDendroAndColors(sampleTree2,
+                    traitColors,
+                    groupLabels = names(datTraits),
+                    main = "Sample dendrogram and trait heatmap")
+```
+
+最后,把数据保存下来,准备后续的分析.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+save(datExpr, datTraits, file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData")
+```
+
+### Network analysis of liver expression data in female mice
+
+数据都准备好之后,下面就是做网络分析和module detection.
+
+1. 首先需要设置R运行环境,主要是要能够进行多线程处理,然后读取数据:
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+enableWGCNAThreads(nThreads = 6)
+# Load the data saved in the first part
+lnames = load(file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData")
+#The variable lnames contains the names of loaded variables.
+lnames
+```
+
+2. Automatic network construction and module detection
+
+首先需要选择合适的`soft-thresholding power`
+
+可以使用`pickSoftThreshold()`函数.一般需要选择一系列candidate powers,然后根据结果进行选择.
+
+> 注意,这段代码在Rstudio中不能运行,运行出错,需要到R自带IDE或者终端中运行.
+
+```{r, echo=TRUE, eval=FALSE,cache=TRUE}
+# Choose a set of soft-thresholding powers
+powers = c(c(1:10), seq(from = 12, to = 20, by = 2))
+# Call the network topology analysis function
+sft = pickSoftThreshold(datExpr, powerVector = powers, verbose = 5)
+save(sft, file = "/Users/shenxt/study/WGCNA_test/sft")
+```
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+load("/Users/shenxt/study/WGCNA_test/sft")
+powers = c(c(1:10), seq(from = 12, to = 20, by = 2))
+# Plot the results:
+sizeGrWindow(9, 5)
+par(mfrow = c(1, 2))
+
+cex1 = 0.9
+
+# Scale-free topology fit index as a function of the soft-thresholding power
+plot(
+  sft$fitIndices[, 1],
+  -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
+  xlab = "Soft Threshold (power)",
+  ylab = "Scale Free Topology Model Fit,signed R^2",
+  type = "n",
+  main = paste("Scale independence")
+)
+
+text(
+  sft$fitIndices[, 1],
+  -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
+  labels = powers,
+  cex = cex1,
+  col = "red"
+)
+
+# this line corresponds to using an R^2 cut-off of h
+abline(h = 0.90, col = "red")
+# Mean connectivity as a function of the soft-thresholding power
+plot(
+  sft$fitIndices[, 1],
+  sft$fitIndices[, 5],
+  xlab = "Soft Threshold (power)",
+  ylab = "Mean Connectivity",
+  type = "n",
+  main = paste("Mean connectivity")
+)
+text(
+  sft$fitIndices[, 1],
+  sft$fitIndices[, 5],
+  labels = powers,
+  cex = cex1,
+  col = "red"
+)
+```
+
+这里我们选择6.
+
+然后使用` blockwiseModules()`函数就可以得到modules.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+net <- blockwiseModules(
+  datExpr,
+  power = 6,
+  TOMType = "unsigned",
+  minModuleSize = 30,
+  reassignThreshold = 0,
+  mergeCutHeight = 0.25,
+  numericLabels = TRUE,
+  pamRespectsDendro = FALSE,
+  saveTOMs = TRUE,
+  saveTOMFileBase = "femaleMouseTOM",
+  verbose = 3
+)
+```
+
+在这里我们选择了soft thresholding power 6, 然后最小module size设置为30.`mergeCutHeight`用来控制merge module.
+
+下面看一下分类结果.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+table(net$colors)
+```
+
+代表这里面有18个module.标记为0的基因代表没有归为任何一类module.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Convert labels to colors for plotting
+mergedColors = labels2colors(net$colors)
+# Plot the dendrogram and the module colors underneath
+plotDendroAndColors(
+  net$dendrograms[[1]],
+  mergedColors[net$blockGenes[[1]]],
+  "Module colors",
+  dendroLabels = FALSE,
+  hang = 0.03,
+  addGuide = TRUE,
+  guideHang = 0.05
+)
+```
+
+然后将结果保存,用于后续的分析.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+moduleLabels = net$colors
+moduleColors = labels2colors(net$colors)
+MEs = net$MEs
+
+geneTree = net$dendrograms[[1]]
+
+save(MEs, moduleLabels, moduleColors, geneTree, 
+     file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData")
+```
+
+### Relating modules to external information and identifying important
+
+首先加载上一步产生的数据:
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+lnames = load(file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData");
+#The variable lnames contains the names of loaded variables.
+lnames
+# Load network data saved in the second part.
+lnames = load(file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData");
+lnames
+```
+
+然后我们想要找到和clinical data关系非常紧密的module.对于每个module的来说,都有一个eigengene,也就是其PCA分析的第一主成分,用来代表该module在每个样品中的含量.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Define numbers of genes and samples
+nGenes = ncol(datExpr)
+nSamples = nrow(datExpr)
+# Recalculate MEs with color labels
+MEs0 = moduleEigengenes(datExpr, moduleColors)$eigengenes
+MEs = orderMEs(MEs0)
+moduleTraitCor = cor(MEs, datTraits, use = "p")
+moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples)
+```
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Will display correlations and their p-values
+textMatrix = paste(signif(moduleTraitCor, 2), "\n(",
+signif(moduleTraitPvalue, 1), ")", sep = "");
+dim(textMatrix) = dim(moduleTraitCor)
+par(mar = c(6, 8.5, 3, 3));
+# Display the correlation values within a heatmap plot
+labeledHeatmap(Matrix = moduleTraitCor,
+xLabels = names(datTraits),
+yLabels = names(MEs),
+ySymbols = names(MEs),
+colorLabels = FALSE,
+colors = greenWhiteRed(50),
+textMatrix = textMatrix,
+setStdMargins = FALSE,
+cex.text = 0.5,
+zlim = c(-1,1),
+main = paste("Module-trait relationships"))
+```
+
+Gene relationship to trait and important modules: Gene Significance and Module Membership
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Define variable weight containing the weight column of datTrait
+weight = as.data.frame(datTraits$weight_g)
+names(weight) = "weight"
+# names (colors) of the modules
+modNames = substring(names(MEs), 3)
+geneModuleMembership = as.data.frame(cor(datExpr, MEs, use = "p"))
+MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))
+names(geneModuleMembership) = paste("MM", modNames, sep="")
+names(MMPvalue) = paste("p.MM", modNames, sep="")
+geneTraitSignificance = as.data.frame(cor(datExpr, weight, use = "p"))
+GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples))
+names(geneTraitSignificance) = paste("GS.", names(weight), sep="")
+names(GSPvalue) = paste("p.GS.", names(weight), sep="")
+```
+
+Intramodular analysis: identifying genes with high GS and MM
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+module = "brown"
+column = match(module, modNames)
+moduleGenes = moduleColors==module
+par(mfrow = c(1,1))
+verboseScatterplot(abs(geneModuleMembership[moduleGenes, column]),
+                   abs(geneTraitSignificance[moduleGenes, 1]),
+xlab = paste("Module Membership in", module, "module"),
+ylab = "Gene significance for body weight",
+main = paste("Module membership vs. gene significance\n"),
+cex.main = 1.2, cex.lab = 1.2, cex.axis = 1.2, col = module)
+```
+
+Summary output of network analysis results
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+head(names(datExpr))
+head(names(datExpr)[moduleColors=="brown"])
+```
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+annot <- 
+  read.csv(file = "/Users/shenxt/study/WGCNA_test/GeneAnnotation.csv")
+dim(annot)
+names(annot)
+probes = names(datExpr)
+probes2annot = match(probes, annot$substanceBXH)
+# The following is the number or probes without annotation:
+sum(is.na(probes2annot))
+```
+
+``````{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Create the starting data frame
+geneInfo0 = data.frame(substanceBXH = probes,
+geneSymbol = annot$gene_symbol[probes2annot],
+LocusLinkID = annot$LocusLinkID[probes2annot],
+moduleColor = moduleColors,
+geneTraitSignificance,
+GSPvalue)
+# Order modules by their significance for weight
+modOrder = order(-abs(cor(MEs, weight, use = "p")));
+# Add module membership information in the chosen order
+for (mod in 1:ncol(geneModuleMembership))
+{
+oldNames = names(geneInfo0)
+geneInfo0 = data.frame(geneInfo0, geneModuleMembership[, modOrder[mod]],
+MMPvalue[, modOrder[mod]]);
+names(geneInfo0) = c(oldNames, paste("MM.", modNames[modOrder[mod]], sep=""),
+paste("p.MM.", modNames[modOrder[mod]], sep=""))
+}
+# Order the genes in the geneInfo variable first by module color, then by geneTraitSignificance
+geneOrder = order(geneInfo0$moduleColor, -abs(geneInfo0$GS.weight));
+geneInfo = geneInfo0[geneOrder, ]
+write.csv(geneInfo, file = "/Users/shenxt/study/WGCNA_test/geneInfo.csv")
+```
+
+
+### 对module进行分析
+
+在前文中,鉴定出了几个和weight相关的module.
+
 
 
 ---
