@@ -18,9 +18,13 @@ install.packages("ggplot2")
 
 * 数据(data)
 
+在`ggplot2`中,数据一般是data frame(数据框).
+
 * 一系列的美学映射(aesthetic mappings),将数据的变量和可视化的特征联系起来.
 
-* 至少一个图层(layer)用来描述变量如何展示?图层一般使用前缀为`geom_`的函数进行创建.
+aesthetic mappings,直译为美学映射.也就是将数据的变量使用哪种图形属性进行表示.比如最为简单的一副散点图,我们可以使用x轴来表示身高,使用y轴表示体重,然后使用每个点的颜色代表性别.
+
+* 至少一个图层(layer)用来描述变量如何展示,也就是几何对象(geometric).图层一般使用前缀为`geom_`的函数进行创建.
 
 一个简单的例子:
 
@@ -92,8 +96,43 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
 
 
+## 单独几何对象(individual geoms)
 
+### 基础图形
 
+如何理解几何对象?可以理解为图形的表现方式.我们平时所说的散点图(scatter plot),箱形图(box plot)或者柱状图(bar plot)其实就是指的不同的几何对象表现方式.
+
+基础的几何对象都是二维的并且需要`x`和`y`轴美学映射.他们也都能够使用颜色(color)和形状(shape)对变量进行映射.
+
+* `geom_area()`: 该几何对象用来绘制面积图.线条下面使用颜色进行填充.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+df <- data.frame(
+  x = c(3, 1, 5), 
+  y = c(2, 4, 6), 
+  label = c("a","b","c")
+)
+p <- ggplot(df, aes(x, y, label = label)) + 
+  labs(x = NULL, y = NULL) + # Hide axis label
+  theme(plot.title = element_text(size = 12)) # Shrink plot title
+```
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_area() + ggtitle("area")
+```
+
+* `geom_bar(stat = "identity")`: 绘制bar plot.注意我们需要将其中的参数`stat`设置为`identify`,因此默认情况下,其会统计x轴变量的个数作为y轴.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_bar(stat = 'identity') + ggtitle("bar")
+```
+
+* `geom_line()`: 绘制线形图.将点按照从左到右顺序进行连接.`geom_path()`函数与`geom_line()`类似,但是连接线的方式是按照他在数据中的顺序进行连接.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_line() + ggtitle("line")
+p + geom_path() + ggtitle("path")
+```
 
 ---
 

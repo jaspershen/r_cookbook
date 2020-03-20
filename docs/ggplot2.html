@@ -266,6 +266,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="ggplot2.html"><a href="ggplot2.html#ggplot图像的三个元素"><i class="fa fa-check"></i><b>5.2.1</b> ggplot图像的三个元素</a></li>
 <li class="chapter" data-level="5.2.2" data-path="ggplot2.html"><a href="ggplot2.html#颜色性状大小和其他的美学属性aesthetic-attributes"><i class="fa fa-check"></i><b>5.2.2</b> 颜色,性状,大小和其他的美学属性(aesthetic attributes)</a></li>
 <li class="chapter" data-level="5.2.3" data-path="ggplot2.html"><a href="ggplot2.html#分面facetting"><i class="fa fa-check"></i><b>5.2.3</b> 分面(Facetting)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="ggplot2.html"><a href="ggplot2.html#图形的图层geom"><i class="fa fa-check"></i><b>5.2.4</b> 图形的图层(geom)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ggplot2.html"><a href="ggplot2.html#单独几何对象individual-geoms"><i class="fa fa-check"></i><b>5.3</b> 单独几何对象(individual geoms)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="ggplot2.html"><a href="ggplot2.html#基础图形"><i class="fa fa-check"></i><b>5.3.1</b> 基础图形</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
@@ -282,10 +286,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="multiomics.html"><a href="multiomics.html#wgcna-介绍"><i class="fa fa-check"></i><b>7.3</b> WGCNA 介绍</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="multiomics.html"><a href="multiomics.html#计算基因的相关性"><i class="fa fa-check"></i><b>7.3.1</b> 计算基因的相关性</a></li>
-<li class="chapter" data-level="7.3.2" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.3.2</b> Data input and cleaning</a></li>
-<li class="chapter" data-level="7.3.3" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.3.3</b> Network analysis of liver expression data in female mice</a></li>
-<li class="chapter" data-level="7.3.4" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.3.4</b> Relating modules to external information and identifying important</a></li>
-<li class="chapter" data-level="7.3.5" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.3.5</b> 对module进行分析</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multiomics.html"><a href="multiomics.html#使用wgcna包进行分析"><i class="fa fa-check"></i><b>7.4</b> 使用WGCNA包进行分析</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.4.1</b> Data input and cleaning</a></li>
+<li class="chapter" data-level="7.4.2" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.4.2</b> Network analysis of liver expression data in female mice</a></li>
+<li class="chapter" data-level="7.4.3" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.4.3</b> Relating modules to external information and identifying important</a></li>
+<li class="chapter" data-level="7.4.4" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.4.4</b> 对module进行分析</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>8</b> 正则表达式</a><ul>
@@ -347,14 +353,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">5.2.1</span> ggplot图像的三个元素</h3>
 <p>每个<code>ggplot</code>都有三个元素组成:</p>
 <ul>
-<li><p>数据(data)</p></li>
-<li><p>一系列的美学映射(aesthetic mappings),将数据的变量和可视化的特征联系起来.</p></li>
-<li><p>至少一个图层(layer)用来描述变量如何展示?图层一般使用前缀为<code>geom_</code>的函数进行创建.</p></li>
+<li>数据(data)</li>
+</ul>
+<p>在<code>ggplot2</code>中,数据一般是data frame(数据框).</p>
+<ul>
+<li>一系列的美学映射(aesthetic mappings),将数据的变量和可视化的特征联系起来.</li>
+</ul>
+<p>aesthetic mappings,直译为美学映射.也就是将数据的变量使用哪种图形属性进行表示.比如最为简单的一副散点图,我们可以使用x轴来表示身高,使用y轴表示体重,然后使用每个点的颜色代表性别.</p>
+<ul>
+<li>至少一个图层(layer)用来描述变量如何展示,也就是几何对象(geometric).图层一般使用前缀为<code>geom_</code>的函数进行创建.</li>
 </ul>
 <p>一个简单的例子:</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb136-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-29-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-205-1.png" width="100%" /></p>
 <p>这幅图中:</p>
 <ol style="list-style-type: decimal">
 <li><p>数据为<code>mpg</code></p></li>
@@ -369,11 +381,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>比如,将颜色映射到变量<code>class</code>上:</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, cty, <span class="dt">colour =</span> class)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb137-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-30-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-206-1.png" width="100%" /></p>
 <p>如果想要将某个美学属性设置为固定值,应当在<code>aes</code>函数之外进行设置:</p>
 <div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb138-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>))</a>
 <a class="sourceLine" id="cb138-2" data-line-number="2"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-31-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-31-2.png" width="50%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-207-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-207-2.png" width="50%" /></p>
 <p>可以看一下这两幅图的差异.</p>
 </div>
 <div id="分面facetting" class="section level3">
@@ -383,7 +395,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb139-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb139-3" data-line-number="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>class)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-32-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-208-1.png" width="100%" /></p>
+</div>
+<div id="图形的图层geom" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> 图形的图层(geom)</h3>
+<p>图层(geom)就是用来决定变量如何展示在图像上的办法.比如最常见的最简单的点图的图层就是<code>geom_point()</code>.</p>
+<ul>
+<li><p><code>geom_smooth</code>: 对数据进行拟合.</p></li>
+<li><p><code>geom_boxplot</code>:箱形图.</p></li>
+<li><p><code>geom_histogram</code>:对连续变量分布进行描述.</p></li>
+<li><p><code>geom_bar</code>:barplot.</p></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>在图中添加smooth曲线</li>
+</ol>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" data-line-number="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb140-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-209-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="单独几何对象individual-geoms" class="section level2">
+<h2><span class="header-section-number">5.3</span> 单独几何对象(individual geoms)</h2>
+<div id="基础图形" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> 基础图形</h3>
+<p>如何理解几何对象?可以理解为图形的表现方式.我们平时所说的散点图(scatter plot),箱形图(box plot)或者柱状图(bar plot)其实就是指的不同的几何对象表现方式.</p>
+<p>基础的几何对象都是二维的并且需要<code>x</code>和<code>y</code>轴美学映射.他们也都能够使用颜色(color)和形状(shape)对变量进行映射.</p>
+<ul>
+<li><code>geom_area()</code>: 该几何对象用来绘制面积图.线条下面使用颜色进行填充.</li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb142-2" data-line-number="2">  <span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">5</span>), </a>
+<a class="sourceLine" id="cb142-3" data-line-number="3">  <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>), </a>
+<a class="sourceLine" id="cb142-4" data-line-number="4">  <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb142-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb142-6" data-line-number="6">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(x, y, <span class="dt">label =</span> label)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb142-7" data-line-number="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Hide axis label</span></a>
+<a class="sourceLine" id="cb142-8" data-line-number="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># Shrink plot title</span></a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_area</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;area&quot;</span>)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-211-1.png" width="100%" /></p>
+<ul>
+<li><code>geom_bar(stat = &quot;identity&quot;)</code>: 绘制bar plot.注意我们需要将其中的参数<code>stat</code>设置为<code>identify</code>,因此默认情况下,其会统计x轴变量的个数作为y轴.</li>
+</ul>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" data-line-number="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;bar&quot;</span>)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-212-1.png" width="100%" /></p>
+<ul>
+<li><code>geom_line()</code>: 绘制线形图.将点按照从左到右顺序进行连接.<code>geom_path()</code>函数与<code>geom_line()</code>类似,但是连接线的方式是按照他在数据中的顺序进行连接.</li>
+</ul>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;line&quot;</span>)</a>
+<a class="sourceLine" id="cb145-2" data-line-number="2">p <span class="op">+</span><span class="st"> </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;path&quot;</span>)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-213-1.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-213-2.png" width="100%" /></p>
 <hr />
 <div id="disqus_thread">
 

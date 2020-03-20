@@ -16,3 +16,12 @@ ggvenn
 dynamicTreeCut
 fastcluster
 WGCNA
+ggtree
+ggraph
+igraph
+dendextend
+colormap
+kableExtra
+circlize
+ggcor
+corrplot

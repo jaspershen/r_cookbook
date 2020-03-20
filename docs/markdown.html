@@ -50,6 +50,13 @@
 
 
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.12/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -180,6 +187,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="rmarkdown.html"><a href="rmarkdown.html#rmarkdown特有语法"><i class="fa fa-check"></i><b>2.8</b> Rmarkdown特有语法</a><ul>
 <li class="chapter" data-level="2.8.1" data-path="rmarkdown.html"><a href="rmarkdown.html#图片-image-1"><i class="fa fa-check"></i><b>2.8.1</b> 图片 (image)</a></li>
 <li class="chapter" data-level="2.8.2" data-path="rmarkdown.html"><a href="rmarkdown.html#表格-table"><i class="fa fa-check"></i><b>2.8.2</b> 表格 (Table)</a></li>
+<li class="chapter" data-level="2.8.3" data-path="rmarkdown.html"><a href="rmarkdown.html#地图-map"><i class="fa fa-check"></i><b>2.8.3</b> 地图 (map)</a></li>
 </ul></li>
 <li class="chapter" data-level="2.9" data-path="rmarkdown.html"><a href="rmarkdown.html#输出格式"><i class="fa fa-check"></i><b>2.9</b> 输出格式</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="rmarkdown.html"><a href="rmarkdown.html#html格式"><i class="fa fa-check"></i><b>2.9.1</b> HTML格式</a></li>
@@ -258,6 +266,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.1" data-path="ggplot2.html"><a href="ggplot2.html#ggplot图像的三个元素"><i class="fa fa-check"></i><b>5.2.1</b> ggplot图像的三个元素</a></li>
 <li class="chapter" data-level="5.2.2" data-path="ggplot2.html"><a href="ggplot2.html#颜色性状大小和其他的美学属性aesthetic-attributes"><i class="fa fa-check"></i><b>5.2.2</b> 颜色,性状,大小和其他的美学属性(aesthetic attributes)</a></li>
 <li class="chapter" data-level="5.2.3" data-path="ggplot2.html"><a href="ggplot2.html#分面facetting"><i class="fa fa-check"></i><b>5.2.3</b> 分面(Facetting)</a></li>
+<li class="chapter" data-level="5.2.4" data-path="ggplot2.html"><a href="ggplot2.html#图形的图层geom"><i class="fa fa-check"></i><b>5.2.4</b> 图形的图层(geom)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ggplot2.html"><a href="ggplot2.html#单独几何对象individual-geoms"><i class="fa fa-check"></i><b>5.3</b> 单独几何对象(individual geoms)</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="ggplot2.html"><a href="ggplot2.html#基础图形"><i class="fa fa-check"></i><b>5.3.1</b> 基础图形</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
@@ -274,10 +286,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="multiomics.html"><a href="multiomics.html#wgcna-介绍"><i class="fa fa-check"></i><b>7.3</b> WGCNA 介绍</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="multiomics.html"><a href="multiomics.html#计算基因的相关性"><i class="fa fa-check"></i><b>7.3.1</b> 计算基因的相关性</a></li>
-<li class="chapter" data-level="7.3.2" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.3.2</b> Data input and cleaning</a></li>
-<li class="chapter" data-level="7.3.3" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.3.3</b> Network analysis of liver expression data in female mice</a></li>
-<li class="chapter" data-level="7.3.4" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.3.4</b> Relating modules to external information and identifying important</a></li>
-<li class="chapter" data-level="7.3.5" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.3.5</b> 对module进行分析</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="multiomics.html"><a href="multiomics.html#使用wgcna包进行分析"><i class="fa fa-check"></i><b>7.4</b> 使用WGCNA包进行分析</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.4.1</b> Data input and cleaning</a></li>
+<li class="chapter" data-level="7.4.2" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.4.2</b> Network analysis of liver expression data in female mice</a></li>
+<li class="chapter" data-level="7.4.3" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.4.3</b> Relating modules to external information and identifying important</a></li>
+<li class="chapter" data-level="7.4.4" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.4.4</b> 对module进行分析</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>8</b> 正则表达式</a><ul>
@@ -568,7 +582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb20-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
 <a class="sourceLine" id="cb20-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb20-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-180-1.png" width="100%" /></p>
 <p>Rmarkdown中代码块中有很多内容可以设置.</p>
 <ul>
 <li>行内代码</li>
@@ -704,8 +718,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb31-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb31-6" data-line-number="6">)</a></code></pre></div>
-<div id="htmlwidget-f868a4e8434f7ee81244" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f868a4e8434f7ee81244">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fc24a5b4df847279170d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc24a5b4df847279170d">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <ul>
 <li><code>knitr</code>包</li>
 </ul>
