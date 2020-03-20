@@ -1,3 +1,7 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%")
+```
+
 # `Tidyverse`用于数据分析stringr {#tidyverse_stringr}
 
 `stringr`是R中进行文本处理的包.cheatsheet可以看这里.

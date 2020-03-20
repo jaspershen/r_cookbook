@@ -1,3 +1,7 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%")
+```
+
 # Rmarkdown拓展 {#rmarkdown_beyond}
 
 Yihui Xie以及Rstudio基于Rmarkdown写了好几个用来创建网站等的包.

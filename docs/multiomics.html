@@ -455,7 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb156-8" data-line-number="8">  <span class="dt">cex.axis =</span> <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb156-9" data-line-number="9">  <span class="dt">cex.main =</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb156-10" data-line-number="10">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-219-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-47-1.png" width="100%" /></p>
 <p>我们可以设定剪枝的阈值,比如我们设置为15,然后使用<code>cutreeStatic()</code>函数对样品进行分类.</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="co"># Determine cluster under the line</span></a>
 <a class="sourceLine" id="cb157-2" data-line-number="2">clust =<span class="st"> </span><span class="kw">cutreeStatic</span>(sampleTree, <span class="dt">cutHeight =</span> <span class="dv">15</span>, <span class="dt">minSize =</span> <span class="dv">10</span>)</a>
@@ -518,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb174-7" data-line-number="7">                    <span class="dt">colors =</span> traitColors,</a>
 <a class="sourceLine" id="cb174-8" data-line-number="8">                    <span class="dt">groupLabels =</span> <span class="kw">names</span>(datTraits),</a>
 <a class="sourceLine" id="cb174-9" data-line-number="9">                    <span class="dt">main =</span> <span class="st">&quot;Sample dendrogram and trait heatmap&quot;</span>)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-224-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-52-1.png" width="100%" /></p>
 <p>最后,把数据保存下来,准备后续的分析.</p>
 <div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">save</span>(datExpr, datTraits, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>)</a></code></pre></div>
 </div>
@@ -573,7 +573,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb181-23" data-line-number="23"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb181-24" data-line-number="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>), </a>
 <a class="sourceLine" id="cb181-25" data-line-number="25">        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">13</span>))</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-228-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-228-2.png" width="50%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-56-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-56-2.png" width="50%" /></p>
 <p>左边图显示的是power和scale free topology fit的关系,右图显示的是power和mean connectivity的关系,一般选择能够使scale free topology fit达到最大时的最小的power.</p>
 <p>这里我们选择6.</p>
 <p>确定了power(β)参数之后,后面使用<code>blockwiseModules()</code>函数就可以得到modules.</p>
@@ -602,7 +602,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  ..Working on block 1 .
 ##     TOM calculation: adjacency..
 ##     ..will use 6 parallel threads.
-##      Fraction of slow calculations: 0.386025
+##      Fraction of slow calculations: 0.386114
 ##     ..connectivity..
 ##     ..matrix multiplication (system BLAS)..
 ##     ..normalization..
@@ -645,7 +645,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb188-10" data-line-number="10">  <span class="dt">addGuide =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb188-11" data-line-number="11">  <span class="dt">guideHang =</span> <span class="fl">0.05</span></a>
 <a class="sourceLine" id="cb188-12" data-line-number="12">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-231-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-59-1.png" width="100%" /></p>
 <p>然后将结果保存,用于后续的分析.</p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">moduleLabels =<span class="st"> </span>net<span class="op">$</span>colors</a>
 <a class="sourceLine" id="cb189-2" data-line-number="2">moduleColors =<span class="st"> </span><span class="kw">labels2colors</span>(net<span class="op">$</span>colors)</a>
@@ -744,7 +744,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb200-15" data-line-number="15"><span class="dt">cex.text =</span> <span class="fl">0.5</span>,</a>
 <a class="sourceLine" id="cb200-16" data-line-number="16"><span class="dt">zlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb200-17" data-line-number="17"><span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Module-trait relationships&quot;</span>))</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-237-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-65-1.png" width="100%" /></p>
 <p>从上图中可以看出<code>weight_g</code>跟一些module相关性非常强.</p>
 <p>Gene relationship to trait and important modules: Gene Significance and Module Membership</p>
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Define variable weight containing the weight column of datTrait</span></a>
@@ -779,7 +779,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb202-13" data-line-number="13">  <span class="dt">cex.axis =</span> <span class="fl">1.2</span>,</a>
 <a class="sourceLine" id="cb202-14" data-line-number="14">  <span class="dt">col =</span> module</a>
 <a class="sourceLine" id="cb202-15" data-line-number="15">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-239-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-67-1.png" width="100%" /></p>
 <p>Summary output of network analysis results</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">names</span>(datExpr))</a></code></pre></div>
 <pre><code>## [1] &quot;MMT00000044&quot; &quot;MMT00000046&quot; &quot;MMT00000051&quot; &quot;MMT00000076&quot; &quot;MMT00000080&quot; &quot;MMT00000102&quot;</code></pre>

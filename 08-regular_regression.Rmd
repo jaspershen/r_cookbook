@@ -1,3 +1,7 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%")
+```
+
 # 正则表达式 {#regularexpression}
 
 正则表达式(regular expression)是文本处理中经常用到的方法.正则表达式描述了一种字符串匹配的模式（pattern）.在R中,正则表达式跟其他语言基本一致,要写成文本的格式,也就是需要使用双引号或者单引号括起来.

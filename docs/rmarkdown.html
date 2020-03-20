@@ -347,7 +347,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>可以参考下面的书,是rmarkdown的作者Yihui Xie写的.</p>
 <p><a href="https://bookdown.org/yihui/rmarkdown/installation.html" class="uri">https://bookdown.org/yihui/rmarkdown/installation.html</a></p>
 <p>也可以查看这个视频简介.</p>
-<iframe src="https://player.vimeo.com/video/178485416?color=428bca&amp;title=0&amp;byline=0&amp;portrait=0" width="640" height="400" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
+<iframe src="https://player.vimeo.com/video/178485416?color=428bca&amp;title=0&amp;byline=0&amp;portrait=0" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
 <p>
 <a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.
@@ -407,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb48-4" data-line-number="4"><span class="bn">color = gear)) + </span></a>
 <a class="sourceLine" id="cb48-5" data-line-number="5"><span class="bn">geom_point() + theme_bw()</span></a>
 <a class="sourceLine" id="cb48-6" data-line-number="6"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-183-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
 <p>而这段代码则不会执行</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="bn">```{r, eval = FALSE}</span></a>
 <a class="sourceLine" id="cb49-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
@@ -457,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb51-5" data-line-number="5"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> gear, cyl)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb51-6" data-line-number="6"><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb51-7" data-line-number="7"><span class="kw">theme_bw</span>()</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-185-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-11-1.png" width="100%" /></p>
 <p>显示代码不显示输出结果:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="bn">```{r, eval = TRUE, include = FALSE}</span></a>
 <a class="sourceLine" id="cb52-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
@@ -554,7 +554,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb56-23" data-line-number="23"><span class="bn">ggsci::scale_color_igv() +</span></a>
 <a class="sourceLine" id="cb56-24" data-line-number="24"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb56-25" data-line-number="25"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-190-1.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-190-2.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-190-3.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-16-1.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-16-2.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-16-3.png" width="100%" /></p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="bn">```{r, eval = TRUE, fig.show = &#39;hold&#39;}</span></a>
 <a class="sourceLine" id="cb57-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
 <a class="sourceLine" id="cb57-3" data-line-number="3"><span class="bn">library(tidyverse)</span></a>
@@ -580,7 +580,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb57-23" data-line-number="23"><span class="bn">ggsci::scale_color_igv() +</span></a>
 <a class="sourceLine" id="cb57-24" data-line-number="24"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb57-25" data-line-number="25"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-191-1.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-191-2.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-191-3.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-17-1.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-17-2.png" width="100%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-17-3.png" width="100%" /></p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="bn">```{r, eval = TRUE, fig.show = &#39;animate&#39;}</span></a>
 <a class="sourceLine" id="cb58-2" data-line-number="2"><span class="bn">library(ggplot2)</span></a>
 <a class="sourceLine" id="cb58-3" data-line-number="3"><span class="bn">library(tidyverse)</span></a>
@@ -607,7 +607,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb58-24" data-line-number="24"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb58-25" data-line-number="25"><span class="bn">```</span></a></code></pre></div>
 <video width="100%"  controls loop>
-<source src="r_cookbook_files/figure-html/unnamed-chunk-192.webm" />
+<source src="r_cookbook_files/figure-html/unnamed-chunk-18.webm" />
 </video>
 <ul>
 <li><p><code>dpi</code>:输出图片dpi,默认72.(dpi * inches = pixels)</p></li>
@@ -653,7 +653,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb60-16" data-line-number="16"><span class="bn">ggsci::scale_color_ucscgb() +</span></a>
 <a class="sourceLine" id="cb60-17" data-line-number="17"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb60-18" data-line-number="18"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-193-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-193-2.png" width="50%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-19-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-19-2.png" width="50%" /></p>
 </div>
 <div id="rmarkdown特有语法" class="section level2">
 <h2><span class="header-section-number">2.8</span> Rmarkdown特有语法</h2>
@@ -664,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb61"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="bn">```{r, eval = TRUE, fig.show = &#39;hold&#39;, out.width = &#39;50%&#39;, fig.align = &#39;center&#39;, fig.cap = &quot;小涛&quot;}</span></a>
 <a class="sourceLine" id="cb61-2" data-line-number="2"><span class="bn">knitr::include_graphics(&#39;images/Screen Shot 2020-03-13 at 10.48.36 PM.png&#39;)</span></a>
 <a class="sourceLine" id="cb61-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-194"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
 <img src="images/wechat_QR.jpg" alt="小涛" width="50%" />
 <p class="caption">
 Figure 2.1: 小涛
@@ -681,7 +681,7 @@ Figure 2.1: 小涛
 <a class="sourceLine" id="cb62-3" data-line-number="3"><span class="bn">```</span></a></code></pre></div>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-195">Table 2.1: </span>A caption
+<span id="tab:unnamed-chunk-21">Table 2.1: </span>A caption
 </caption>
 <thead>
 <tr>
@@ -805,8 +805,8 @@ setosa
 <a class="sourceLine" id="cb63-7" data-line-number="7"><span class="bn">    &#39;Here is the &lt;b&gt;Department of Statistics&lt;/b&gt;, ISU&#39;</span></a>
 <a class="sourceLine" id="cb63-8" data-line-number="8"><span class="bn">  )</span></a>
 <a class="sourceLine" id="cb63-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
-<div id="htmlwidget-b7b710fdeac1b042f682" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b7b710fdeac1b042f682">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[37.432748,-122.176758,"Here is the <b>Snyder lab<\/b>, Stanford University",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[37.432748,-122.176758],17,[]],"limits":{"lat":[37.432748,37.432748],"lng":[-122.176758,-122.176758]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-315c4db4a792a3c059b5" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-315c4db4a792a3c059b5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[37.432748,-122.176758,"Here is the <b>Snyder lab<\/b>, Stanford University",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[37.432748,-122.176758],17,[]],"limits":{"lat":[37.432748,37.432748],"lng":[-122.176758,-122.176758]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="输出格式" class="section level2">

@@ -1,3 +1,8 @@
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, out.width = "100%")
+```
+
+
 # Network分析总结 {#network}
 
 Some _significant_ applications are demonstrated in this chapter.
