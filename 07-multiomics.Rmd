@@ -1,5 +1,5 @@
 ```{r, include = FALSE}
-knitr::opts_chunk$set(out.width = "100%")
+knitr::opts_chunk$set(out.width = "100%", warning = FALSE)
 ```
 
 # 多组学分析 {#multiomics}
@@ -10,29 +10,110 @@ knitr::opts_chunk$set(out.width = "100%")
 
 https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/
 
+## 基础概念
+
+参考这篇文章.
+
+https://www.omicshare.com/class/Public/Upload/video/20170607150629336688.pdf
+
+### 无尺度网络(scale free network)
+
+基因符合无尺度分布
+
+无尺度网络是指大部分节点的degree(与其相连的node)非常少,而小部分的node与非常多的节点相连.如果使用数学语言进行描述:假设某个基因(node)的degree为m,统计网络中所有的基因的m值,然后以m值大小对基因进行分类,n为基因连接数为m的基因,那么m和n成反比.
+
+### 模块(module)和模块特征值
+
+模块是指表达模式相似的一组基因.
+
+模块特征值:将一组基因归为一个模块之后,如果我们想对该模块进行定量化表示,就需要使用一个值来进行表示该模块在所有样品中的表达值.这时候一般是使用该模块中的所有基因进行PCA分析,然后使用PC1(主成分1)来表示.
+
+### 连通性 (Connectivity)
+
+一个基因和其他所有基因的连接程度,一般只在模块内计算,称之为连接度(connectivity)或者degree.对于非权重网络来说,因为edge没有权重,因此有边就是1,没有边就是0,因此degree就是该基因的边的个数.对于权重网络,边是有权重的,因此,每个基因的degree是值所有边的权重之和.
+
+### Hub gene
+
+在一个模块中,degree排名靠前的基因,说明其处于枢纽位置,称之为hug gene.
+
+## WGCNA 介绍
+
+全称为`weighted gene co-expression network analysis`.将研究重点从单个基因转移到模块.计算的两个关键步骤:1)计算基因间的相关性,2)将基因画为模块.
+
+### 计算基因的相关性
+
+1. 计算基因的两两间相关性
+
+$$S_{ij} = |cor(x_i,x_j)|$$
+
+其中$S_{ij}$是基因相关性矩阵.
+
+2. 无尺度化
+
+也就是对原始的相关性矩阵进行变换.构建相邻矩阵.为了知道两个基因表达是否类似,需要设定一个阈值(threshold),只有当基因之间的相关性大于该阈值,才认为他们之间是相似的,比如0.8.否则不相似,因此,相邻矩阵就是描述两个基因之间是否相似的矩阵.如果使用硬阈值,得到的相邻矩阵应该就是0,1矩阵.但是这种办法的缺点就在于怎么确定阈值?
+
+在WGCNA中,使用的是软阈值的办法,软阈值的思路是通过加权函数,将相邻矩阵中的元素连续化:
+
+$$a_{ij} = power(S_{ij}, \beta) = |S_{ij}|^\beta$$
+
+在这里使用的是`power`函数.需要设置soft threshold,这时候需要确定power函数的参数β.如何选择合适的β呢?WGCNA的作者提供了两个标准:
+
+1) 网络更接近无尺度网络; 2) 尽可能保留连通性信息.
+
+β是WGCNA中第一个关键参数,后面在实际例子中进行详解.
+
+3. 基因间表达相关性
+
+上面我们得到了基因间的相邻矩阵,WGCNA为了更准确的表示两个基因间表达的相似性,还引入了另外一个概念,也就是TOM(Topological Overlap Matrix),拓扑重叠矩阵,她代表的是两个基因间相似性等于直接相关+间接相关.
+
+计算公式如下:
+
+$$TOM_{ij} = \frac{\displaystyle \sum_{u}{a_{iu}a_{uj}+a_{ij}}}{min(k_i,k_j)+1-a_{ij}}$$
+
+
+其中$\displaystyle \sum_{u}{a_{iu}a_{uj}}$代表基因i和j.
+
+$a_{ij}$代表基因i和基因j的在相邻矩阵中的值.因此,上式中的分子代表的是基因i和j直接联系加上一阶(基因u)基因联系的和.
+
+而$k_i$代表基因k的degree,也就是基因k和其他所有直接连接的基因的关系之和.
+
+TOM值的取值范围也是0-1.TOM值也就是WGCNA中最后的weight值.
+
+4. 聚类
+
+得到TOM值之后,也就得到了TOM矩阵.然后利用TOM矩阵,就可以对基因进行聚类了.WGCNA中使用的是层级聚类,聚类结束之后,就可以对分支进行剪切区分.得到module.
+
+5. 后续生物学意义挖掘
+
+得到模块之后,可以对模块进行生物学意义的挖掘.
+
+## 使用WGCNA包进行分析
+
 ### Data input and cleaning
 
-1. 首先读取数据
+1. 首先读取数据并清洗
 
-```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+```{r, echo=TRUE, eval=TRUE,cache=TRUE, warning=FALSE}
 library(WGCNA)
+library(tidyverse)
 femData <- 
   read.csv("/Users/shenxt/study/WGCNA_test/LiverFemale3600.csv")
 dim(femData)
-colnames(femData)
+colnames(femData) %>% head()
 ```
 
-可以看到该数据行是基因,列是样品.
+可以看到该数据行是基因,列是样品.一共3600个基因.
 
-然后将基因的描述列去掉.并且将其转置,行是样品,列是基因.
+然后将基因的描述列去掉.并且将其转置,得到的matrix行是样品,列是基因.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
-data_exp0 <- as.data.frame(t(femData[, -c(1:8)]), stringsAsFactors = FALSE)
-names(data_exp0) = femData$substanceBXH
-rownames(data_exp0) = names(femData)[-c(1:8)]
+data_exp0 <-
+  as.data.frame(t(femData[, -c(1:8)]), stringsAsFactors = FALSE)
+colnames(data_exp0) = femData$substanceBXH
+rownames(data_exp0) = colnames(femData)[-c(1:8)]
 ```
 
-然后需要去除掉数据(表达矩阵)中的outlier基因和样品
+然后需要去除掉数据(表达矩阵)中的outlier基因和样品.使用的是`goodSamplesGenes()`函数.
 
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
@@ -40,47 +121,31 @@ gsg <- goodSamplesGenes(data_exp0, verbose = 3)
 gsg$allOK
 ```
 
-该函数用来检查数据中的基因是否符合要求,如果`allOK`为TRUE,则代表通过检查,如果不是TRUE,则需要手动去除基因和样品:
+该函数用来检查数据中的基因是否符合要求,返回结果是一个list.如果`allOK`为TRUE,则代表通过检查,如果不是TRUE,则需要手动去除基因和样品:
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
-if (!gsg$allOK)
-{
-  # Optionally, print the gene and sample names that were removed:
-  if (sum(!gsg$goodGenes) > 0)
-    printFlush(paste("Removing genes:", paste(names(data_exp0)[!gsg$goodGenes], collapse = ", ")))
-  
-  if (sum(!gsg$goodSamples) > 0)
-    printFlush(paste("Removing samples:", paste(rownames(data_exp0)[!gsg$goodSamples], collapse = ", ")))
-  
+if (!gsg$allOK){
   # Remove the offending genes and samples from the data:
   data_exp0 <- data_exp0[gsg$goodSamples, gsg$goodGenes]
 }
 ```
 
-现在下面对样品进行聚类,然后观察有哪些明显的outlier samples.
+我们可以使用数据对样品进行聚类,然后观察有哪些明显的outlier samples.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 sampleTree <- hclust(dist(data_exp0), method = "average")
-# Plot the sample tree: Open a graphic output window of size 12 by 9 inches
-# The user should change the dimensions if the window is too large or too small.
-sizeGrWindow(12, 9)
-#pdf(file = "Plots/sampleClustering.pdf", width = 12, height = 9);
-par(cex = 0.6)
-par(mar = c(0, 4, 2, 0))
 plot(
   sampleTree,
   main = "Sample clustering to detect outliers",
   sub = "",
   xlab = "",
-  cex.lab = 1.5,
-  cex.axis = 1.5,
-  cex.main = 2
+  cex.lab = 1,
+  cex.axis = 1,
+  cex.main = 1
 )
-
-# Plot a line to show the cut
-abline(h = 15, col = "red")
 ```
 
+我们可以设定剪枝的阈值,比如我们设置为15,然后使用`cutreeStatic()`函数对样品进行分类.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Determine cluster under the line
@@ -88,24 +153,24 @@ clust = cutreeStatic(sampleTree, cutHeight = 15, minSize = 10)
 table(clust)
 ```
 
-可以明显的看到一个outlier sample.可以手动删除,也可以自动的办法.
-
-
+可以明显的看到一个outlier sample(0).可以手动删除,也可以自动的办法.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # clust 1 contains the samples we want to keep.
-keepSamples = (clust == 1)
+keepSamples = which(clust == 1)
 datExpr = data_exp0[keepSamples,]
 nGenes = ncol(datExpr)
 nSamples = nrow(datExpr)
+nGenes
+nSamples
 ```
 
-`datExpr`就是我们最终用来进行network分析的表达数据.
+`datExpr`就是我们最终用来进行network分析的表达数据.一共3600个基因,134个样品.
 
-下面我们需要读取clinical data.
+下面我们需要读取clinical data.后续需要使用clinical data和模块数据做分析.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
-traitData = read.csv("/Users/shenxt/study/WGCNA_test/ClinicalTraits.csv")
+traitData <- read.csv("/Users/shenxt/study/WGCNA_test/ClinicalTraits.csv")
 dim(traitData)
 names(traitData)
 # remove columns that hold information we do not need.
@@ -124,20 +189,19 @@ collectGarbage()
 这时候我们得到的`datTraits`就是clinicaldata,其中行为样品,列为变量.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
-rownames(datTraits) == rownames(datExpr)
+sum(rownames(datTraits) == rownames(datExpr))
 ```
 
 下面我们来看看样品的临床数据的热图和样品的基因的聚类.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Re-cluster samples
-sampleTree2 = hclust(dist(datExpr), method = "average")
+sampleTree2 <- hclust(dist(datExpr), method = "average")
 # Convert traits to a color representation: white means low, red means high, grey means missing entry
 traitColors = numbers2colors(datTraits, signed = FALSE)
-
 # Plot the sample dendrogram and the colors underneath.
-plotDendroAndColors(sampleTree2,
-                    traitColors,
+plotDendroAndColors(dendro = sampleTree2,
+                    colors = traitColors,
                     groupLabels = names(datTraits),
                     main = "Sample dendrogram and trait heatmap")
 ```
@@ -164,9 +228,9 @@ lnames
 
 2. Automatic network construction and module detection
 
-首先需要选择合适的`soft-thresholding power`
+WGCNA的第一个重要参数,就是构建相邻矩阵是的power函数的参数β.首先需要选择合适的`soft-thresholding power`
 
-可以使用`pickSoftThreshold()`函数.一般需要选择一系列candidate powers,然后根据结果进行选择.
+在WGCNA中,使用`pickSoftThreshold()`函数.一般需要选择一系列candidate powers,然后根据结果进行选择.
 
 > 注意,这段代码在Rstudio中不能运行,运行出错,需要到R自带IDE或者终端中运行.
 
@@ -178,56 +242,42 @@ sft = pickSoftThreshold(datExpr, powerVector = powers, verbose = 5)
 save(sft, file = "/Users/shenxt/study/WGCNA_test/sft")
 ```
 
-```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE, out.width="50%", fig.show="hold"}
 load("/Users/shenxt/study/WGCNA_test/sft")
 powers = c(c(1:10), seq(from = 12, to = 20, by = 2))
-# Plot the results:
-sizeGrWindow(9, 5)
-par(mfrow = c(1, 2))
-
-cex1 = 0.9
-
 # Scale-free topology fit index as a function of the soft-thresholding power
-plot(
-  sft$fitIndices[, 1],
-  -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
-  xlab = "Soft Threshold (power)",
-  ylab = "Scale Free Topology Model Fit,signed R^2",
-  type = "n",
-  main = paste("Scale independence")
-)
-
-text(
-  sft$fitIndices[, 1],
-  -sign(sft$fitIndices[, 3]) * sft$fitIndices[, 2],
-  labels = powers,
-  cex = cex1,
-  col = "red"
-)
-
-# this line corresponds to using an R^2 cut-off of h
-abline(h = 0.90, col = "red")
+sft$fitIndices %>% 
+  ggplot(aes(x = Power, y = -sign(slope) * SFT.R.sq)) +
+  geom_hline(yintercept = 0.9, col = "red") +
+  geom_point(size = 2, shape = 16) +
+  ggrepel::geom_text_repel(aes(x = Power, y = -sign(slope) * SFT.R.sq, label = Power),
+                           color = "red") +
+  labs(x = "Soft Threshold (power)", 
+       y = "Scale Free Topology Model Fit,signed R^2") +
+  theme_bw() +
+  theme(axis.title = element_text(size = 15), 
+        axis.text = element_text(size = 13))
 # Mean connectivity as a function of the soft-thresholding power
-plot(
-  sft$fitIndices[, 1],
-  sft$fitIndices[, 5],
-  xlab = "Soft Threshold (power)",
-  ylab = "Mean Connectivity",
-  type = "n",
-  main = paste("Mean connectivity")
-)
-text(
-  sft$fitIndices[, 1],
-  sft$fitIndices[, 5],
-  labels = powers,
-  cex = cex1,
-  col = "red"
-)
+sft$fitIndices %>% 
+  ggplot(aes(x = Power, y = mean.k.)) +
+  geom_point(size = 2, shape = 16) +
+  ggrepel::geom_text_repel(aes(x = Power, y = mean.k., label = Power),
+                           color = "red") +
+  labs(x = "Soft Threshold (power)", 
+       y = "Mean Connectivity") +
+  theme_bw() +
+  theme(axis.title = element_text(size = 15), 
+        axis.text = element_text(size = 13))
+
 ```
+
+左边图显示的是power和scale free topology fit的关系,右图显示的是power和mean connectivity的关系,一般选择能够使scale free topology fit达到最大时的最小的power.
 
 这里我们选择6.
 
-然后使用` blockwiseModules()`函数就可以得到modules.
+确定了power(β)参数之后,后面使用` blockwiseModules()`函数就可以得到modules.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 net <- blockwiseModules(
@@ -245,15 +295,26 @@ net <- blockwiseModules(
 )
 ```
 
+`dataExpr`是基因表达数据,行是样品,列基因.
+
 在这里我们选择了soft thresholding power 6, 然后最小module size设置为30.`mergeCutHeight`用来控制merge module.
+
+`maxBlockSize`: 是指最大的module的基因数量,默认为5000.
+
+`net`是最终的分类结果.
+
+
 
 下面看一下分类结果.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+names(net)
 table(net$colors)
 ```
 
-代表这里面有18个module.标记为0的基因代表没有归为任何一类module.
+使用颜色来表示module,代表这里面有18个module.标记为0的基因代表没有归为任何一类module.
+
+下面我们把module画出来.
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Convert labels to colors for plotting
@@ -279,7 +340,7 @@ MEs = net$MEs
 
 geneTree = net$dendrograms[[1]]
 
-save(MEs, moduleLabels, moduleColors, geneTree, 
+save(MEs, moduleLabels, moduleColors, geneTree, net,
      file = "/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData")
 ```
 
@@ -298,23 +359,46 @@ lnames
 
 然后我们想要找到和clinical data关系非常紧密的module.对于每个module的来说,都有一个eigengene,也就是其PCA分析的第一主成分,用来代表该module在每个样品中的含量.
 
+ 这个矩阵除了可以从最终的结果`net`中直接得到,还可以使用下面的函数`moduleEigengenes`得到.
+ 
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+# Recalculate MEs with color labels
+MEs0 = moduleEigengenes(expr = datExpr, colors = moduleColors)$eigengenes
+MEs = orderMEs(MEs0)
+```
+
+我们也可以把这个数据和从`net`中直接得到的对比看一下.
+
+```{r, echo=TRUE, eval=TRUE,cache=TRUE}
+test <- net$MEs
+data.frame(colnames(test), colnames(MEs), stringsAsFactors = FALSE) %>% 
+  dplyr::distinct() %>% 
+  dplyr::arrange()
+
+data.frame(moduleColors, net$colors, stringsAsFactors = FALSE) %>% 
+  dplyr::distinct() %>% 
+  dplyr::arrange()
+
+```
+
+然后我们使用`WGCNA`中的`cor`函数计算module和clinical data的相关性.
+
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Define numbers of genes and samples
 nGenes = ncol(datExpr)
 nSamples = nrow(datExpr)
-# Recalculate MEs with color labels
-MEs0 = moduleEigengenes(datExpr, moduleColors)$eigengenes
-MEs = orderMEs(MEs0)
-moduleTraitCor = cor(MEs, datTraits, use = "p")
+moduleTraitCor = WGCNA::cor(MEs, datTraits, use = "p")
 moduleTraitPvalue = corPvalueStudent(moduleTraitCor, nSamples)
 ```
+
+下面对correlation进行可视化:
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Will display correlations and their p-values
 textMatrix = paste(signif(moduleTraitCor, 2), "\n(",
-signif(moduleTraitPvalue, 1), ")", sep = "");
+signif(moduleTraitPvalue, 1), ")", sep = "")
 dim(textMatrix) = dim(moduleTraitCor)
-par(mar = c(6, 8.5, 3, 3));
+par(mar = c(6, 8.5, 3, 3))
 # Display the correlation values within a heatmap plot
 labeledHeatmap(Matrix = moduleTraitCor,
 xLabels = names(datTraits),
@@ -322,29 +406,34 @@ yLabels = names(MEs),
 ySymbols = names(MEs),
 colorLabels = FALSE,
 colors = greenWhiteRed(50),
-textMatrix = textMatrix,
+# textMatrix = textMatrix,
 setStdMargins = FALSE,
 cex.text = 0.5,
 zlim = c(-1,1),
 main = paste("Module-trait relationships"))
 ```
 
+从上图中可以看出`weight_g`跟一些module相关性非常强.
+
 Gene relationship to trait and important modules: Gene Significance and Module Membership
 
 ```{r, echo=TRUE, eval=TRUE,cache=TRUE}
 # Define variable weight containing the weight column of datTrait
 weight = as.data.frame(datTraits$weight_g)
-names(weight) = "weight"
+colnames(weight) = "weight"
 # names (colors) of the modules
 modNames = substring(names(MEs), 3)
-geneModuleMembership = as.data.frame(cor(datExpr, MEs, use = "p"))
+##计算每个基因和module的相关性
+geneModuleMembership = as.data.frame(WGCNA::cor(datExpr, MEs, use = "p"))
 MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))
-names(geneModuleMembership) = paste("MM", modNames, sep="")
-names(MMPvalue) = paste("p.MM", modNames, sep="")
+names(geneModuleMembership) = paste("MM", modNames, sep = "")
+names(MMPvalue) = paste("p.MM", modNames, sep = "")
+##计算基因和weight的相关性
 geneTraitSignificance = as.data.frame(cor(datExpr, weight, use = "p"))
 GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples))
-names(geneTraitSignificance) = paste("GS.", names(weight), sep="")
-names(GSPvalue) = paste("p.GS.", names(weight), sep="")
+
+names(geneTraitSignificance) = paste("GS.", names(weight), sep = "")
+names(GSPvalue) = paste("p.GS.", names(weight), sep = "")
 ```
 
 Intramodular analysis: identifying genes with high GS and MM
@@ -353,13 +442,18 @@ Intramodular analysis: identifying genes with high GS and MM
 module = "brown"
 column = match(module, modNames)
 moduleGenes = moduleColors==module
-par(mfrow = c(1,1))
-verboseScatterplot(abs(geneModuleMembership[moduleGenes, column]),
-                   abs(geneTraitSignificance[moduleGenes, 1]),
-xlab = paste("Module Membership in", module, "module"),
-ylab = "Gene significance for body weight",
-main = paste("Module membership vs. gene significance\n"),
-cex.main = 1.2, cex.lab = 1.2, cex.axis = 1.2, col = module)
+par(mfrow = c(1, 1))
+verboseScatterplot(
+  abs(geneModuleMembership[moduleGenes, column]),
+  abs(geneTraitSignificance[moduleGenes, 1]),
+  xlab = paste("Module Membership in", module, "module"),
+  ylab = "Gene significance for body weight",
+  main = paste("Module membership vs. gene significance\n"),
+  cex.main = 1.2,
+  cex.lab = 1.2,
+  cex.axis = 1.2,
+  col = module
+)
 ```
 
 Summary output of network analysis results
@@ -410,7 +504,7 @@ write.csv(geneInfo, file = "/Users/shenxt/study/WGCNA_test/geneInfo.csv")
 
 在前文中,鉴定出了几个和weight相关的module.
 
-
+一般需要进行GO注释或者KEGG pathway分析.
 
 ---
 

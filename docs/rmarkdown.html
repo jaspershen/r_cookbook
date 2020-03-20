@@ -273,11 +273,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="network.html"><a href="network.html#example-two"><i class="fa fa-check"></i><b>6.2</b> Example two</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="multiomics.html"><a href="multiomics.html"><i class="fa fa-check"></i><b>7</b> 多组学分析</a><ul>
-<li class="chapter" data-level="7.1" data-path="multiomics.html"><a href="multiomics.html#wgcna"><i class="fa fa-check"></i><b>7.1</b> WGCNA</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.1.1</b> Data input and cleaning</a></li>
-<li class="chapter" data-level="7.1.2" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.1.2</b> Network analysis of liver expression data in female mice</a></li>
-<li class="chapter" data-level="7.1.3" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.1.3</b> Relating modules to external information and identifying important</a></li>
-<li class="chapter" data-level="7.1.4" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.1.4</b> 对module进行分析</a></li>
+<li class="chapter" data-level="7.1" data-path="multiomics.html"><a href="multiomics.html#wgcna"><i class="fa fa-check"></i><b>7.1</b> WGCNA</a></li>
+<li class="chapter" data-level="7.2" data-path="multiomics.html"><a href="multiomics.html#基础概念"><i class="fa fa-check"></i><b>7.2</b> 基础概念</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="multiomics.html"><a href="multiomics.html#无尺度网络scale-free-network"><i class="fa fa-check"></i><b>7.2.1</b> 无尺度网络(scale free network)</a></li>
+<li class="chapter" data-level="7.2.2" data-path="multiomics.html"><a href="multiomics.html#模块module和模块特征值"><i class="fa fa-check"></i><b>7.2.2</b> 模块(module)和模块特征值</a></li>
+<li class="chapter" data-level="7.2.3" data-path="multiomics.html"><a href="multiomics.html#连通性-connectivity"><i class="fa fa-check"></i><b>7.2.3</b> 连通性 (Connectivity)</a></li>
+<li class="chapter" data-level="7.2.4" data-path="multiomics.html"><a href="multiomics.html#hub-gene"><i class="fa fa-check"></i><b>7.2.4</b> Hub gene</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="multiomics.html"><a href="multiomics.html#wgcna-介绍"><i class="fa fa-check"></i><b>7.3</b> WGCNA 介绍</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="multiomics.html"><a href="multiomics.html#计算基因的相关性"><i class="fa fa-check"></i><b>7.3.1</b> 计算基因的相关性</a></li>
+<li class="chapter" data-level="7.3.2" data-path="multiomics.html"><a href="multiomics.html#data-input-and-cleaning"><i class="fa fa-check"></i><b>7.3.2</b> Data input and cleaning</a></li>
+<li class="chapter" data-level="7.3.3" data-path="multiomics.html"><a href="multiomics.html#network-analysis-of-liver-expression-data-in-female-mice"><i class="fa fa-check"></i><b>7.3.3</b> Network analysis of liver expression data in female mice</a></li>
+<li class="chapter" data-level="7.3.4" data-path="multiomics.html"><a href="multiomics.html#relating-modules-to-external-information-and-identifying-important"><i class="fa fa-check"></i><b>7.3.4</b> Relating modules to external information and identifying important</a></li>
+<li class="chapter" data-level="7.3.5" data-path="multiomics.html"><a href="multiomics.html#对module进行分析"><i class="fa fa-check"></i><b>7.3.5</b> 对module进行分析</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="regularexpression.html"><a href="regularexpression.html"><i class="fa fa-check"></i><b>8</b> 正则表达式</a><ul>
@@ -729,8 +737,8 @@ Figure 2.1: 小涛
 <a class="sourceLine" id="cb63-7" data-line-number="7"><span class="bn">    &#39;Here is the &lt;b&gt;Department of Statistics&lt;/b&gt;, ISU&#39;</span></a>
 <a class="sourceLine" id="cb63-8" data-line-number="8"><span class="bn">  )</span></a>
 <a class="sourceLine" id="cb63-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
-<div id="htmlwidget-2d179e55131e2653d484" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2d179e55131e2653d484">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[37.432748,-122.176758,"Here is the <b>Snyder lab<\/b>, Stanford University",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[37.432748,-122.176758],17,[]],"limits":{"lat":[37.432748,37.432748],"lng":[-122.176758,-122.176758]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-957ad3803116c1380145" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-957ad3803116c1380145">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addPopups","args":[37.432748,-122.176758,"Here is the <b>Snyder lab<\/b>, Stanford University",null,null,{"maxWidth":300,"minWidth":50,"autoPan":true,"keepInView":false,"closeButton":true,"className":""}]}],"setView":[[37.432748,-122.176758],17,[]],"limits":{"lat":[37.432748,37.432748],"lng":[-122.176758,-122.176758]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="输出格式" class="section level2">

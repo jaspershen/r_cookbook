@@ -71,6 +71,30 @@ ggplot(mpg, aes(displ, hwy)) +
   facet_wrap(~class)
 ```
 
+### 图形的图层(geom)
+
+图层(geom)就是用来决定变量如何展示在图像上的办法.比如最常见的最简单的点图的图层就是`geom_point()`.
+
+* `geom_smooth`: 对数据进行拟合.
+
+* `geom_boxplot`:箱形图.
+
+* `geom_histogram`:对连续变量分布进行描述.
+
+* `geom_bar`:barplot.
+
+1. 在图中添加smooth曲线
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+
+
+
+
 ---
 
 <div id="disqus_thread"></div>
