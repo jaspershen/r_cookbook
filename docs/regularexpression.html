@@ -271,6 +271,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="ggplot2.html"><a href="ggplot2.html#单独几何对象individual-geoms"><i class="fa fa-check"></i><b>5.3</b> 单独几何对象(individual geoms)</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="ggplot2.html"><a href="ggplot2.html#基础图形"><i class="fa fa-check"></i><b>5.3.1</b> 基础图形</a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="ggplot2.html"><a href="ggplot2.html#复杂几何对象collective-geoms"><i class="fa fa-check"></i><b>5.4</b> 复杂几何对象(collective geoms)</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="ggplot2.html"><a href="ggplot2.html#多个组一个美学属性aesthetic"><i class="fa fa-check"></i><b>5.4.1</b> 多个组一个美学属性(aesthetic)</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ggplot2.html"><a href="ggplot2.html#多组并且多个图层layer"><i class="fa fa-check"></i><b>5.4.2</b> 多组并且多个图层(layer)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="ggplot2.html"><a href="ggplot2.html#覆盖默认分组"><i class="fa fa-check"></i><b>5.5</b> 覆盖默认分组</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="ggplot2.html"><a href="ggplot2.html#将美学属性match到图形对象上"><i class="fa fa-check"></i><b>5.5.1</b> 将美学属性match到图形对象上</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
 <li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
@@ -511,7 +518,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>以固定要求开头的正则表达式是<code>^</code>,比如我们要查找那些以字母a开头的字符串,就可以写作:</p>
 <pre class="markdonw"><code>&#39;^a&#39;</code></pre>
 <p>在R语言中:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;^a&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ade&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;^a&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ade&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] 1 4</code></pre>
 </div>
 <div id="以固定要求结尾" class="section level3">
@@ -519,7 +526,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>以固定要求结尾的正则表达式是<code>$</code>,比如我们要查找那些以字母a结尾的字符串,就可以写作:</p>
 <pre class="markdonw"><code>&#39;a$&#39;</code></pre>
 <p>在R语言中:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;a$&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ada&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;a$&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ada&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
 </div>
@@ -596,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.6</span> 整体匹配 (groups)</h2>
 <p>如果需要将某个对象最为整体进行匹配,一般是使用小括号将其括起来.</p>
 <p>比如:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb220-1" data-line-number="1">(ab|d)e</a></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb234-1" data-line-number="1">(ab|d)e</a></code></pre></div>
 <p>小括号中就代表一个整体,也即是<code>ab</code>或者<code>d</code>然后后面带着<code>e</code>.</p>
 </div>
 <div id="反义" class="section level2">

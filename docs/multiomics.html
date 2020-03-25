@@ -271,6 +271,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="ggplot2.html"><a href="ggplot2.html#单独几何对象individual-geoms"><i class="fa fa-check"></i><b>5.3</b> 单独几何对象(individual geoms)</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="ggplot2.html"><a href="ggplot2.html#基础图形"><i class="fa fa-check"></i><b>5.3.1</b> 基础图形</a></li>
 </ul></li>
+<li class="chapter" data-level="5.4" data-path="ggplot2.html"><a href="ggplot2.html#复杂几何对象collective-geoms"><i class="fa fa-check"></i><b>5.4</b> 复杂几何对象(collective geoms)</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="ggplot2.html"><a href="ggplot2.html#多个组一个美学属性aesthetic"><i class="fa fa-check"></i><b>5.4.1</b> 多个组一个美学属性(aesthetic)</a></li>
+<li class="chapter" data-level="5.4.2" data-path="ggplot2.html"><a href="ggplot2.html#多组并且多个图层layer"><i class="fa fa-check"></i><b>5.4.2</b> 多组并且多个图层(layer)</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="ggplot2.html"><a href="ggplot2.html#覆盖默认分组"><i class="fa fa-check"></i><b>5.5</b> 覆盖默认分组</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="ggplot2.html"><a href="ggplot2.html#将美学属性match到图形对象上"><i class="fa fa-check"></i><b>5.5.1</b> 将美学属性match到图形对象上</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="network.html"><a href="network.html"><i class="fa fa-check"></i><b>6</b> Network分析总结</a><ul>
 <li class="chapter" data-level="6.1" data-path="network.html"><a href="network.html#example-one"><i class="fa fa-check"></i><b>6.1</b> Example one</a></li>
@@ -419,66 +426,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>首先读取数据并清洗</li>
 </ol>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" data-line-number="1"><span class="kw">library</span>(WGCNA)</a>
-<a class="sourceLine" id="cb146-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb146-3" data-line-number="3">femData &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb146-4" data-line-number="4"><span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/LiverFemale3600.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb146-5" data-line-number="5"><span class="kw">dim</span>(femData)</a></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" data-line-number="1"><span class="kw">library</span>(WGCNA)</a>
+<a class="sourceLine" id="cb160-2" data-line-number="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb160-3" data-line-number="3">femData &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb160-4" data-line-number="4"><span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/LiverFemale3600.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb160-5" data-line-number="5"><span class="kw">dim</span>(femData)</a></code></pre></div>
 <pre><code>## [1] 3600  143</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="kw">colnames</span>(femData) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" data-line-number="1"><span class="kw">colnames</span>(femData) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;substanceBXH&quot;   &quot;gene_symbol&quot;    &quot;LocusLinkID&quot;    &quot;ProteomeID&quot;     &quot;cytogeneticLoc&quot; &quot;CHROMOSOME&quot;</code></pre>
 <p>可以看到该数据行是基因,列是样品.一共3600个基因.</p>
 <p>然后将基因的描述列去掉.并且将其转置,得到的matrix行是样品,列是基因.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1">data_exp0 &lt;-</a>
-<a class="sourceLine" id="cb150-2" data-line-number="2"><span class="st">  </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(femData[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>)]), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb150-3" data-line-number="3"><span class="kw">colnames</span>(data_exp0) =<span class="st"> </span>femData<span class="op">$</span>substanceBXH</a>
-<a class="sourceLine" id="cb150-4" data-line-number="4"><span class="kw">rownames</span>(data_exp0) =<span class="st"> </span><span class="kw">colnames</span>(femData)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" data-line-number="1">data_exp0 &lt;-</a>
+<a class="sourceLine" id="cb164-2" data-line-number="2"><span class="st">  </span><span class="kw">as.data.frame</span>(<span class="kw">t</span>(femData[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>)]), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb164-3" data-line-number="3"><span class="kw">colnames</span>(data_exp0) =<span class="st"> </span>femData<span class="op">$</span>substanceBXH</a>
+<a class="sourceLine" id="cb164-4" data-line-number="4"><span class="kw">rownames</span>(data_exp0) =<span class="st"> </span><span class="kw">colnames</span>(femData)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>)]</a></code></pre></div>
 <p>然后需要去除掉数据(表达矩阵)中的outlier基因和样品.使用的是<code>goodSamplesGenes()</code>函数.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">gsg &lt;-<span class="st"> </span><span class="kw">goodSamplesGenes</span>(data_exp0, <span class="dt">verbose =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">gsg &lt;-<span class="st"> </span><span class="kw">goodSamplesGenes</span>(data_exp0, <span class="dt">verbose =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>##  Flagging genes and samples with too many missing values...
 ##   ..step 1</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">gsg<span class="op">$</span>allOK</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1">gsg<span class="op">$</span>allOK</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>该函数用来检查数据中的基因是否符合要求,返回结果是一个list.如果<code>allOK</code>为TRUE,则代表通过检查,如果不是TRUE,则需要手动去除基因和样品:</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span>gsg<span class="op">$</span>allOK){</a>
-<a class="sourceLine" id="cb155-2" data-line-number="2">  <span class="co"># Remove the offending genes and samples from the data:</span></a>
-<a class="sourceLine" id="cb155-3" data-line-number="3">  data_exp0 &lt;-<span class="st"> </span>data_exp0[gsg<span class="op">$</span>goodSamples, gsg<span class="op">$</span>goodGenes]</a>
-<a class="sourceLine" id="cb155-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span>gsg<span class="op">$</span>allOK){</a>
+<a class="sourceLine" id="cb169-2" data-line-number="2">  <span class="co"># Remove the offending genes and samples from the data:</span></a>
+<a class="sourceLine" id="cb169-3" data-line-number="3">  data_exp0 &lt;-<span class="st"> </span>data_exp0[gsg<span class="op">$</span>goodSamples, gsg<span class="op">$</span>goodGenes]</a>
+<a class="sourceLine" id="cb169-4" data-line-number="4">}</a></code></pre></div>
 <p>我们可以使用数据对样品进行聚类,然后观察有哪些明显的outlier samples.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" data-line-number="1">sampleTree &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(data_exp0), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
-<a class="sourceLine" id="cb156-2" data-line-number="2"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb156-3" data-line-number="3">  sampleTree,</a>
-<a class="sourceLine" id="cb156-4" data-line-number="4">  <span class="dt">main =</span> <span class="st">&quot;Sample clustering to detect outliers&quot;</span>,</a>
-<a class="sourceLine" id="cb156-5" data-line-number="5">  <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb156-6" data-line-number="6">  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb156-7" data-line-number="7">  <span class="dt">cex.lab =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb156-8" data-line-number="8">  <span class="dt">cex.axis =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb156-9" data-line-number="9">  <span class="dt">cex.main =</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb156-10" data-line-number="10">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-47-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" data-line-number="1">sampleTree &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(data_exp0), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
+<a class="sourceLine" id="cb170-2" data-line-number="2"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb170-3" data-line-number="3">  sampleTree,</a>
+<a class="sourceLine" id="cb170-4" data-line-number="4">  <span class="dt">main =</span> <span class="st">&quot;Sample clustering to detect outliers&quot;</span>,</a>
+<a class="sourceLine" id="cb170-5" data-line-number="5">  <span class="dt">sub =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb170-6" data-line-number="6">  <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb170-7" data-line-number="7">  <span class="dt">cex.lab =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb170-8" data-line-number="8">  <span class="dt">cex.axis =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb170-9" data-line-number="9">  <span class="dt">cex.main =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb170-10" data-line-number="10">)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-80-1.png" width="100%" /></p>
 <p>我们可以设定剪枝的阈值,比如我们设置为15,然后使用<code>cutreeStatic()</code>函数对样品进行分类.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="co"># Determine cluster under the line</span></a>
-<a class="sourceLine" id="cb157-2" data-line-number="2">clust =<span class="st"> </span><span class="kw">cutreeStatic</span>(sampleTree, <span class="dt">cutHeight =</span> <span class="dv">15</span>, <span class="dt">minSize =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="kw">table</span>(clust)</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="co"># Determine cluster under the line</span></a>
+<a class="sourceLine" id="cb171-2" data-line-number="2">clust =<span class="st"> </span><span class="kw">cutreeStatic</span>(sampleTree, <span class="dt">cutHeight =</span> <span class="dv">15</span>, <span class="dt">minSize =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb171-3" data-line-number="3"><span class="kw">table</span>(clust)</a></code></pre></div>
 <pre><code>## clust
 ##   0   1 
 ##   1 134</code></pre>
 <p>可以明显的看到一个outlier sample(0).可以手动删除,也可以自动的办法.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="co"># clust 1 contains the samples we want to keep.</span></a>
-<a class="sourceLine" id="cb159-2" data-line-number="2">keepSamples =<span class="st"> </span><span class="kw">which</span>(clust <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb159-3" data-line-number="3">datExpr =<span class="st"> </span>data_exp0[keepSamples,]</a>
-<a class="sourceLine" id="cb159-4" data-line-number="4">nGenes =<span class="st"> </span><span class="kw">ncol</span>(datExpr)</a>
-<a class="sourceLine" id="cb159-5" data-line-number="5">nSamples =<span class="st"> </span><span class="kw">nrow</span>(datExpr)</a>
-<a class="sourceLine" id="cb159-6" data-line-number="6">nGenes</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1"><span class="co"># clust 1 contains the samples we want to keep.</span></a>
+<a class="sourceLine" id="cb173-2" data-line-number="2">keepSamples =<span class="st"> </span><span class="kw">which</span>(clust <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb173-3" data-line-number="3">datExpr =<span class="st"> </span>data_exp0[keepSamples,]</a>
+<a class="sourceLine" id="cb173-4" data-line-number="4">nGenes =<span class="st"> </span><span class="kw">ncol</span>(datExpr)</a>
+<a class="sourceLine" id="cb173-5" data-line-number="5">nSamples =<span class="st"> </span><span class="kw">nrow</span>(datExpr)</a>
+<a class="sourceLine" id="cb173-6" data-line-number="6">nGenes</a></code></pre></div>
 <pre><code>## [1] 3600</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">nSamples</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">nSamples</a></code></pre></div>
 <pre><code>## [1] 134</code></pre>
 <p><code>datExpr</code>就是我们最终用来进行network分析的表达数据.一共3600个基因,134个样品.</p>
 <p>下面我们需要读取clinical data.后续需要使用clinical data和模块数据做分析.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">traitData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/ClinicalTraits.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="kw">dim</span>(traitData)</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1">traitData &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/ClinicalTraits.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb177-2" data-line-number="2"><span class="kw">dim</span>(traitData)</a></code></pre></div>
 <pre><code>## [1] 361  38</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1"><span class="kw">names</span>(traitData)</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" data-line-number="1"><span class="kw">names</span>(traitData)</a></code></pre></div>
 <pre><code>##  [1] &quot;X&quot;                  &quot;Mice&quot;               &quot;Number&quot;             &quot;Mouse_ID&quot;           &quot;Strain&quot;            
 ##  [6] &quot;sex&quot;                &quot;DOB&quot;                &quot;parents&quot;            &quot;Western_Diet&quot;       &quot;Sac_Date&quot;          
 ## [11] &quot;weight_g&quot;           &quot;length_cm&quot;          &quot;ab_fat&quot;             &quot;other_fat&quot;          &quot;total_fat&quot;         
@@ -487,40 +494,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [26] &quot;Insulin_ug_l&quot;       &quot;Glucose_Insulin&quot;    &quot;Leptin_pg_ml&quot;       &quot;Adiponectin&quot;        &quot;Aortic.lesions&quot;    
 ## [31] &quot;Note&quot;               &quot;Aneurysm&quot;           &quot;Aortic_cal_M&quot;       &quot;Aortic_cal_L&quot;       &quot;CoronaryArtery_Cal&quot;
 ## [36] &quot;Myocardial_cal&quot;     &quot;BMD_all_limbs&quot;      &quot;BMD_femurs_only&quot;</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1"><span class="co"># remove columns that hold information we do not need.</span></a>
-<a class="sourceLine" id="cb167-2" data-line-number="2">allTraits =<span class="st"> </span>traitData[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">31</span>, <span class="dv">16</span>)]</a>
-<a class="sourceLine" id="cb167-3" data-line-number="3">allTraits =<span class="st"> </span>allTraits[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">36</span>)]</a>
-<a class="sourceLine" id="cb167-4" data-line-number="4"><span class="kw">dim</span>(allTraits)</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="co"># remove columns that hold information we do not need.</span></a>
+<a class="sourceLine" id="cb181-2" data-line-number="2">allTraits =<span class="st"> </span>traitData[, <span class="op">-</span><span class="kw">c</span>(<span class="dv">31</span>, <span class="dv">16</span>)]</a>
+<a class="sourceLine" id="cb181-3" data-line-number="3">allTraits =<span class="st"> </span>allTraits[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">36</span>)]</a>
+<a class="sourceLine" id="cb181-4" data-line-number="4"><span class="kw">dim</span>(allTraits)</a></code></pre></div>
 <pre><code>## [1] 361  27</code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1"><span class="kw">names</span>(allTraits)</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">names</span>(allTraits)</a></code></pre></div>
 <pre><code>##  [1] &quot;Mice&quot;               &quot;weight_g&quot;           &quot;length_cm&quot;          &quot;ab_fat&quot;             &quot;other_fat&quot;         
 ##  [6] &quot;total_fat&quot;          &quot;X100xfat_weight&quot;    &quot;Trigly&quot;             &quot;Total_Chol&quot;         &quot;HDL_Chol&quot;          
 ## [11] &quot;UC&quot;                 &quot;FFA&quot;                &quot;Glucose&quot;            &quot;LDL_plus_VLDL&quot;      &quot;MCP_1_phys&quot;        
 ## [16] &quot;Insulin_ug_l&quot;       &quot;Glucose_Insulin&quot;    &quot;Leptin_pg_ml&quot;       &quot;Adiponectin&quot;        &quot;Aortic.lesions&quot;    
 ## [21] &quot;Aneurysm&quot;           &quot;Aortic_cal_M&quot;       &quot;Aortic_cal_L&quot;       &quot;CoronaryArtery_Cal&quot; &quot;Myocardial_cal&quot;    
 ## [26] &quot;BMD_all_limbs&quot;      &quot;BMD_femurs_only&quot;</code></pre>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1"><span class="co"># Form a data frame analogous to expression data that will hold the clinical traits.</span></a>
-<a class="sourceLine" id="cb171-2" data-line-number="2">femaleSamples =<span class="st"> </span><span class="kw">rownames</span>(datExpr)</a>
-<a class="sourceLine" id="cb171-3" data-line-number="3">traitRows =<span class="st"> </span><span class="kw">match</span>(femaleSamples, allTraits<span class="op">$</span>Mice)</a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">datTraits =<span class="st"> </span>allTraits[traitRows, <span class="dv">-1</span>]</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5"><span class="kw">rownames</span>(datTraits) =<span class="st"> </span>allTraits[traitRows, <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb171-6" data-line-number="6"><span class="kw">collectGarbage</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="co"># Form a data frame analogous to expression data that will hold the clinical traits.</span></a>
+<a class="sourceLine" id="cb185-2" data-line-number="2">femaleSamples =<span class="st"> </span><span class="kw">rownames</span>(datExpr)</a>
+<a class="sourceLine" id="cb185-3" data-line-number="3">traitRows =<span class="st"> </span><span class="kw">match</span>(femaleSamples, allTraits<span class="op">$</span>Mice)</a>
+<a class="sourceLine" id="cb185-4" data-line-number="4">datTraits =<span class="st"> </span>allTraits[traitRows, <span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb185-5" data-line-number="5"><span class="kw">rownames</span>(datTraits) =<span class="st"> </span>allTraits[traitRows, <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb185-6" data-line-number="6"><span class="kw">collectGarbage</span>()</a></code></pre></div>
 <p>这时候我们得到的<code>datTraits</code>就是clinicaldata,其中行为样品,列为变量.</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" data-line-number="1"><span class="kw">sum</span>(<span class="kw">rownames</span>(datTraits) <span class="op">==</span><span class="st"> </span><span class="kw">rownames</span>(datExpr))</a></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">sum</span>(<span class="kw">rownames</span>(datTraits) <span class="op">==</span><span class="st"> </span><span class="kw">rownames</span>(datExpr))</a></code></pre></div>
 <pre><code>## [1] 134</code></pre>
 <p>下面我们来看看样品的临床数据的热图和样品的基因的聚类.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" data-line-number="1"><span class="co"># Re-cluster samples</span></a>
-<a class="sourceLine" id="cb174-2" data-line-number="2">sampleTree2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(datExpr), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
-<a class="sourceLine" id="cb174-3" data-line-number="3"><span class="co"># Convert traits to a color representation: white means low, red means high, grey means missing entry</span></a>
-<a class="sourceLine" id="cb174-4" data-line-number="4">traitColors =<span class="st"> </span><span class="kw">numbers2colors</span>(datTraits, <span class="dt">signed =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb174-5" data-line-number="5"><span class="co"># Plot the sample dendrogram and the colors underneath.</span></a>
-<a class="sourceLine" id="cb174-6" data-line-number="6"><span class="kw">plotDendroAndColors</span>(<span class="dt">dendro =</span> sampleTree2,</a>
-<a class="sourceLine" id="cb174-7" data-line-number="7">                    <span class="dt">colors =</span> traitColors,</a>
-<a class="sourceLine" id="cb174-8" data-line-number="8">                    <span class="dt">groupLabels =</span> <span class="kw">names</span>(datTraits),</a>
-<a class="sourceLine" id="cb174-9" data-line-number="9">                    <span class="dt">main =</span> <span class="st">&quot;Sample dendrogram and trait heatmap&quot;</span>)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-52-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="co"># Re-cluster samples</span></a>
+<a class="sourceLine" id="cb188-2" data-line-number="2">sampleTree2 &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(datExpr), <span class="dt">method =</span> <span class="st">&quot;average&quot;</span>)</a>
+<a class="sourceLine" id="cb188-3" data-line-number="3"><span class="co"># Convert traits to a color representation: white means low, red means high, grey means missing entry</span></a>
+<a class="sourceLine" id="cb188-4" data-line-number="4">traitColors =<span class="st"> </span><span class="kw">numbers2colors</span>(datTraits, <span class="dt">signed =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb188-5" data-line-number="5"><span class="co"># Plot the sample dendrogram and the colors underneath.</span></a>
+<a class="sourceLine" id="cb188-6" data-line-number="6"><span class="kw">plotDendroAndColors</span>(<span class="dt">dendro =</span> sampleTree2,</a>
+<a class="sourceLine" id="cb188-7" data-line-number="7">                    <span class="dt">colors =</span> traitColors,</a>
+<a class="sourceLine" id="cb188-8" data-line-number="8">                    <span class="dt">groupLabels =</span> <span class="kw">names</span>(datTraits),</a>
+<a class="sourceLine" id="cb188-9" data-line-number="9">                    <span class="dt">main =</span> <span class="st">&quot;Sample dendrogram and trait heatmap&quot;</span>)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-85-1.png" width="100%" /></p>
 <p>最后,把数据保存下来,准备后续的分析.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1"><span class="kw">save</span>(datExpr, datTraits, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">save</span>(datExpr, datTraits, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>)</a></code></pre></div>
 </div>
 <div id="network-analysis-of-liver-expression-data-in-female-mice" class="section level3">
 <h3><span class="header-section-number">7.4.2</span> Network analysis of liver expression data in female mice</h3>
@@ -528,12 +535,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>首先需要设置R运行环境,主要是要能够进行多线程处理,然后读取数据:</li>
 </ol>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" data-line-number="1"><span class="kw">enableWGCNAThreads</span>(<span class="dt">nThreads =</span> <span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1"><span class="kw">enableWGCNAThreads</span>(<span class="dt">nThreads =</span> <span class="dv">6</span>)</a></code></pre></div>
 <pre><code>## Allowing parallel execution with up to 6 working processes.</code></pre>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" data-line-number="1"><span class="co"># Load the data saved in the first part</span></a>
-<a class="sourceLine" id="cb178-2" data-line-number="2">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>)</a>
-<a class="sourceLine" id="cb178-3" data-line-number="3"><span class="co">#The variable lnames contains the names of loaded variables.</span></a>
-<a class="sourceLine" id="cb178-4" data-line-number="4">lnames</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="co"># Load the data saved in the first part</span></a>
+<a class="sourceLine" id="cb192-2" data-line-number="2">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>)</a>
+<a class="sourceLine" id="cb192-3" data-line-number="3"><span class="co">#The variable lnames contains the names of loaded variables.</span></a>
+<a class="sourceLine" id="cb192-4" data-line-number="4">lnames</a></code></pre></div>
 <pre><code>## [1] &quot;datExpr&quot;   &quot;datTraits&quot;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>Automatic network construction and module detection</li>
@@ -543,53 +550,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>注意,这段代码在Rstudio中不能运行,运行出错,需要到R自带IDE或者终端中运行.</p>
 </blockquote>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="co"># Choose a set of soft-thresholding powers</span></a>
-<a class="sourceLine" id="cb180-2" data-line-number="2">powers =<span class="st"> </span><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">12</span>, <span class="dt">to =</span> <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb180-3" data-line-number="3"><span class="co"># Call the network topology analysis function</span></a>
-<a class="sourceLine" id="cb180-4" data-line-number="4">sft =<span class="st"> </span><span class="kw">pickSoftThreshold</span>(datExpr, <span class="dt">powerVector =</span> powers, <span class="dt">verbose =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb180-5" data-line-number="5"><span class="kw">save</span>(sft, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/sft&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/sft&quot;</span>)</a>
-<a class="sourceLine" id="cb181-2" data-line-number="2">powers =<span class="st"> </span><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">12</span>, <span class="dt">to =</span> <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb181-3" data-line-number="3"><span class="co"># Scale-free topology fit index as a function of the soft-thresholding power</span></a>
-<a class="sourceLine" id="cb181-4" data-line-number="4">sft<span class="op">$</span>fitIndices <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb181-5" data-line-number="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> <span class="op">-</span><span class="kw">sign</span>(slope) <span class="op">*</span><span class="st"> </span>SFT.R.sq)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.9</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">16</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-8" data-line-number="8"><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> <span class="op">-</span><span class="kw">sign</span>(slope) <span class="op">*</span><span class="st"> </span>SFT.R.sq, <span class="dt">label =</span> Power),</a>
-<a class="sourceLine" id="cb181-9" data-line-number="9">                           <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Soft Threshold (power)&quot;</span>, </a>
-<a class="sourceLine" id="cb181-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;Scale Free Topology Model Fit,signed R^2&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-12" data-line-number="12"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-13" data-line-number="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>), </a>
-<a class="sourceLine" id="cb181-14" data-line-number="14">        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">13</span>))</a>
-<a class="sourceLine" id="cb181-15" data-line-number="15"><span class="co"># Mean connectivity as a function of the soft-thresholding power</span></a>
-<a class="sourceLine" id="cb181-16" data-line-number="16">sft<span class="op">$</span>fitIndices <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb181-17" data-line-number="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> mean.k.)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-18" data-line-number="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">16</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-19" data-line-number="19"><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> mean.k., <span class="dt">label =</span> Power),</a>
-<a class="sourceLine" id="cb181-20" data-line-number="20">                           <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-21" data-line-number="21"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Soft Threshold (power)&quot;</span>, </a>
-<a class="sourceLine" id="cb181-22" data-line-number="22">       <span class="dt">y =</span> <span class="st">&quot;Mean Connectivity&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-23" data-line-number="23"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-24" data-line-number="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>), </a>
-<a class="sourceLine" id="cb181-25" data-line-number="25">        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">13</span>))</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-56-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-56-2.png" width="50%" /></p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="co"># Choose a set of soft-thresholding powers</span></a>
+<a class="sourceLine" id="cb194-2" data-line-number="2">powers =<span class="st"> </span><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">12</span>, <span class="dt">to =</span> <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb194-3" data-line-number="3"><span class="co"># Call the network topology analysis function</span></a>
+<a class="sourceLine" id="cb194-4" data-line-number="4">sft =<span class="st"> </span><span class="kw">pickSoftThreshold</span>(datExpr, <span class="dt">powerVector =</span> powers, <span class="dt">verbose =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb194-5" data-line-number="5"><span class="kw">save</span>(sft, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/sft&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;/Users/shenxt/study/WGCNA_test/sft&quot;</span>)</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">powers =<span class="st"> </span><span class="kw">c</span>(<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">12</span>, <span class="dt">to =</span> <span class="dv">20</span>, <span class="dt">by =</span> <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="co"># Scale-free topology fit index as a function of the soft-thresholding power</span></a>
+<a class="sourceLine" id="cb195-4" data-line-number="4">sft<span class="op">$</span>fitIndices <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-5" data-line-number="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> <span class="op">-</span><span class="kw">sign</span>(slope) <span class="op">*</span><span class="st"> </span>SFT.R.sq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="fl">0.9</span>, <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-7" data-line-number="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">16</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-8" data-line-number="8"><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> <span class="op">-</span><span class="kw">sign</span>(slope) <span class="op">*</span><span class="st"> </span>SFT.R.sq, <span class="dt">label =</span> Power),</a>
+<a class="sourceLine" id="cb195-9" data-line-number="9">                           <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-10" data-line-number="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Soft Threshold (power)&quot;</span>, </a>
+<a class="sourceLine" id="cb195-11" data-line-number="11">       <span class="dt">y =</span> <span class="st">&quot;Scale Free Topology Model Fit,signed R^2&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-12" data-line-number="12"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-13" data-line-number="13"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>), </a>
+<a class="sourceLine" id="cb195-14" data-line-number="14">        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">13</span>))</a>
+<a class="sourceLine" id="cb195-15" data-line-number="15"><span class="co"># Mean connectivity as a function of the soft-thresholding power</span></a>
+<a class="sourceLine" id="cb195-16" data-line-number="16">sft<span class="op">$</span>fitIndices <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb195-17" data-line-number="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> mean.k.)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-18" data-line-number="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">shape =</span> <span class="dv">16</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-19" data-line-number="19"><span class="st">  </span>ggrepel<span class="op">::</span><span class="kw">geom_text_repel</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Power, <span class="dt">y =</span> mean.k., <span class="dt">label =</span> Power),</a>
+<a class="sourceLine" id="cb195-20" data-line-number="20">                           <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-21" data-line-number="21"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Soft Threshold (power)&quot;</span>, </a>
+<a class="sourceLine" id="cb195-22" data-line-number="22">       <span class="dt">y =</span> <span class="st">&quot;Mean Connectivity&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-23" data-line-number="23"><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb195-24" data-line-number="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>), </a>
+<a class="sourceLine" id="cb195-25" data-line-number="25">        <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">13</span>))</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-89-1.png" width="50%" /><img src="r_cookbook_files/figure-html/unnamed-chunk-89-2.png" width="50%" /></p>
 <p>左边图显示的是power和scale free topology fit的关系,右图显示的是power和mean connectivity的关系,一般选择能够使scale free topology fit达到最大时的最小的power.</p>
 <p>这里我们选择6.</p>
 <p>确定了power(β)参数之后,后面使用<code>blockwiseModules()</code>函数就可以得到modules.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1">net &lt;-<span class="st"> </span><span class="kw">blockwiseModules</span>(</a>
-<a class="sourceLine" id="cb182-2" data-line-number="2">  datExpr,</a>
-<a class="sourceLine" id="cb182-3" data-line-number="3">  <span class="dt">power =</span> <span class="dv">6</span>,</a>
-<a class="sourceLine" id="cb182-4" data-line-number="4">  <span class="dt">TOMType =</span> <span class="st">&quot;unsigned&quot;</span>,</a>
-<a class="sourceLine" id="cb182-5" data-line-number="5">  <span class="dt">minModuleSize =</span> <span class="dv">30</span>,</a>
-<a class="sourceLine" id="cb182-6" data-line-number="6">  <span class="dt">reassignThreshold =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb182-7" data-line-number="7">  <span class="dt">mergeCutHeight =</span> <span class="fl">0.25</span>,</a>
-<a class="sourceLine" id="cb182-8" data-line-number="8">  <span class="dt">numericLabels =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb182-9" data-line-number="9">  <span class="dt">pamRespectsDendro =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb182-10" data-line-number="10">  <span class="dt">saveTOMs =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb182-11" data-line-number="11">  <span class="dt">saveTOMFileBase =</span> <span class="st">&quot;femaleMouseTOM&quot;</span>,</a>
-<a class="sourceLine" id="cb182-12" data-line-number="12">  <span class="dt">verbose =</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb182-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" data-line-number="1">net &lt;-<span class="st"> </span><span class="kw">blockwiseModules</span>(</a>
+<a class="sourceLine" id="cb196-2" data-line-number="2">  datExpr,</a>
+<a class="sourceLine" id="cb196-3" data-line-number="3">  <span class="dt">power =</span> <span class="dv">6</span>,</a>
+<a class="sourceLine" id="cb196-4" data-line-number="4">  <span class="dt">TOMType =</span> <span class="st">&quot;unsigned&quot;</span>,</a>
+<a class="sourceLine" id="cb196-5" data-line-number="5">  <span class="dt">minModuleSize =</span> <span class="dv">30</span>,</a>
+<a class="sourceLine" id="cb196-6" data-line-number="6">  <span class="dt">reassignThreshold =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb196-7" data-line-number="7">  <span class="dt">mergeCutHeight =</span> <span class="fl">0.25</span>,</a>
+<a class="sourceLine" id="cb196-8" data-line-number="8">  <span class="dt">numericLabels =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb196-9" data-line-number="9">  <span class="dt">pamRespectsDendro =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb196-10" data-line-number="10">  <span class="dt">saveTOMs =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb196-11" data-line-number="11">  <span class="dt">saveTOMFileBase =</span> <span class="st">&quot;femaleMouseTOM&quot;</span>,</a>
+<a class="sourceLine" id="cb196-12" data-line-number="12">  <span class="dt">verbose =</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb196-13" data-line-number="13">)</a></code></pre></div>
 <pre><code>##  Calculating module eigengenes block-wise from all genes
 ##    Flagging genes and samples with too many missing values...
 ##     ..step 1
@@ -602,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  ..Working on block 1 .
 ##     TOM calculation: adjacency..
 ##     ..will use 6 parallel threads.
-##      Fraction of slow calculations: 0.386114
+##      Fraction of slow calculations: 0.386246
 ##     ..connectivity..
 ##     ..matrix multiplication (system BLAS)..
 ##     ..normalization..
@@ -624,59 +631,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>maxBlockSize</code>: 是指最大的module的基因数量,默认为5000.</p>
 <p><code>net</code>是最终的分类结果.</p>
 <p>下面看一下分类结果.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" data-line-number="1"><span class="kw">names</span>(net)</a></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">names</span>(net)</a></code></pre></div>
 <pre><code>##  [1] &quot;colors&quot;         &quot;unmergedColors&quot; &quot;MEs&quot;            &quot;goodSamples&quot;    &quot;goodGenes&quot;      &quot;dendrograms&quot;    &quot;TOMFiles&quot;      
 ##  [8] &quot;blockGenes&quot;     &quot;blocks&quot;         &quot;MEsOK&quot;</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" data-line-number="1"><span class="kw">table</span>(net<span class="op">$</span>colors)</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="kw">table</span>(net<span class="op">$</span>colors)</a></code></pre></div>
 <pre><code>## 
 ##   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18 
 ##  99 609 460 409 316 312 221 211 157 123 106 100  94  91  77  76  58  47  34</code></pre>
 <p>使用颜色来表示module,代表这里面有18个module.标记为0的基因代表没有归为任何一类module.</p>
 <p>下面我们把module画出来.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" data-line-number="1"><span class="co"># Convert labels to colors for plotting</span></a>
-<a class="sourceLine" id="cb188-2" data-line-number="2">mergedColors =<span class="st"> </span><span class="kw">labels2colors</span>(net<span class="op">$</span>colors)</a>
-<a class="sourceLine" id="cb188-3" data-line-number="3"><span class="co"># Plot the dendrogram and the module colors underneath</span></a>
-<a class="sourceLine" id="cb188-4" data-line-number="4"><span class="kw">plotDendroAndColors</span>(</a>
-<a class="sourceLine" id="cb188-5" data-line-number="5">  net<span class="op">$</span>dendrograms[[<span class="dv">1</span>]],</a>
-<a class="sourceLine" id="cb188-6" data-line-number="6">  mergedColors[net<span class="op">$</span>blockGenes[[<span class="dv">1</span>]]],</a>
-<a class="sourceLine" id="cb188-7" data-line-number="7">  <span class="st">&quot;Module colors&quot;</span>,</a>
-<a class="sourceLine" id="cb188-8" data-line-number="8">  <span class="dt">dendroLabels =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb188-9" data-line-number="9">  <span class="dt">hang =</span> <span class="fl">0.03</span>,</a>
-<a class="sourceLine" id="cb188-10" data-line-number="10">  <span class="dt">addGuide =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb188-11" data-line-number="11">  <span class="dt">guideHang =</span> <span class="fl">0.05</span></a>
-<a class="sourceLine" id="cb188-12" data-line-number="12">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-59-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1"><span class="co"># Convert labels to colors for plotting</span></a>
+<a class="sourceLine" id="cb202-2" data-line-number="2">mergedColors =<span class="st"> </span><span class="kw">labels2colors</span>(net<span class="op">$</span>colors)</a>
+<a class="sourceLine" id="cb202-3" data-line-number="3"><span class="co"># Plot the dendrogram and the module colors underneath</span></a>
+<a class="sourceLine" id="cb202-4" data-line-number="4"><span class="kw">plotDendroAndColors</span>(</a>
+<a class="sourceLine" id="cb202-5" data-line-number="5">  net<span class="op">$</span>dendrograms[[<span class="dv">1</span>]],</a>
+<a class="sourceLine" id="cb202-6" data-line-number="6">  mergedColors[net<span class="op">$</span>blockGenes[[<span class="dv">1</span>]]],</a>
+<a class="sourceLine" id="cb202-7" data-line-number="7">  <span class="st">&quot;Module colors&quot;</span>,</a>
+<a class="sourceLine" id="cb202-8" data-line-number="8">  <span class="dt">dendroLabels =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb202-9" data-line-number="9">  <span class="dt">hang =</span> <span class="fl">0.03</span>,</a>
+<a class="sourceLine" id="cb202-10" data-line-number="10">  <span class="dt">addGuide =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb202-11" data-line-number="11">  <span class="dt">guideHang =</span> <span class="fl">0.05</span></a>
+<a class="sourceLine" id="cb202-12" data-line-number="12">)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-92-1.png" width="100%" /></p>
 <p>然后将结果保存,用于后续的分析.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1">moduleLabels =<span class="st"> </span>net<span class="op">$</span>colors</a>
-<a class="sourceLine" id="cb189-2" data-line-number="2">moduleColors =<span class="st"> </span><span class="kw">labels2colors</span>(net<span class="op">$</span>colors)</a>
-<a class="sourceLine" id="cb189-3" data-line-number="3">MEs =<span class="st"> </span>net<span class="op">$</span>MEs</a>
-<a class="sourceLine" id="cb189-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb189-5" data-line-number="5">geneTree =<span class="st"> </span>net<span class="op">$</span>dendrograms[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb189-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb189-7" data-line-number="7"><span class="kw">save</span>(MEs, moduleLabels, moduleColors, geneTree, net,</a>
-<a class="sourceLine" id="cb189-8" data-line-number="8">     <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">moduleLabels =<span class="st"> </span>net<span class="op">$</span>colors</a>
+<a class="sourceLine" id="cb203-2" data-line-number="2">moduleColors =<span class="st"> </span><span class="kw">labels2colors</span>(net<span class="op">$</span>colors)</a>
+<a class="sourceLine" id="cb203-3" data-line-number="3">MEs =<span class="st"> </span>net<span class="op">$</span>MEs</a>
+<a class="sourceLine" id="cb203-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb203-5" data-line-number="5">geneTree =<span class="st"> </span>net<span class="op">$</span>dendrograms[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb203-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb203-7" data-line-number="7"><span class="kw">save</span>(MEs, moduleLabels, moduleColors, geneTree, net,</a>
+<a class="sourceLine" id="cb203-8" data-line-number="8">     <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData&quot;</span>)</a></code></pre></div>
 </div>
 <div id="relating-modules-to-external-information-and-identifying-important" class="section level3">
 <h3><span class="header-section-number">7.4.3</span> Relating modules to external information and identifying important</h3>
 <p>首先加载上一步产生的数据:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" data-line-number="1">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>);</a>
-<a class="sourceLine" id="cb190-2" data-line-number="2"><span class="co">#The variable lnames contains the names of loaded variables.</span></a>
-<a class="sourceLine" id="cb190-3" data-line-number="3">lnames</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" data-line-number="1">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-01-dataInput.RData&quot;</span>);</a>
+<a class="sourceLine" id="cb204-2" data-line-number="2"><span class="co">#The variable lnames contains the names of loaded variables.</span></a>
+<a class="sourceLine" id="cb204-3" data-line-number="3">lnames</a></code></pre></div>
 <pre><code>## [1] &quot;datExpr&quot;   &quot;datTraits&quot;</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1"><span class="co"># Load network data saved in the second part.</span></a>
-<a class="sourceLine" id="cb192-2" data-line-number="2">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData&quot;</span>);</a>
-<a class="sourceLine" id="cb192-3" data-line-number="3">lnames</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" data-line-number="1"><span class="co"># Load network data saved in the second part.</span></a>
+<a class="sourceLine" id="cb206-2" data-line-number="2">lnames =<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/FemaleLiver-02-networkConstruction-auto.RData&quot;</span>);</a>
+<a class="sourceLine" id="cb206-3" data-line-number="3">lnames</a></code></pre></div>
 <pre><code>## [1] &quot;MEs&quot;          &quot;moduleLabels&quot; &quot;moduleColors&quot; &quot;geneTree&quot;     &quot;net&quot;</code></pre>
 <p>然后我们想要找到和clinical data关系非常紧密的module.对于每个module的来说,都有一个eigengene,也就是其PCA分析的第一主成分,用来代表该module在每个样品中的含量.</p>
 <p>这个矩阵除了可以从最终的结果<code>net</code>中直接得到,还可以使用下面的函数<code>moduleEigengenes</code>得到.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" data-line-number="1"><span class="co"># Recalculate MEs with color labels</span></a>
-<a class="sourceLine" id="cb194-2" data-line-number="2">MEs0 =<span class="st"> </span><span class="kw">moduleEigengenes</span>(<span class="dt">expr =</span> datExpr, <span class="dt">colors =</span> moduleColors)<span class="op">$</span>eigengenes</a>
-<a class="sourceLine" id="cb194-3" data-line-number="3">MEs =<span class="st"> </span><span class="kw">orderMEs</span>(MEs0)</a></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" data-line-number="1"><span class="co"># Recalculate MEs with color labels</span></a>
+<a class="sourceLine" id="cb208-2" data-line-number="2">MEs0 =<span class="st"> </span><span class="kw">moduleEigengenes</span>(<span class="dt">expr =</span> datExpr, <span class="dt">colors =</span> moduleColors)<span class="op">$</span>eigengenes</a>
+<a class="sourceLine" id="cb208-3" data-line-number="3">MEs =<span class="st"> </span><span class="kw">orderMEs</span>(MEs0)</a></code></pre></div>
 <p>我们也可以把这个数据和从<code>net</code>中直接得到的对比看一下.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">test &lt;-<span class="st"> </span>net<span class="op">$</span>MEs</a>
-<a class="sourceLine" id="cb195-2" data-line-number="2"><span class="kw">data.frame</span>(<span class="kw">colnames</span>(test), <span class="kw">colnames</span>(MEs), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb195-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb195-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1">test &lt;-<span class="st"> </span>net<span class="op">$</span>MEs</a>
+<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="kw">data.frame</span>(<span class="kw">colnames</span>(test), <span class="kw">colnames</span>(MEs), <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb209-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb209-4" data-line-number="4"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>()</a></code></pre></div>
 <pre><code>##    colnames.test.  colnames.MEs.
 ## 1             ME9      MEmagenta
 ## 2             ME7        MEblack
@@ -697,9 +704,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 17           ME14         MEcyan
 ## 18           ME15 MEmidnightblue
 ## 19            ME0         MEgrey</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1"><span class="kw">data.frame</span>(moduleColors, net<span class="op">$</span>colors, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1"><span class="kw">data.frame</span>(moduleColors, net<span class="op">$</span>colors, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb211-2" data-line-number="2"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb211-3" data-line-number="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">arrange</span>()</a></code></pre></div>
 <pre><code>##    moduleColors net.colors
 ## 1          grey          0
 ## 2     turquoise          1
@@ -721,75 +728,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 18  greenyellow         11
 ## 19    lightcyan         16</code></pre>
 <p>然后我们使用<code>WGCNA</code>中的<code>cor</code>函数计算module和clinical data的相关性.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="co"># Define numbers of genes and samples</span></a>
-<a class="sourceLine" id="cb199-2" data-line-number="2">nGenes =<span class="st"> </span><span class="kw">ncol</span>(datExpr)</a>
-<a class="sourceLine" id="cb199-3" data-line-number="3">nSamples =<span class="st"> </span><span class="kw">nrow</span>(datExpr)</a>
-<a class="sourceLine" id="cb199-4" data-line-number="4">moduleTraitCor =<span class="st"> </span>WGCNA<span class="op">::</span><span class="kw">cor</span>(MEs, datTraits, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>)</a>
-<a class="sourceLine" id="cb199-5" data-line-number="5">moduleTraitPvalue =<span class="st"> </span><span class="kw">corPvalueStudent</span>(moduleTraitCor, nSamples)</a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="co"># Define numbers of genes and samples</span></a>
+<a class="sourceLine" id="cb213-2" data-line-number="2">nGenes =<span class="st"> </span><span class="kw">ncol</span>(datExpr)</a>
+<a class="sourceLine" id="cb213-3" data-line-number="3">nSamples =<span class="st"> </span><span class="kw">nrow</span>(datExpr)</a>
+<a class="sourceLine" id="cb213-4" data-line-number="4">moduleTraitCor =<span class="st"> </span>WGCNA<span class="op">::</span><span class="kw">cor</span>(MEs, datTraits, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb213-5" data-line-number="5">moduleTraitPvalue =<span class="st"> </span><span class="kw">corPvalueStudent</span>(moduleTraitCor, nSamples)</a></code></pre></div>
 <p>下面对correlation进行可视化:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" data-line-number="1"><span class="co"># Will display correlations and their p-values</span></a>
-<a class="sourceLine" id="cb200-2" data-line-number="2">textMatrix =<span class="st"> </span><span class="kw">paste</span>(<span class="kw">signif</span>(moduleTraitCor, <span class="dv">2</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">(&quot;</span>,</a>
-<a class="sourceLine" id="cb200-3" data-line-number="3"><span class="kw">signif</span>(moduleTraitPvalue, <span class="dv">1</span>), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb200-4" data-line-number="4"><span class="kw">dim</span>(textMatrix) =<span class="st"> </span><span class="kw">dim</span>(moduleTraitCor)</a>
-<a class="sourceLine" id="cb200-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="fl">8.5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb200-6" data-line-number="6"><span class="co"># Display the correlation values within a heatmap plot</span></a>
-<a class="sourceLine" id="cb200-7" data-line-number="7"><span class="kw">labeledHeatmap</span>(<span class="dt">Matrix =</span> moduleTraitCor,</a>
-<a class="sourceLine" id="cb200-8" data-line-number="8"><span class="dt">xLabels =</span> <span class="kw">names</span>(datTraits),</a>
-<a class="sourceLine" id="cb200-9" data-line-number="9"><span class="dt">yLabels =</span> <span class="kw">names</span>(MEs),</a>
-<a class="sourceLine" id="cb200-10" data-line-number="10"><span class="dt">ySymbols =</span> <span class="kw">names</span>(MEs),</a>
-<a class="sourceLine" id="cb200-11" data-line-number="11"><span class="dt">colorLabels =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb200-12" data-line-number="12"><span class="dt">colors =</span> <span class="kw">greenWhiteRed</span>(<span class="dv">50</span>),</a>
-<a class="sourceLine" id="cb200-13" data-line-number="13"><span class="co"># textMatrix = textMatrix,</span></a>
-<a class="sourceLine" id="cb200-14" data-line-number="14"><span class="dt">setStdMargins =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb200-15" data-line-number="15"><span class="dt">cex.text =</span> <span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb200-16" data-line-number="16"><span class="dt">zlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb200-17" data-line-number="17"><span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Module-trait relationships&quot;</span>))</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-65-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" data-line-number="1"><span class="co"># Will display correlations and their p-values</span></a>
+<a class="sourceLine" id="cb214-2" data-line-number="2">textMatrix =<span class="st"> </span><span class="kw">paste</span>(<span class="kw">signif</span>(moduleTraitCor, <span class="dv">2</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">(&quot;</span>,</a>
+<a class="sourceLine" id="cb214-3" data-line-number="3"><span class="kw">signif</span>(moduleTraitPvalue, <span class="dv">1</span>), <span class="st">&quot;)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb214-4" data-line-number="4"><span class="kw">dim</span>(textMatrix) =<span class="st"> </span><span class="kw">dim</span>(moduleTraitCor)</a>
+<a class="sourceLine" id="cb214-5" data-line-number="5"><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">6</span>, <span class="fl">8.5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb214-6" data-line-number="6"><span class="co"># Display the correlation values within a heatmap plot</span></a>
+<a class="sourceLine" id="cb214-7" data-line-number="7"><span class="kw">labeledHeatmap</span>(<span class="dt">Matrix =</span> moduleTraitCor,</a>
+<a class="sourceLine" id="cb214-8" data-line-number="8"><span class="dt">xLabels =</span> <span class="kw">names</span>(datTraits),</a>
+<a class="sourceLine" id="cb214-9" data-line-number="9"><span class="dt">yLabels =</span> <span class="kw">names</span>(MEs),</a>
+<a class="sourceLine" id="cb214-10" data-line-number="10"><span class="dt">ySymbols =</span> <span class="kw">names</span>(MEs),</a>
+<a class="sourceLine" id="cb214-11" data-line-number="11"><span class="dt">colorLabels =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb214-12" data-line-number="12"><span class="dt">colors =</span> <span class="kw">greenWhiteRed</span>(<span class="dv">50</span>),</a>
+<a class="sourceLine" id="cb214-13" data-line-number="13"><span class="co"># textMatrix = textMatrix,</span></a>
+<a class="sourceLine" id="cb214-14" data-line-number="14"><span class="dt">setStdMargins =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb214-15" data-line-number="15"><span class="dt">cex.text =</span> <span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb214-16" data-line-number="16"><span class="dt">zlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb214-17" data-line-number="17"><span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Module-trait relationships&quot;</span>))</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-98-1.png" width="100%" /></p>
 <p>从上图中可以看出<code>weight_g</code>跟一些module相关性非常强.</p>
 <p>Gene relationship to trait and important modules: Gene Significance and Module Membership</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1"><span class="co"># Define variable weight containing the weight column of datTrait</span></a>
-<a class="sourceLine" id="cb201-2" data-line-number="2">weight =<span class="st"> </span><span class="kw">as.data.frame</span>(datTraits<span class="op">$</span>weight_g)</a>
-<a class="sourceLine" id="cb201-3" data-line-number="3"><span class="kw">colnames</span>(weight) =<span class="st"> &quot;weight&quot;</span></a>
-<a class="sourceLine" id="cb201-4" data-line-number="4"><span class="co"># names (colors) of the modules</span></a>
-<a class="sourceLine" id="cb201-5" data-line-number="5">modNames =<span class="st"> </span><span class="kw">substring</span>(<span class="kw">names</span>(MEs), <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb201-6" data-line-number="6"><span class="co">##计算每个基因和module的相关性</span></a>
-<a class="sourceLine" id="cb201-7" data-line-number="7">geneModuleMembership =<span class="st"> </span><span class="kw">as.data.frame</span>(WGCNA<span class="op">::</span><span class="kw">cor</span>(datExpr, MEs, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>))</a>
-<a class="sourceLine" id="cb201-8" data-line-number="8">MMPvalue =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">corPvalueStudent</span>(<span class="kw">as.matrix</span>(geneModuleMembership), nSamples))</a>
-<a class="sourceLine" id="cb201-9" data-line-number="9"><span class="kw">names</span>(geneModuleMembership) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;MM&quot;</span>, modNames, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb201-10" data-line-number="10"><span class="kw">names</span>(MMPvalue) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;p.MM&quot;</span>, modNames, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb201-11" data-line-number="11"><span class="co">##计算基因和weight的相关性</span></a>
-<a class="sourceLine" id="cb201-12" data-line-number="12">geneTraitSignificance =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cor</span>(datExpr, weight, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>))</a>
-<a class="sourceLine" id="cb201-13" data-line-number="13">GSPvalue =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">corPvalueStudent</span>(<span class="kw">as.matrix</span>(geneTraitSignificance), nSamples))</a>
-<a class="sourceLine" id="cb201-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb201-15" data-line-number="15"><span class="kw">names</span>(geneTraitSignificance) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;GS.&quot;</span>, <span class="kw">names</span>(weight), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb201-16" data-line-number="16"><span class="kw">names</span>(GSPvalue) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;p.GS.&quot;</span>, <span class="kw">names</span>(weight), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1"><span class="co"># Define variable weight containing the weight column of datTrait</span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2">weight =<span class="st"> </span><span class="kw">as.data.frame</span>(datTraits<span class="op">$</span>weight_g)</a>
+<a class="sourceLine" id="cb215-3" data-line-number="3"><span class="kw">colnames</span>(weight) =<span class="st"> &quot;weight&quot;</span></a>
+<a class="sourceLine" id="cb215-4" data-line-number="4"><span class="co"># names (colors) of the modules</span></a>
+<a class="sourceLine" id="cb215-5" data-line-number="5">modNames =<span class="st"> </span><span class="kw">substring</span>(<span class="kw">names</span>(MEs), <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb215-6" data-line-number="6"><span class="co">##计算每个基因和module的相关性</span></a>
+<a class="sourceLine" id="cb215-7" data-line-number="7">geneModuleMembership =<span class="st"> </span><span class="kw">as.data.frame</span>(WGCNA<span class="op">::</span><span class="kw">cor</span>(datExpr, MEs, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>))</a>
+<a class="sourceLine" id="cb215-8" data-line-number="8">MMPvalue =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">corPvalueStudent</span>(<span class="kw">as.matrix</span>(geneModuleMembership), nSamples))</a>
+<a class="sourceLine" id="cb215-9" data-line-number="9"><span class="kw">names</span>(geneModuleMembership) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;MM&quot;</span>, modNames, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb215-10" data-line-number="10"><span class="kw">names</span>(MMPvalue) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;p.MM&quot;</span>, modNames, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb215-11" data-line-number="11"><span class="co">##计算基因和weight的相关性</span></a>
+<a class="sourceLine" id="cb215-12" data-line-number="12">geneTraitSignificance =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">cor</span>(datExpr, weight, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>))</a>
+<a class="sourceLine" id="cb215-13" data-line-number="13">GSPvalue =<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">corPvalueStudent</span>(<span class="kw">as.matrix</span>(geneTraitSignificance), nSamples))</a>
+<a class="sourceLine" id="cb215-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb215-15" data-line-number="15"><span class="kw">names</span>(geneTraitSignificance) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;GS.&quot;</span>, <span class="kw">names</span>(weight), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb215-16" data-line-number="16"><span class="kw">names</span>(GSPvalue) =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;p.GS.&quot;</span>, <span class="kw">names</span>(weight), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <p>Intramodular analysis: identifying genes with high GS and MM</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" data-line-number="1">module =<span class="st"> &quot;brown&quot;</span></a>
-<a class="sourceLine" id="cb202-2" data-line-number="2">column =<span class="st"> </span><span class="kw">match</span>(module, modNames)</a>
-<a class="sourceLine" id="cb202-3" data-line-number="3">moduleGenes =<span class="st"> </span>moduleColors<span class="op">==</span>module</a>
-<a class="sourceLine" id="cb202-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb202-5" data-line-number="5"><span class="kw">verboseScatterplot</span>(</a>
-<a class="sourceLine" id="cb202-6" data-line-number="6">  <span class="kw">abs</span>(geneModuleMembership[moduleGenes, column]),</a>
-<a class="sourceLine" id="cb202-7" data-line-number="7">  <span class="kw">abs</span>(geneTraitSignificance[moduleGenes, <span class="dv">1</span>]),</a>
-<a class="sourceLine" id="cb202-8" data-line-number="8">  <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;Module Membership in&quot;</span>, module, <span class="st">&quot;module&quot;</span>),</a>
-<a class="sourceLine" id="cb202-9" data-line-number="9">  <span class="dt">ylab =</span> <span class="st">&quot;Gene significance for body weight&quot;</span>,</a>
-<a class="sourceLine" id="cb202-10" data-line-number="10">  <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Module membership vs. gene significance</span><span class="ch">\n</span><span class="st">&quot;</span>),</a>
-<a class="sourceLine" id="cb202-11" data-line-number="11">  <span class="dt">cex.main =</span> <span class="fl">1.2</span>,</a>
-<a class="sourceLine" id="cb202-12" data-line-number="12">  <span class="dt">cex.lab =</span> <span class="fl">1.2</span>,</a>
-<a class="sourceLine" id="cb202-13" data-line-number="13">  <span class="dt">cex.axis =</span> <span class="fl">1.2</span>,</a>
-<a class="sourceLine" id="cb202-14" data-line-number="14">  <span class="dt">col =</span> module</a>
-<a class="sourceLine" id="cb202-15" data-line-number="15">)</a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-67-1.png" width="100%" /></p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb216-1" data-line-number="1">module =<span class="st"> &quot;brown&quot;</span></a>
+<a class="sourceLine" id="cb216-2" data-line-number="2">column =<span class="st"> </span><span class="kw">match</span>(module, modNames)</a>
+<a class="sourceLine" id="cb216-3" data-line-number="3">moduleGenes =<span class="st"> </span>moduleColors<span class="op">==</span>module</a>
+<a class="sourceLine" id="cb216-4" data-line-number="4"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb216-5" data-line-number="5"><span class="kw">verboseScatterplot</span>(</a>
+<a class="sourceLine" id="cb216-6" data-line-number="6">  <span class="kw">abs</span>(geneModuleMembership[moduleGenes, column]),</a>
+<a class="sourceLine" id="cb216-7" data-line-number="7">  <span class="kw">abs</span>(geneTraitSignificance[moduleGenes, <span class="dv">1</span>]),</a>
+<a class="sourceLine" id="cb216-8" data-line-number="8">  <span class="dt">xlab =</span> <span class="kw">paste</span>(<span class="st">&quot;Module Membership in&quot;</span>, module, <span class="st">&quot;module&quot;</span>),</a>
+<a class="sourceLine" id="cb216-9" data-line-number="9">  <span class="dt">ylab =</span> <span class="st">&quot;Gene significance for body weight&quot;</span>,</a>
+<a class="sourceLine" id="cb216-10" data-line-number="10">  <span class="dt">main =</span> <span class="kw">paste</span>(<span class="st">&quot;Module membership vs. gene significance</span><span class="ch">\n</span><span class="st">&quot;</span>),</a>
+<a class="sourceLine" id="cb216-11" data-line-number="11">  <span class="dt">cex.main =</span> <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb216-12" data-line-number="12">  <span class="dt">cex.lab =</span> <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb216-13" data-line-number="13">  <span class="dt">cex.axis =</span> <span class="fl">1.2</span>,</a>
+<a class="sourceLine" id="cb216-14" data-line-number="14">  <span class="dt">col =</span> module</a>
+<a class="sourceLine" id="cb216-15" data-line-number="15">)</a></code></pre></div>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-100-1.png" width="100%" /></p>
 <p>Summary output of network analysis results</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">names</span>(datExpr))</a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">names</span>(datExpr))</a></code></pre></div>
 <pre><code>## [1] &quot;MMT00000044&quot; &quot;MMT00000046&quot; &quot;MMT00000051&quot; &quot;MMT00000076&quot; &quot;MMT00000080&quot; &quot;MMT00000102&quot;</code></pre>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">names</span>(datExpr)[moduleColors<span class="op">==</span><span class="st">&quot;brown&quot;</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1"><span class="kw">head</span>(<span class="kw">names</span>(datExpr)[moduleColors<span class="op">==</span><span class="st">&quot;brown&quot;</span>])</a></code></pre></div>
 <pre><code>## [1] &quot;MMT00000887&quot; &quot;MMT00001077&quot; &quot;MMT00001185&quot; &quot;MMT00001486&quot; &quot;MMT00002002&quot; &quot;MMT00002037&quot;</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">annot &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="st">  </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/GeneAnnotation.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb207-3" data-line-number="3"><span class="kw">dim</span>(annot)</a></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">annot &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="st">  </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/GeneAnnotation.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="kw">dim</span>(annot)</a></code></pre></div>
 <pre><code>## [1] 23388    34</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1"><span class="kw">names</span>(annot)</a></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1"><span class="kw">names</span>(annot)</a></code></pre></div>
 <pre><code>##  [1] &quot;X&quot;                        &quot;ID&quot;                       &quot;arrayname&quot;                &quot;substanceBXH&quot;            
 ##  [5] &quot;gene_symbol&quot;              &quot;LocusLinkID&quot;              &quot;OfficialGeneSymbol&quot;       &quot;OfficialGeneName&quot;        
 ##  [9] &quot;LocusLinkSymbol&quot;          &quot;LocusLinkName&quot;            &quot;ProteomeShortDescription&quot; &quot;UnigeneCluster&quot;          
@@ -799,33 +806,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [25] &quot;reporterid&quot;               &quot;probeid&quot;                  &quot;sequenceid&quot;               &quot;clusterid&quot;               
 ## [29] &quot;chromosome&quot;               &quot;startcoordinate&quot;          &quot;endcoordinate&quot;            &quot;strand&quot;                  
 ## [33] &quot;sequence_3_to_5_prime&quot;    &quot;sequence_5_to_3_prime&quot;</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">probes =<span class="st"> </span><span class="kw">names</span>(datExpr)</a>
-<a class="sourceLine" id="cb211-2" data-line-number="2">probes2annot =<span class="st"> </span><span class="kw">match</span>(probes, annot<span class="op">$</span>substanceBXH)</a>
-<a class="sourceLine" id="cb211-3" data-line-number="3"><span class="co"># The following is the number or probes without annotation:</span></a>
-<a class="sourceLine" id="cb211-4" data-line-number="4"><span class="kw">sum</span>(<span class="kw">is.na</span>(probes2annot))</a></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">probes =<span class="st"> </span><span class="kw">names</span>(datExpr)</a>
+<a class="sourceLine" id="cb225-2" data-line-number="2">probes2annot =<span class="st"> </span><span class="kw">match</span>(probes, annot<span class="op">$</span>substanceBXH)</a>
+<a class="sourceLine" id="cb225-3" data-line-number="3"><span class="co"># The following is the number or probes without annotation:</span></a>
+<a class="sourceLine" id="cb225-4" data-line-number="4"><span class="kw">sum</span>(<span class="kw">is.na</span>(probes2annot))</a></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1"><span class="co"># Create the starting data frame</span></a>
-<a class="sourceLine" id="cb213-2" data-line-number="2">geneInfo0 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">substanceBXH =</span> probes,</a>
-<a class="sourceLine" id="cb213-3" data-line-number="3"><span class="dt">geneSymbol =</span> annot<span class="op">$</span>gene_symbol[probes2annot],</a>
-<a class="sourceLine" id="cb213-4" data-line-number="4"><span class="dt">LocusLinkID =</span> annot<span class="op">$</span>LocusLinkID[probes2annot],</a>
-<a class="sourceLine" id="cb213-5" data-line-number="5"><span class="dt">moduleColor =</span> moduleColors,</a>
-<a class="sourceLine" id="cb213-6" data-line-number="6">geneTraitSignificance,</a>
-<a class="sourceLine" id="cb213-7" data-line-number="7">GSPvalue)</a>
-<a class="sourceLine" id="cb213-8" data-line-number="8"><span class="co"># Order modules by their significance for weight</span></a>
-<a class="sourceLine" id="cb213-9" data-line-number="9">modOrder =<span class="st"> </span><span class="kw">order</span>(<span class="op">-</span><span class="kw">abs</span>(<span class="kw">cor</span>(MEs, weight, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>)));</a>
-<a class="sourceLine" id="cb213-10" data-line-number="10"><span class="co"># Add module membership information in the chosen order</span></a>
-<a class="sourceLine" id="cb213-11" data-line-number="11"><span class="cf">for</span> (mod <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(geneModuleMembership))</a>
-<a class="sourceLine" id="cb213-12" data-line-number="12">{</a>
-<a class="sourceLine" id="cb213-13" data-line-number="13">oldNames =<span class="st"> </span><span class="kw">names</span>(geneInfo0)</a>
-<a class="sourceLine" id="cb213-14" data-line-number="14">geneInfo0 =<span class="st"> </span><span class="kw">data.frame</span>(geneInfo0, geneModuleMembership[, modOrder[mod]],</a>
-<a class="sourceLine" id="cb213-15" data-line-number="15">MMPvalue[, modOrder[mod]]);</a>
-<a class="sourceLine" id="cb213-16" data-line-number="16"><span class="kw">names</span>(geneInfo0) =<span class="st"> </span><span class="kw">c</span>(oldNames, <span class="kw">paste</span>(<span class="st">&quot;MM.&quot;</span>, modNames[modOrder[mod]], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>),</a>
-<a class="sourceLine" id="cb213-17" data-line-number="17"><span class="kw">paste</span>(<span class="st">&quot;p.MM.&quot;</span>, modNames[modOrder[mod]], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</a>
-<a class="sourceLine" id="cb213-18" data-line-number="18">}</a>
-<a class="sourceLine" id="cb213-19" data-line-number="19"><span class="co"># Order the genes in the geneInfo variable first by module color, then by geneTraitSignificance</span></a>
-<a class="sourceLine" id="cb213-20" data-line-number="20">geneOrder =<span class="st"> </span><span class="kw">order</span>(geneInfo0<span class="op">$</span>moduleColor, <span class="op">-</span><span class="kw">abs</span>(geneInfo0<span class="op">$</span>GS.weight));</a>
-<a class="sourceLine" id="cb213-21" data-line-number="21">geneInfo =<span class="st"> </span>geneInfo0[geneOrder, ]</a>
-<a class="sourceLine" id="cb213-22" data-line-number="22"><span class="kw">write.csv</span>(geneInfo, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/geneInfo.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1"><span class="co"># Create the starting data frame</span></a>
+<a class="sourceLine" id="cb227-2" data-line-number="2">geneInfo0 =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">substanceBXH =</span> probes,</a>
+<a class="sourceLine" id="cb227-3" data-line-number="3"><span class="dt">geneSymbol =</span> annot<span class="op">$</span>gene_symbol[probes2annot],</a>
+<a class="sourceLine" id="cb227-4" data-line-number="4"><span class="dt">LocusLinkID =</span> annot<span class="op">$</span>LocusLinkID[probes2annot],</a>
+<a class="sourceLine" id="cb227-5" data-line-number="5"><span class="dt">moduleColor =</span> moduleColors,</a>
+<a class="sourceLine" id="cb227-6" data-line-number="6">geneTraitSignificance,</a>
+<a class="sourceLine" id="cb227-7" data-line-number="7">GSPvalue)</a>
+<a class="sourceLine" id="cb227-8" data-line-number="8"><span class="co"># Order modules by their significance for weight</span></a>
+<a class="sourceLine" id="cb227-9" data-line-number="9">modOrder =<span class="st"> </span><span class="kw">order</span>(<span class="op">-</span><span class="kw">abs</span>(<span class="kw">cor</span>(MEs, weight, <span class="dt">use =</span> <span class="st">&quot;p&quot;</span>)));</a>
+<a class="sourceLine" id="cb227-10" data-line-number="10"><span class="co"># Add module membership information in the chosen order</span></a>
+<a class="sourceLine" id="cb227-11" data-line-number="11"><span class="cf">for</span> (mod <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(geneModuleMembership))</a>
+<a class="sourceLine" id="cb227-12" data-line-number="12">{</a>
+<a class="sourceLine" id="cb227-13" data-line-number="13">oldNames =<span class="st"> </span><span class="kw">names</span>(geneInfo0)</a>
+<a class="sourceLine" id="cb227-14" data-line-number="14">geneInfo0 =<span class="st"> </span><span class="kw">data.frame</span>(geneInfo0, geneModuleMembership[, modOrder[mod]],</a>
+<a class="sourceLine" id="cb227-15" data-line-number="15">MMPvalue[, modOrder[mod]]);</a>
+<a class="sourceLine" id="cb227-16" data-line-number="16"><span class="kw">names</span>(geneInfo0) =<span class="st"> </span><span class="kw">c</span>(oldNames, <span class="kw">paste</span>(<span class="st">&quot;MM.&quot;</span>, modNames[modOrder[mod]], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb227-17" data-line-number="17"><span class="kw">paste</span>(<span class="st">&quot;p.MM.&quot;</span>, modNames[modOrder[mod]], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb227-18" data-line-number="18">}</a>
+<a class="sourceLine" id="cb227-19" data-line-number="19"><span class="co"># Order the genes in the geneInfo variable first by module color, then by geneTraitSignificance</span></a>
+<a class="sourceLine" id="cb227-20" data-line-number="20">geneOrder =<span class="st"> </span><span class="kw">order</span>(geneInfo0<span class="op">$</span>moduleColor, <span class="op">-</span><span class="kw">abs</span>(geneInfo0<span class="op">$</span>GS.weight));</a>
+<a class="sourceLine" id="cb227-21" data-line-number="21">geneInfo =<span class="st"> </span>geneInfo0[geneOrder, ]</a>
+<a class="sourceLine" id="cb227-22" data-line-number="22"><span class="kw">write.csv</span>(geneInfo, <span class="dt">file =</span> <span class="st">&quot;/Users/shenxt/study/WGCNA_test/geneInfo.csv&quot;</span>)</a></code></pre></div>
 </div>
 <div id="对module进行分析" class="section level3">
 <h3><span class="header-section-number">7.4.4</span> 对module进行分析</h3>

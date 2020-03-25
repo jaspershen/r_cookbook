@@ -4,6 +4,10 @@ knitr::opts_chunk$set(out.width = "100%")
 
 # ggplot2 {#ggplot2}
 
+推荐查看作者写的英文书:
+
+https://ggplot2-book.org/
+
 ## 安装
 
 ```{r, eval=FALSE,echo=TRUE, cache=TRUE}
@@ -133,6 +137,118 @@ p + geom_bar(stat = 'identity') + ggtitle("bar")
 p + geom_line() + ggtitle("line")
 p + geom_path() + ggtitle("path")
 ```
+
+* `geom_point()`用来画散点图.所以可以对点设置`shape`属性.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_point() + ggtitle("point")
+```
+
+
+* `geom_polygon()`,该函数用来绘制多边形.多边形的每个顶点都需要数据中的单独一行来定义.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_polygon() + ggtitle("polygon")
+```
+
+* `geom_rect()`,`geom_title()`和`geom_raster()`用来绘制长方形(rectangles).其中,`geom_rect()`使用四个参数来确定长方形的四个角(`xmin`,`xmax`,`ymin`和`ymax`).`geom_title()`和`geom_rect()`几乎相同,但是使用参数`x`和`y`来定义每个长方形的中心,然后使用`width`和`height`来定义每个长方形的宽度和高度.`geom_raster()`和`geom_title()`几乎相同.如果每个长方形的大小都是一致的,那么更推荐使用它,因为速度会快一些.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+p + geom_tile() + ggtitle("raster")
+```
+
+
+## 复杂几何对象(collective geoms)
+
+不知道这个怎么翻译比较恰当.所有的集合对象(geom)都可以简单粗略的分为简单对象和复杂几何对象.对于简单的集合对象来说,数据的每一个观测(也就是一行),只画成一个独立的图形.比如对于散点图,每一行数据,只画一个点.而一个复杂的几何对象(collective geom)则使用几行数据来画出一个图形.这有可能是因为统计,比如boxplot,很多点才画出一个box.也有可能是图像的显示方式决定的,比如对于多边形,只有几个点才能确定一个多边形.
+
+下面的例子我们使用`nlme` package的`Oxboys`数据进行演示.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+data(Oxboys, package = "nlme")
+head(Oxboys)
+```
+
+### 多个组一个美学属性(aesthetic)
+
+有时候,我们希望将数据分成不同的组别进行画图.但是画出的图都是同样的美学属性.也就是说,你希望对每一个对象进行单独画图.这在一些longitudinal研究中非常常见.比如我们想要看每一个男孩随着时间身高的变化:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(age, height, group = Subject)) + 
+  geom_point() + 
+  geom_line()
+```
+
+每一条线代表一个男孩,一个对象.如果我们不适用`group`参数进行设置,那么出来的结果就是下面这样:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(age, height)) + 
+  geom_point() + 
+  geom_line()
+```
+
+另外还有一个比较有用的参数,如果对于对象并没有一个单独的group进行定义,那么就可以使用`interaction()`函数进行定义,比如:`aes(group = interaction(school_id, student_id))`.
+
+### 多组并且多个图层(layer)
+
+有时候我们还想对每个对象单独画图,但是需要对整体进行总结.这时候我们就需要知道怎么在`ggplot2`中设置`整体数据(global)`和`特殊数据(specific data)`.
+
+我们看到,我们都需要使用`ggplot()`参数来创建一个ggplot2图像,在`ggplot()`函数中设置的数据和参数称之为整体数据和整体参数,这些数据会在所有的图层中都使用.如果想要在不同的图层中使用不同的数据和参数,那么就需要在不同的图层或者说集合对象中设置数据和参数.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(age, height)) + 
+  geom_line(aes(group = Subject)) + 
+  geom_smooth(method = "lm", size = 2, se = FALSE)
+```
+
+## 覆盖默认分组
+
+有一些图形的横坐标为非连续变量,但是我们仍然想要画一条线将他们连接起来.比如对于boxplot:
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(Occasion, height)) + 
+  geom_boxplot()
+```
+
+横坐标是非连续变量,如果我们想使用一条线将所有的人都连接起来该怎么做呢?
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(Occasion, height)) + 
+  geom_boxplot() +
+  geom_line(colour = "#3366FF", alpha = 0.5)
+```
+
+可以看到上面并不是我们想要的结果,如果想要得到我们想要的结果,需要在`geom_line()`函数中再次单独定义`group`.
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(Oxboys, aes(Occasion, height)) + 
+  geom_boxplot() +
+  geom_line(aes(group = Subject), colour = "#3366FF", alpha = 0.5)
+```
+
+上面是我们想要的结果.
+
+### 将美学属性match到图形对象上
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+df <- data.frame(x = 1:3,
+                 y = 1:3,
+                 colour = c(1, 3, 5))
+ggplot(df, aes(x, y, colour = factor(colour))) +
+  geom_line(aes(group = 1), size = 2) +
+  geom_point(size = 5)
+```
+
+这幅图中,colour是非连续变量.第一个点和第一条线是红色的.第二条线和第二个点事绿色的,第三个点(没有对应的线)则是蓝色的.
+
+
+```{r, eval=TRUE,echo=TRUE, cache=TRUE,warning=FALSE,fig.show='hold'}
+ggplot(df, aes(x, y, colour = colour)) +
+  geom_line(aes(group = 1), size = 2) +
+  geom_point(size = 5)
+```
+
+这幅图中colour是连续的.
 
 ---
 
