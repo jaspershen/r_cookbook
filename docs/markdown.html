@@ -259,6 +259,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.9.8" data-path="git.html"><a href="git.html#抓取分支"><i class="fa fa-check"></i><b>4.9.8</b> 抓取分支</a></li>
 <li class="chapter" data-level="4.9.9" data-path="git.html"><a href="git.html#多人协作的工作模式"><i class="fa fa-check"></i><b>4.9.9</b> 多人协作的工作模式</a></li>
 </ul></li>
+<li class="chapter" data-level="4.10" data-path="git.html"><a href="git.html#how-to-work-together-use-git-and-github-for-metid-for-han"><i class="fa fa-check"></i><b>4.10</b> How to work together use git and github for metID (for Han)</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="git.html"><a href="git.html#set-up-you-git-and-github"><i class="fa fa-check"></i><b>4.10.1</b> Set up you git and github</a></li>
+<li class="chapter" data-level="4.10.2" data-path="git.html"><a href="git.html#accept-the-invitation"><i class="fa fa-check"></i><b>4.10.2</b> Accept the invitation</a></li>
+<li class="chapter" data-level="4.10.3" data-path="git.html"><a href="git.html#git-clone-the-repository"><i class="fa fa-check"></i><b>4.10.3</b> Git clone the repository</a></li>
+<li class="chapter" data-level="4.10.4" data-path="git.html"><a href="git.html#add-the-repo-into-the-github-desktop"><i class="fa fa-check"></i><b>4.10.4</b> Add the repo into the github desktop</a></li>
+<li class="chapter" data-level="4.10.5" data-path="git.html"><a href="git.html#begin-to-work"><i class="fa fa-check"></i><b>4.10.5</b> Begin to work</a></li>
+<li class="chapter" data-level="4.10.6" data-path="git.html"><a href="git.html#push-your-work-to-github"><i class="fa fa-check"></i><b>4.10.6</b> Push your work to github</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2</a><ul>
 <li class="chapter" data-level="5.1" data-path="ggplot2.html"><a href="ggplot2.html#安装-2"><i class="fa fa-check"></i><b>5.1</b> 安装</a></li>
@@ -326,7 +334,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中替换匹配到的pattern"><i class="fa fa-check"></i><b>9.3.7</b> 从文本中替换匹配到的pattern</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>10</b> Modern Statistics for Modern Biology</a></li>
+<li class="chapter" data-level="10" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html"><i class="fa fa-check"></i><b>10</b> 功能化函数编程<code>purrr</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#安装-4"><i class="fa fa-check"></i><b>10.1</b> 安装</a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map函数系列"><i class="fa fa-check"></i><b>10.2</b> <code>map</code>函数系列</a></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map变种函数"><i class="fa fa-check"></i><b>10.3</b> <code>map</code>变种函数</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map2系列函数"><i class="fa fa-check"></i><b>10.3.1</b> <code>map2</code>系列函数</a></li>
+<li class="chapter" data-level="10.3.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#pmap和pwalk系列函数"><i class="fa fa-check"></i><b>10.3.2</b> <code>pmap</code>和<code>pwalk</code>系列函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>11</b> Modern Statistics for Modern Biology</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -589,7 +605,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb20-7" data-line-number="7"><span class="bn">geom_point() + </span></a>
 <a class="sourceLine" id="cb20-8" data-line-number="8"><span class="bn">theme_bw()</span></a>
 <a class="sourceLine" id="cb20-9" data-line-number="9"><span class="bn">```</span></a></code></pre></div>
-<p><img src="r_cookbook_files/figure-html/unnamed-chunk-26-1.png" width="100%" /></p>
+<p><img src="r_cookbook_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
 <p>Rmarkdown中代码块中有很多内容可以设置.</p>
 <ul>
 <li>行内代码</li>
@@ -725,8 +741,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="dt">fillContainer =</span> <span class="ot">TRUE</span>, </a>
 <a class="sourceLine" id="cb31-5" data-line-number="5">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">pageLength =</span> <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb31-6" data-line-number="6">)</a></code></pre></div>
-<div id="htmlwidget-66038f3f5782f97af90b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-66038f3f5782f97af90b">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-648b3af2365535c7599f" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-648b3af2365535c7599f">{"x":{"filter":"none","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1],[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5],[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1],["setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa","setosa"]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n      <th>Petal.Length<\/th>\n      <th>Petal.Width<\/th>\n      <th>Species<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":4,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[4,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <ul>
 <li><code>knitr</code>包</li>
 </ul>

@@ -259,6 +259,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.9.8" data-path="git.html"><a href="git.html#抓取分支"><i class="fa fa-check"></i><b>4.9.8</b> 抓取分支</a></li>
 <li class="chapter" data-level="4.9.9" data-path="git.html"><a href="git.html#多人协作的工作模式"><i class="fa fa-check"></i><b>4.9.9</b> 多人协作的工作模式</a></li>
 </ul></li>
+<li class="chapter" data-level="4.10" data-path="git.html"><a href="git.html#how-to-work-together-use-git-and-github-for-metid-for-han"><i class="fa fa-check"></i><b>4.10</b> How to work together use git and github for metID (for Han)</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="git.html"><a href="git.html#set-up-you-git-and-github"><i class="fa fa-check"></i><b>4.10.1</b> Set up you git and github</a></li>
+<li class="chapter" data-level="4.10.2" data-path="git.html"><a href="git.html#accept-the-invitation"><i class="fa fa-check"></i><b>4.10.2</b> Accept the invitation</a></li>
+<li class="chapter" data-level="4.10.3" data-path="git.html"><a href="git.html#git-clone-the-repository"><i class="fa fa-check"></i><b>4.10.3</b> Git clone the repository</a></li>
+<li class="chapter" data-level="4.10.4" data-path="git.html"><a href="git.html#add-the-repo-into-the-github-desktop"><i class="fa fa-check"></i><b>4.10.4</b> Add the repo into the github desktop</a></li>
+<li class="chapter" data-level="4.10.5" data-path="git.html"><a href="git.html#begin-to-work"><i class="fa fa-check"></i><b>4.10.5</b> Begin to work</a></li>
+<li class="chapter" data-level="4.10.6" data-path="git.html"><a href="git.html#push-your-work-to-github"><i class="fa fa-check"></i><b>4.10.6</b> Push your work to github</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2</a><ul>
 <li class="chapter" data-level="5.1" data-path="ggplot2.html"><a href="ggplot2.html#安装-2"><i class="fa fa-check"></i><b>5.1</b> 安装</a></li>
@@ -326,7 +334,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中替换匹配到的pattern"><i class="fa fa-check"></i><b>9.3.7</b> 从文本中替换匹配到的pattern</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>10</b> Modern Statistics for Modern Biology</a></li>
+<li class="chapter" data-level="10" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html"><i class="fa fa-check"></i><b>10</b> 功能化函数编程<code>purrr</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#安装-4"><i class="fa fa-check"></i><b>10.1</b> 安装</a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map函数系列"><i class="fa fa-check"></i><b>10.2</b> <code>map</code>函数系列</a></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map变种函数"><i class="fa fa-check"></i><b>10.3</b> <code>map</code>变种函数</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map2系列函数"><i class="fa fa-check"></i><b>10.3.1</b> <code>map2</code>系列函数</a></li>
+<li class="chapter" data-level="10.3.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#pmap和pwalk系列函数"><i class="fa fa-check"></i><b>10.3.2</b> <code>pmap</code>和<code>pwalk</code>系列函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>11</b> Modern Statistics for Modern Biology</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -518,7 +534,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>以固定要求开头的正则表达式是<code>^</code>,比如我们要查找那些以字母a开头的字符串,就可以写作:</p>
 <pre class="markdonw"><code>&#39;^a&#39;</code></pre>
 <p>在R语言中:</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;^a&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ade&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;^a&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ade&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] 1 4</code></pre>
 </div>
 <div id="以固定要求结尾" class="section level3">
@@ -526,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>以固定要求结尾的正则表达式是<code>$</code>,比如我们要查找那些以字母a结尾的字符串,就可以写作:</p>
 <pre class="markdonw"><code>&#39;a$&#39;</code></pre>
 <p>在R语言中:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;a$&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ada&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb240-1" data-line-number="1"><span class="kw">grep</span>(<span class="dt">pattern =</span> <span class="st">&quot;a$&quot;</span>, <span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;abc&quot;</span>, <span class="st">&quot;bcd&quot;</span>, <span class="st">&quot;cde&quot;</span>, <span class="st">&quot;ada&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 </div>
 </div>
@@ -603,7 +619,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.6</span> 整体匹配 (groups)</h2>
 <p>如果需要将某个对象最为整体进行匹配,一般是使用小括号将其括起来.</p>
 <p>比如:</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb234-1" data-line-number="1">(ab|d)e</a></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb242-1" data-line-number="1">(ab|d)e</a></code></pre></div>
 <p>小括号中就代表一个整体,也即是<code>ab</code>或者<code>d</code>然后后面带着<code>e</code>.</p>
 </div>
 <div id="反义" class="section level2">

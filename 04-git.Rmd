@@ -692,6 +692,94 @@ git branch --set-upstream-to=origin/jaspershen jaspershen
 
 这就是多人协作的工作模式，一旦熟悉了，就非常简单。
 
+## How to work together use git and github for metID (for Han)
+
+
+### Set up you git and github
+
+Make sure you have installed github desktop in you mac.
+
+Open you terminal, and then type this code to set up you local git account:
+
+```markdown
+git config --global user.name your_github_user_name
+git config --global user.email your_github_user_email
+```
+
+After you set up your github account, then try to confirm if you are successful:
+
+```markdown
+git config --global user.name
+git config --global user.email
+```
+
+Then, you should set up a SSH with you local git and github, still in your terminal:
+
+```markdown
+#chang directory
+cd ~/.ssh
+ssh-keygen -t rsa -C "your_github_email"
+```
+
+Then open your `/ssh` folder, and you will see there is a `id_rsd.pub`. Open this file and copy all the content. Go to you github website, in the right top concer, cliker your picture, and then select `Settings`. Then select `SSH and GPG keys`, and then click `New SSH key`. For the `Title`, just type a name you want, and then paste the keys you copied from `id_rsd.pub` to the key area. And then click `Add SSH key`.
+
+![](images/Screen Shot 2020-03-27 at 10.16.52 AM.png)
+
+### Accept the invitation
+
+I will send a collaborator invitation email to Han, you will receive this email and please recept the inviation.
+
+![](images/Screen Shot 2020-03-27 at 9.55.43 AM.png)
+
+### Git clone the repository
+
+Open you terminal, and then set to the work directoy you want to keep the metID. Then type this code to clone the metID repo:
+
+```markdown
+git clone git@github.com:jaspershen/metID.git
+```
+
+Then change you work directory into `metID` folder:
+
+```markdown
+cd metID
+```
+
+Then check you branch: 
+
+```branch
+git branch
+```
+
+You will find you only have the master branch. Then chnage to `hanyah` branch:
+
+```markdown
+git checkout -b hanyah origin/hanyah
+```
+
+Then you can see that you are in branch already:
+
+```
+gitbranch
+```
+
+### Add the repo into the github desktop
+
+Open you github desktop. And open you `Preferences`, and then sign in.
+
+Then click `File`, and select `Add Local Repository`, and then choose the local `metID` package in your mac.
+
+Now you can use github desktop to manage your metID repository.
+
+### Begin to work
+
+Now please open your Rstudio, and open the `metID` project. Now you can work with metID.
+
+### Push your work to github
+
+After your finish a file or document, and then you can open your github desktop, you can see what you have changed in your documents or files. And then please type some note in your summary, and then click `Commit to hanyah`. And then push them to github by click `Fetch origin`.
+
+![](images/Screen Shot 2020-03-27 at 10.32.52 AM.png)
 
 ---
 

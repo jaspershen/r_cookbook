@@ -259,6 +259,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.9.8" data-path="git.html"><a href="git.html#抓取分支"><i class="fa fa-check"></i><b>4.9.8</b> 抓取分支</a></li>
 <li class="chapter" data-level="4.9.9" data-path="git.html"><a href="git.html#多人协作的工作模式"><i class="fa fa-check"></i><b>4.9.9</b> 多人协作的工作模式</a></li>
 </ul></li>
+<li class="chapter" data-level="4.10" data-path="git.html"><a href="git.html#how-to-work-together-use-git-and-github-for-metid-for-han"><i class="fa fa-check"></i><b>4.10</b> How to work together use git and github for metID (for Han)</a><ul>
+<li class="chapter" data-level="4.10.1" data-path="git.html"><a href="git.html#set-up-you-git-and-github"><i class="fa fa-check"></i><b>4.10.1</b> Set up you git and github</a></li>
+<li class="chapter" data-level="4.10.2" data-path="git.html"><a href="git.html#accept-the-invitation"><i class="fa fa-check"></i><b>4.10.2</b> Accept the invitation</a></li>
+<li class="chapter" data-level="4.10.3" data-path="git.html"><a href="git.html#git-clone-the-repository"><i class="fa fa-check"></i><b>4.10.3</b> Git clone the repository</a></li>
+<li class="chapter" data-level="4.10.4" data-path="git.html"><a href="git.html#add-the-repo-into-the-github-desktop"><i class="fa fa-check"></i><b>4.10.4</b> Add the repo into the github desktop</a></li>
+<li class="chapter" data-level="4.10.5" data-path="git.html"><a href="git.html#begin-to-work"><i class="fa fa-check"></i><b>4.10.5</b> Begin to work</a></li>
+<li class="chapter" data-level="4.10.6" data-path="git.html"><a href="git.html#push-your-work-to-github"><i class="fa fa-check"></i><b>4.10.6</b> Push your work to github</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>5</b> ggplot2</a><ul>
 <li class="chapter" data-level="5.1" data-path="ggplot2.html"><a href="ggplot2.html#安装-2"><i class="fa fa-check"></i><b>5.1</b> 安装</a></li>
@@ -326,7 +334,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.7" data-path="tidyverse-stringr.html"><a href="tidyverse-stringr.html#从文本中替换匹配到的pattern"><i class="fa fa-check"></i><b>9.3.7</b> 从文本中替换匹配到的pattern</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>10</b> Modern Statistics for Modern Biology</a></li>
+<li class="chapter" data-level="10" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html"><i class="fa fa-check"></i><b>10</b> 功能化函数编程<code>purrr</code></a><ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#安装-4"><i class="fa fa-check"></i><b>10.1</b> 安装</a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map函数系列"><i class="fa fa-check"></i><b>10.2</b> <code>map</code>函数系列</a></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map变种函数"><i class="fa fa-check"></i><b>10.3</b> <code>map</code>变种函数</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#map2系列函数"><i class="fa fa-check"></i><b>10.3.1</b> <code>map2</code>系列函数</a></li>
+<li class="chapter" data-level="10.3.2" data-path="tidyverse-purrr.html"><a href="tidyverse-purrr.html#pmap和pwalk系列函数"><i class="fa fa-check"></i><b>10.3.2</b> <code>pmap</code>和<code>pwalk</code>系列函数</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="biostatistics.html"><a href="biostatistics.html"><i class="fa fa-check"></i><b>11</b> Modern Statistics for Modern Biology</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://shenxt.info" target="blank">Find me in my blog</a></li>
@@ -779,6 +795,58 @@ hint: See the &#39;Note about fast-forwards&#39; in &#39;git push --help&#39; fo
 <li><p>如果<code>git pull</code>提示<code>no tracking information</code>，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream-to &lt;branch-name&gt; origin/&lt;branch-name&gt;</code>。</p></li>
 </ol>
 <p>这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
+</div>
+</div>
+<div id="how-to-work-together-use-git-and-github-for-metid-for-han" class="section level2">
+<h2><span class="header-section-number">4.10</span> How to work together use git and github for metID (for Han)</h2>
+<div id="set-up-you-git-and-github" class="section level3">
+<h3><span class="header-section-number">4.10.1</span> Set up you git and github</h3>
+<p>Make sure you have installed github desktop in you mac.</p>
+<p>Open you terminal, and then type this code to set up you local git account:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb135-1" data-line-number="1">git config --global user.name your_github_user_name</a>
+<a class="sourceLine" id="cb135-2" data-line-number="2">git config --global user.email your_github_user_email</a></code></pre></div>
+<p>After you set up your github account, then try to confirm if you are successful:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb136-1" data-line-number="1">git config --global user.name</a>
+<a class="sourceLine" id="cb136-2" data-line-number="2">git config --global user.email</a></code></pre></div>
+<p>Then, you should set up a SSH with you local git and github, still in your terminal:</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb137-1" data-line-number="1">#chang directory</a>
+<a class="sourceLine" id="cb137-2" data-line-number="2">cd ~/.ssh</a>
+<a class="sourceLine" id="cb137-3" data-line-number="3">ssh-keygen -t rsa -C &quot;your_github_email&quot;</a></code></pre></div>
+<p>Then open your <code>/ssh</code> folder, and you will see there is a <code>id_rsd.pub</code>. Open this file and copy all the content. Go to you github website, in the right top concer, cliker your picture, and then select <code>Settings</code>. Then select <code>SSH and GPG keys</code>, and then click <code>New SSH key</code>. For the <code>Title</code>, just type a name you want, and then paste the keys you copied from <code>id_rsd.pub</code> to the key area. And then click <code>Add SSH key</code>.</p>
+<p><img src="images/Screen%20Shot%202020-03-27%20at%2010.16.52%20AM.png" /></p>
+</div>
+<div id="accept-the-invitation" class="section level3">
+<h3><span class="header-section-number">4.10.2</span> Accept the invitation</h3>
+<p>I will send a collaborator invitation email to Han, you will receive this email and please recept the inviation.</p>
+<p><img src="images/Screen%20Shot%202020-03-27%20at%209.55.43%20AM.png" /></p>
+</div>
+<div id="git-clone-the-repository" class="section level3">
+<h3><span class="header-section-number">4.10.3</span> Git clone the repository</h3>
+<p>Open you terminal, and then set to the work directoy you want to keep the metID. Then type this code to clone the metID repo:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb138-1" data-line-number="1">git clone git@github.com:jaspershen/metID.git</a></code></pre></div>
+<p>Then change you work directory into <code>metID</code> folder:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb139-1" data-line-number="1">cd metID</a></code></pre></div>
+<p>Then check you branch:</p>
+<pre class="branch"><code>git branch</code></pre>
+<p>You will find you only have the master branch. Then chnage to <code>hanyah</code> branch:</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb141-1" data-line-number="1">git checkout -b hanyah origin/hanyah</a></code></pre></div>
+<p>Then you can see that you are in branch already:</p>
+<pre><code>gitbranch</code></pre>
+</div>
+<div id="add-the-repo-into-the-github-desktop" class="section level3">
+<h3><span class="header-section-number">4.10.4</span> Add the repo into the github desktop</h3>
+<p>Open you github desktop. And open you <code>Preferences</code>, and then sign in.</p>
+<p>Then click <code>File</code>, and select <code>Add Local Repository</code>, and then choose the local <code>metID</code> package in your mac.</p>
+<p>Now you can use github desktop to manage your metID repository.</p>
+</div>
+<div id="begin-to-work" class="section level3">
+<h3><span class="header-section-number">4.10.5</span> Begin to work</h3>
+<p>Now please open your Rstudio, and open the <code>metID</code> project. Now you can work with metID.</p>
+</div>
+<div id="push-your-work-to-github" class="section level3">
+<h3><span class="header-section-number">4.10.6</span> Push your work to github</h3>
+<p>After your finish a file or document, and then you can open your github desktop, you can see what you have changed in your documents or files. And then please type some note in your summary, and then click <code>Commit to hanyah</code>. And then push them to github by click <code>Fetch origin</code>.</p>
+<p><img src="images/Screen%20Shot%202020-03-27%20at%2010.32.52%20AM.png" /></p>
 <hr />
 <div id="disqus_thread">
 

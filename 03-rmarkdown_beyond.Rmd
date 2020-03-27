@@ -16,7 +16,10 @@ https://bookdown.org/yihui/blogdown/
 
 * Rstudio和R
 
-* 一个github账户
+* 本地安装git和一个github账户
+
+需要确保已经将ssh key pub添加到了github账户中.详细信息可以参考:
+
 
 ### 安装
 
